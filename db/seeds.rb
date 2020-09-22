@@ -5,6 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'faker'
+Faker::Config.locale = 'en'
 
 puts "starting to seed..."
 
@@ -62,5 +64,27 @@ users.each do |user|
   puts "seeded user #{user[:email]}"
 end
 puts 'users seeded!'
+
+puts 'seeding user meals...'
+User.all.each do |user|
+  ['Breakfast', 'Lunch', 'Dinner'].each do |meal|
+    UserMeal.create!(
+      user: user,
+      name: meal,
+      protein: Faker::Number.between(from: 40, to: 75),
+      carbs: Faker::Number.between(from: 50, to: 90),
+      fats: Faker::Number.between(from: 20, to: 35)
+    )
+    puts "seeded #{user.first_name}'s #{meal}"
+  end
+end
+puts 'user meals seeded!'
+
+puts 'seeding 15 cuisines...'
+15.times do
+  cuisine = Cuisine.create!(name: Faker::Nation.uniq.nationality)
+  puts "seeded #{cuisine.name}"
+end
+puts 'cuisines seeded!'
 
 puts "finished seeding!"

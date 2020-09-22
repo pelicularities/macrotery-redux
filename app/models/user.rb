@@ -6,5 +6,5 @@ class User < ApplicationRecord
   
   has_many :user_meals, dependent: :destroy
   has_many :orders, dependent: :destroy
-  validates :first_name, :last_name, :protein, :carbs, :fats, presence: true
+  validates :first_name, :last_name, presence: true
 end
