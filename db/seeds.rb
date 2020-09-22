@@ -102,7 +102,7 @@ puts 'seeding cuisines...'
 #   puts "seeded #{cuisine}"
 # end
 15.times do
-  cuisine = Cuisine.create!(name: Faker::Restaurant.type)
+  cuisine = Cuisine.create!(name: Faker::Restaurant.unique.type)
   puts "seeded #{cuisine.name}"
 end
 puts 'cuisines seeded!'
@@ -143,6 +143,31 @@ end
 puts 'eateries seeded!'
 
 puts 'seeding eatery-cuisine relationship...'
+Eatery.all.each do |eatery|
+  2.times do
+    eatery_cuisine = EateryCuisine.create!(eatery: eatery, cuisine: Cuisine.all.sample)
+    puts "#{eatery.name} is a #{eatery_cuisine.cuisine.name} restaurant!"
+  end
+end
 puts 'seeded eatery cuisines!'
+
+puts 'seeding dishes...'
+Eatery.all.each do |eatery|
+  10.times do
+    dish = Dish.new
+    dish.eatery = eatery
+    dish.name = Faker::Food.unique.dish
+    dish.price = (Faker::Number.between(from: 1, to: 400) * 5.0)/100
+    dish.protein = Faker::Number.between(from: 10, to: 60)
+    dish.carbs = Faker::Number.between(from: 40, to: 120)
+    dish.fats = Faker::Number.between(from: 15, to: 50)
+    dish.description = Faker::Food.description
+    dish.save!
+    puts "seeded dish #{dish.name}"
+  end
+  puts "seeded dishes for #{eatery.name}!"
+  Faker::Food.unique.clear
+end
+puts 'seeded all dishes!'
 
 puts "finished seeding!"
