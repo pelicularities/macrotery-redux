@@ -6,7 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'faker'
-Faker::Config.locale = 'en'
 
 puts "starting to seed..."
 
@@ -68,7 +67,7 @@ puts 'users seeded!'
 puts 'seeding user meals...'
 User.all.each do |user|
   ['Breakfast', 'Lunch', 'Dinner'].each do |meal|
-    UserMeal.create!(
+    Macro.create!(
       user: user,
       name: meal,
       protein: Faker::Number.between(from: 40, to: 75),
@@ -80,11 +79,95 @@ User.all.each do |user|
 end
 puts 'user meals seeded!'
 
-puts 'seeding 15 cuisines...'
+puts 'seeding cuisines...'
+# cuisines = [
+#   'Singaporean',
+#   'Malaysian',
+#   'Indonesian',
+#   'Spanish',
+#   'Japanese',
+#   'Italian',
+#   'British',
+#   'American',
+#   'Mexican',
+#   'French',
+#   'Chinese',
+#   'Korean',
+#   'Thai',
+#   'Middle Eastern',
+#   'Indian'
+# ]
+# cuisines.each do |cuisine|
+#   Cuisine.create!(name: cuisine)
+#   puts "seeded #{cuisine}"
+# end
 15.times do
-  cuisine = Cuisine.create!(name: Faker::Nation.uniq.nationality)
+  cuisine = Cuisine.create!(name: Faker::Restaurant.unique.type)
   puts "seeded #{cuisine.name}"
 end
 puts 'cuisines seeded!'
+
+puts 'seeding eateries...'
+addresses = [
+  '360 Orchard Road, Singapore',
+  '1 Raffles Place, Singapore',
+  '1 Woodlands Place, Singapore',
+  '10 Tampines Central 1, Singapore',
+  '50 Jurong Gateway Rd, Singapore',
+  '3 Yung Sheng Rd, Singapore',
+  '85 Bedok North St 4, Singapore',
+  '137 Tampines St 11, Singapore',
+  '100 Neo Tiew Rd, Singapore',
+  '30 Victoria St, Singapore',
+  '12 Purvis St, Singapore',
+  '262 Jurong East St 24, Singapore',
+  '524A Jelapang Road, Singapore',
+  '243 Jalan Kayu, Singapore',
+  '27 Lichfield Road, Singapore',
+  '11 New Bridge Road, Singapore',
+  '435 Orchard Road, Singapore',
+  '68 Orchard Road, Singapore',
+  '2 Orchard Turn, Singapore',
+  '350 Orchard Road, Singapore'
+]
+
+addresses.each do |address|
+  eatery = Eatery.new
+  eatery.name = Faker::Restaurant.unique.name
+  eatery.address = address
+  eatery.phone_number = "6#{Faker::Number.number(digits: 7)}"
+  eatery.description = Faker::Restaurant.description
+  eatery.save!
+  puts "seeded #{eatery.name}"
+end
+puts 'eateries seeded!'
+
+puts 'seeding eatery-cuisine relationship...'
+Eatery.all.each do |eatery|
+  2.times do
+    eatery_cuisine = EateryCuisine.create!(eatery: eatery, cuisine: Cuisine.all.sample)
+    puts "#{eatery.name} is a #{eatery_cuisine.cuisine.name} restaurant!"
+  end
+end
+puts 'seeded eatery cuisines!'
+
+puts 'seeding dishes...'
+Eatery.all.each do |eatery|
+  10.times do
+    dish = Dish.new
+    dish.eatery = eatery
+    dish.name = Faker::Food.unique.dish
+    dish.price = (Faker::Number.between(from: 1, to: 400) * 5.0)/100
+    dish.protein = Faker::Number.between(from: 10, to: 60)
+    dish.carbs = Faker::Number.between(from: 40, to: 120)
+    dish.fats = Faker::Number.between(from: 15, to: 50)
+    dish.description = Faker::Food.description
+    dish.save!
+    puts "seeded dish #{dish.name}"
+  end
+  puts "seeded dishes for #{eatery.name}!"
+  Faker::Food.unique.clear
+end
+puts 'seeded all dishes!'
 
 puts "finished seeding!"
