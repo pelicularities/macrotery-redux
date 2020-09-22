@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
-  has_many :user_meals
-  has_many :orders
+  has_many :user_meals, dependent: :destroy
+  has_many :orders, dependent: :destroy
   validates :first_name, :last_name, :protein, :carbs, :fats, presence: true
 end
