@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_22_072657) do
+ActiveRecord::Schema.define(version: 2020_09_22_082939) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,17 @@ ActiveRecord::Schema.define(version: 2020_09_22_072657) do
     t.index ["eatery_id"], name: "index_eatery_cuisines_on_eatery_id"
   end
 
+  create_table "macros", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "protein"
+    t.integer "carbs"
+    t.integer "fats"
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_macros_on_user_id"
+  end
+
   create_table "order_dishes", force: :cascade do |t|
     t.bigint "order_id", null: false
     t.bigint "dish_id", null: false
@@ -83,17 +94,6 @@ ActiveRecord::Schema.define(version: 2020_09_22_072657) do
     t.index ["order_dish_id"], name: "index_reviews_on_order_dish_id"
   end
 
-  create_table "user_meals", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.integer "protein"
-    t.integer "carbs"
-    t.integer "fats"
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_user_meals_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -115,9 +115,9 @@ ActiveRecord::Schema.define(version: 2020_09_22_072657) do
   add_foreign_key "dishes", "eateries"
   add_foreign_key "eatery_cuisines", "cuisines"
   add_foreign_key "eatery_cuisines", "eateries"
+  add_foreign_key "macros", "users"
   add_foreign_key "order_dishes", "dishes"
   add_foreign_key "order_dishes", "orders"
   add_foreign_key "orders", "users"
   add_foreign_key "reviews", "order_dishes"
-  add_foreign_key "user_meals", "users"
 end

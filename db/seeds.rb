@@ -67,7 +67,7 @@ puts 'users seeded!'
 puts 'seeding user meals...'
 User.all.each do |user|
   ['Breakfast', 'Lunch', 'Dinner'].each do |meal|
-    UserMeal.create!(
+    Macro.create!(
       user: user,
       name: meal,
       protein: Faker::Number.between(from: 40, to: 75),
