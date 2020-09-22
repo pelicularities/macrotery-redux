@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'faker'
+require 'open-uri'
 
 puts "starting to seed..."
 
@@ -131,13 +132,41 @@ addresses = [
   '350 Orchard Road, Singapore'
 ]
 
-addresses.each do |address|
+logos = [
+  'https://99designs-blog.imgix.net/blog/wp-content/uploads/2019/10/attachment_103367090-e1571110045215.jpg',
+  'https://99designs-blog.imgix.net/blog/wp-content/uploads/2019/10/attachment_97787761-e1571109999721.jpg',
+  'https://99designs-blog.imgix.net/blog/wp-content/uploads/2019/10/attachment_59509361-e1571108905481.png',
+  'https://99designs-blog.imgix.net/blog/wp-content/uploads/2019/10/attachment_99478007-e1571112167353.png',
+  'https://99designs-blog.imgix.net/blog/wp-content/uploads/2019/10/attachment_40533723-e1571112100668.png',
+  'https://99designs-blog.imgix.net/blog/wp-content/uploads/2019/10/attachment_90692173-e1571110647786.png',
+  'https://99designs-blog.imgix.net/blog/wp-content/uploads/2019/10/attachment_93150414-e1571110566194.png',
+  'https://99designs-blog.imgix.net/blog/wp-content/uploads/2019/10/attachment_66602497-e1571115384951.jpg',
+  'https://99designs-blog.imgix.net/blog/wp-content/uploads/2019/10/attachment_92127945-e1571116006606.jpg',
+  'https://99designs-blog.imgix.net/blog/wp-content/uploads/2019/10/f87d59b6-c3df-4ce0-a9a2-073c8b98d2a8.jpg',
+  'https://99designs-blog.imgix.net/blog/wp-content/uploads/2019/10/attachment_89345375.jpg',
+  'https://99designs-blog.imgix.net/blog/wp-content/uploads/2019/10/attachment_77512603-e1571186033116.png',
+  'https://99designs-blog.imgix.net/blog/wp-content/uploads/2019/10/mugaritz-restaurant.jpg',
+  'https://99designs-blog.imgix.net/blog/wp-content/uploads/2019/10/attachment_57615794-e1571114994767.png',
+  'https://99designs-blog.imgix.net/blog/wp-content/uploads/2019/10/attachment_94283857-e1571185890515.jpg',
+  'https://99designs-blog.imgix.net/blog/wp-content/uploads/2019/10/attachment_102682959-e1571116039684.png',
+  'https://99designs-blog.imgix.net/blog/wp-content/uploads/2019/10/attachment_72730158-e1571110735270.png',
+  'https://99designs-blog.imgix.net/blog/wp-content/uploads/2019/10/attachment_89348086-e1571112998256.png',
+  'https://99designs-blog.imgix.net/blog/wp-content/uploads/2019/10/attachment_45092251.png',
+  'https://99designs-blog.imgix.net/blog/wp-content/uploads/2019/10/1d712e10-525a-4cc2-84f2-36e66336c0d0-e1571115090968.png'
+]
+
+addresses.each_with_index do |address, index|
   eatery = Eatery.new
   eatery.name = Faker::Restaurant.unique.name
   eatery.address = address
   eatery.phone_number = "6#{Faker::Number.number(digits: 7)}"
   eatery.description = Faker::Restaurant.description
   eatery.save!
+
+  file = URI.open(logos[index])
+  content_type = "image/#{logos[index][-3, 3]}"
+  eatery.photo.attach(io: file, filename: "logo#{index}.png", content_type: content_type)
+
   puts "seeded #{eatery.name}"
 end
 puts 'eateries seeded!'
@@ -152,6 +181,31 @@ end
 puts 'seeded eatery cuisines!'
 
 puts 'seeding dishes...'
+
+dish_images = [
+  'CA2NgpLIqa0',
+  'zcUgjyqEwe8',
+  'ZuIDLSz3XLg',
+  'MNtag_eXMKw',
+  'IGfIGP5ONV0',
+  '8Nc_oQsc2qQ',
+  'w6ftFbPCs9I',
+  'EvoIiaIVRzU',
+  'jpkfc5_d-DI',
+  'OFismyezPnY',
+  'vzX2rgUbQXM',
+  'jUPOXXRNdcA',
+  'XoByiBymX20',
+  'oaz0raysASk',
+  'ennARkXrF74',
+  'oT7_v-I0hHg',
+  'CvLZ6hbIemI',
+  's7FuT9HYoxM',
+  'LCaBh7QSGr8',
+  'O4CVzHODjjM'
+]
+dish_images.map! { |id| "https://source.unsplash.com/#{id}" }
+
 Eatery.all.each do |eatery|
   10.times do
     dish = Dish.new
@@ -163,6 +217,11 @@ Eatery.all.each do |eatery|
     dish.fats = Faker::Number.between(from: 15, to: 50)
     dish.description = Faker::Food.description
     dish.save!
+
+    dish_image = dish_images.sample
+    file = URI.open(dish_image)
+    dish.photo.attach(io: file, filename: "dish#{dish.id}.png", content_type: 'image/jpg')
+
     puts "seeded dish #{dish.name}"
   end
   puts "seeded dishes for #{eatery.name}!"
