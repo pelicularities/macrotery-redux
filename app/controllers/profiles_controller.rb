@@ -4,18 +4,18 @@ class ProfilesController < ApplicationController
 
 def calculate_macros
 #should be boleen
+# if yes, go to new
+# if no, go to
 
 end
 
 
 def show
-
 end
 
-def create
 
+def edit
 end
-
 
 def update
 
@@ -25,7 +25,8 @@ end
 private
 
 def find_profile
-  @profile= Profile.find(params[:id])
+  @user = current_user
 end
+
 
 end

@@ -1,16 +1,15 @@
 class MacrosController < ApplicationController
-  before_action :set_macro, only: [:edit, :update, :destroy]
+  before_action :set_macros
 
 
 def new
-  @macro= Macros.new
 end
 
 def create
-  macro= Macros.new(macro_params)
+  macro= Macro.new(macro_params)
   macro.user = current_user
   if macro.save
-    redirect_to macros_path
+    redirect_to profile_macros_path
   else
     render :new
   end
@@ -22,7 +21,7 @@ end
 def update
   @macro.update(macro_params)
   if @macro.save
-    redirect_to macros_path(@macro)
+    redirect_to profile_macros_path(@macro)
   else
     render :edit
   end
@@ -30,17 +29,17 @@ end
 
 def destroy
   @macro.destroy
-  redirect_to macros_path
+  redirect_to profile_macros_path
 end
 
 private
 
-def set_macro
-  @macro= Macros.find(params[:id])
+def set_macros
+  @macro= Macro.find(params[:id])
 end
 
 def macro_params
-  params.require(:macro).permit(:protein, :carb, :fat)
+  params.require(:macro).permit(:name, :protein, :carbs, :fats)
 end
 
 end
