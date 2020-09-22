@@ -5,7 +5,7 @@ class CreateDishes < ActiveRecord::Migration[6.0]
       t.string :name
       t.decimal :price
       t.integer :protein
-      t.carbs :
+      t.integer :carbs
       t.integer :fats
       t.text :description
 
