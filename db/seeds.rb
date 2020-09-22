@@ -170,4 +170,42 @@ Eatery.all.each do |eatery|
 end
 puts 'seeded all dishes!'
 
-puts "finished seeding!"
+puts 'seeding orders...'
+User.all.each do |user|
+  3.times do
+    order = Order.new
+    order.user = user
+    order.dine_in = [true, false].sample
+    order.save!
+    puts "created an order for #{user.first_name}"
+    eatery = Eatery.all.sample
+    (0..2).to_a.each do |index|
+      order_dish = OrderDish.create!(
+        order: order,
+        dish: eatery.dishes[index],
+        quantity: [1, 2, 3].sample
+      )
+      puts "added #{order_dish.dish.name} to order #{order.id}"
+    end
+    order.save!
+    puts "ordered from #{eatery.name} for #{user.first_name}"
+  end
+  puts "seeded all orders for #{user.first_name}!"
+end
+puts 'seeded all orders!'
+
+puts 'seeding all reviews...'
+OrderDish.all.each do |order_dish|
+  heads = [true, false].sample
+  if heads
+    Review.create!(
+      order_dish: order_dish,
+      content: Faker::Restaurant.review,
+      rating: Faker::Number.between(from: 1, to: 5)
+    )
+    puts "created review for #{order_dish.dish.name} from order #{order_dish.order.id}"
+  end
+end
+puts 'seeded all reviews!'
+
+puts 'finished seeding!'
