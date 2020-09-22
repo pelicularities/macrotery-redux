@@ -194,4 +194,18 @@ User.all.each do |user|
 end
 puts 'seeded all orders!'
 
+puts 'seeding all reviews...'
+OrderDish.all.each do |order_dish|
+  heads = [true, false].sample
+  if heads
+    Review.create!(
+      order_dish: order_dish,
+      content: Faker::Restaurant.review,
+      rating: Faker::Number.between(from: 1, to: 5)
+    )
+    puts "created review for #{order_dish.dish.name} from order #{order_dish.order.id}"
+  end
+end
+puts 'seeded all reviews!'
+
 puts 'finished seeding!'
