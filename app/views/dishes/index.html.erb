@@ -1,11 +1,21 @@
 <div data-controller="macros">
-  Your macros are: 
-  <ul>
-    <li data-target="macros.userProtein">Protein: <%=@macro[:protein]%> g</li>
-    <li data-target="macros.userCarbs">Carbs: <%=@macro[:carbs]%> g</li>
-    <li data-target="macros.userFats">Fats: <%=@macro[:fats]%> g</li>
-    <li data-target="macros.userCalories">Cal: <%=@macro[:calories]%> kcal</li>
-  </ul>
+  <div>
+    Your macros are: 
+      <span data-target="macros.userProtein"><%=@macro[:protein]%> g protein</span>, 
+      <span data-target="macros.userCarbs"><%=@macro[:carbs]%> g carbs</span>,
+      <span data-target="macros.userFats"><%=@macro[:fats]%> g fats</span>,
+      <span data-target="macros.userCalories"><%=@macro[:calories]%> kcal calories</span>
+    <div data-target="advancedSearch" class="d-none">
+      <h5>Filter by</h5>
+      Cuisine
+    </div>
+  </div>
+
+  <div id="map"
+     style="width: 100%; height: 600px;"
+     data-markers="<%= @markers.to_json %>"
+     data-mapbox-api-key="pk.eyJ1IjoicGVsaWN1bGFyaXRpZXMiLCJhIjoiY2tlZHFqNm0wMHY1czJ2c2JzMzd4cTRuYSJ9.3Evpdh8tMIOiSN4zVwzAIg">
+  </div>
 
   <div>
     <form id="custom-macros">
@@ -15,19 +25,20 @@
       <input type="text" id="carbs" name="carbs" size="3" data-target="macros.carbs">
       <label for="fats">Fats: </label>
       <input type="text" id="fats" name="fats" size="3" data-target="macros.fats">
-      <input type="submit" id="search" data-action="click->macros#refresh">
+      <input type="submit" id="search" data-action="">
     </form>
   </div>
 
   <h2>Suggested Dishes</h2>
-  <% @dishes.each do |dish| %>
-    <ul><%=dish.name%> from <%=dish.eatery.name%>
-      <li>Protein: <%=dish.protein%> g</li>
-      <li>Carbs: <%=dish.carbs%> g</li>
-      <li>Fats: <%=dish.fats%> g</li>
-      <li>Cal: <%=dish.calories%> kcal</li>
-      <li>Difference score (lower is better): <%="%.1f" % @dish_scores[dish]%>
-    </ul>
-  <% end %>
+  <div id="display-dishes" data-target="macros.displayDishes">
+    <% @dishes.each do |dish| %>
+      <ul><%= link_to "#{dish.name} from #{dish.eatery.name}", eatery_path(dish.eatery) %>
+        <li>Protein: <%=dish.protein%> g</li>
+        <li>Carbs: <%=dish.carbs%> g</li>
+        <li>Fats: <%=dish.fats%> g</li>
+        <li>Cal: <%=dish.calories%> kcal</li>
+      </ul>
+    <% end %>
+  </div>
 </div>
 <%= javascript_pack_tag 'search', defer: true %>

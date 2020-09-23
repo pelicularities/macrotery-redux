@@ -17,6 +17,17 @@ class DishesController < ApplicationController
 
     @dishes = Dish.all.sort_by { |dish| calculate_score(@macro, dish) }.first(20)
 
+    @eateries = []
+    @dishes.each { |dish| @eateries << dish.eatery }
+    @eateries.uniq!
+
+    @markers = @eateries.select { |eatery| eatery.latitude.nil? == false }.map do |eatery|
+      {
+        lat: eatery.latitude,
+        lng: eatery.longitude
+      }
+    end
+
     @dishes.each do |dish|
       @dish_scores[dish] = calculate_score(@macro, dish)
     end

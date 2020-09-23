@@ -6,5 +6,5 @@
 searchButton = document.getElementById('search')
 
 searchButton.addEventListener("click", (event) => {
-  event.preventDefault();
+  // event.preventDefault();
 });
