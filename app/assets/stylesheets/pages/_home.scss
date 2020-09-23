@@ -1,1 +1,20 @@
 // Specific CSS for your home-page
+
+._text-carousel {
+  position: relative;
+  white-space: nowrap;
+}
+
+._text-carousel span {
+    position: relative;
+    display: inline-block;
+}
+
+.fadeInDown {
+  animation-name: fadeInDown
+}
+
+.animated {
+  animation-duration: 1s;
+  animtion-fill-mode: both;
+}
