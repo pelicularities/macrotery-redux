@@ -23,7 +23,7 @@ class DishesController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render json: { restaurants: @dishes } }
+      format.json { render json: { dishes: @dishes } }
     end
   end
 
@@ -35,7 +35,7 @@ class DishesController < ApplicationController
 
   def calculate_score(user_macro, dish)
     # takes a Dish object, and either a Macro object or a hash with protein / carbs / fats keys
-    # generates a score based on how close the proportions of the two sets of macros are
+    # generates a score based on how close the two sets of macros are
     # the closer to 0, the better the score
 
     protein_diff = (dish.protein - user_macro[:protein]).abs

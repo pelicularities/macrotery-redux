@@ -1,10 +1,10 @@
 <div data-controller="macros">
   Your macros are: 
   <ul>
-    <li>Protein: <%=@macro[:protein]%> g</li>
-    <li>Carbs: <%=@macro[:carbs]%> g</li>
-    <li>Fats: <%=@macro[:fats]%> g</li>
-    <li>Cal: <%=@macro[:calories]%> kcal</li>
+    <li data-target="macros.userProtein">Protein: <%=@macro[:protein]%> g</li>
+    <li data-target="macros.userCarbs">Carbs: <%=@macro[:carbs]%> g</li>
+    <li data-target="macros.userFats">Fats: <%=@macro[:fats]%> g</li>
+    <li data-target="macros.userCalories">Cal: <%=@macro[:calories]%> kcal</li>
   </ul>
 
   <div>
