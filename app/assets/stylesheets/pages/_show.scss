@@ -19,10 +19,15 @@
 .description {
     line-height: 1;
     margin-top: 10px;
+    width: 80%;
 }
 
 .description p {
     font-size: 14px;
+}
+
+.description h5 {
+    font-weight: bold;
 }
 
 .price {
@@ -34,7 +39,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50px;
+    width: 100px;
 }
 
 .tick {
