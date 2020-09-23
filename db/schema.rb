@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_22_092442) do
+ActiveRecord::Schema.define(version: 2020_09_23_065352) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 2020_09_22_092442) do
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "calories"
     t.index ["eatery_id"], name: "index_dishes_on_eatery_id"
   end
 
@@ -83,6 +84,7 @@ ActiveRecord::Schema.define(version: 2020_09_22_092442) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "calories"
     t.index ["user_id"], name: "index_macros_on_user_id"
   end
 
@@ -129,6 +131,7 @@ ActiveRecord::Schema.define(version: 2020_09_22_092442) do
     t.integer "protein"
     t.integer "carbs"
     t.integer "fats"
+    t.integer "calories"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

@@ -1,0 +1,22 @@
+Your macros are: 
+<ul>
+  <li>Protein: <%=@macro[:protein]%> g</li>
+  <li>Carbs: <%=@macro[:carbs]%> g</li>
+  <li>Fats: <%=@macro[:fats]%> g</li>
+  <li>Cal: <%=@macro[:calories]%> kcal</li>
+</ul>
+
+<div>
+  <%= render 'shared/macros_form' %>
+</div>
+
+<h2>Suggested Dishes</h2>
+<% @dishes.each do |dish| %>
+  <ul><%=dish.name%> from <%=dish.eatery.name%>
+    <li>Protein: <%=dish.protein%> g</li>
+    <li>Carbs: <%=dish.carbs%> g</li>
+    <li>Fats: <%=dish.fats%> g</li>
+    <li>Cal: <%=dish.calories%> kcal</li>
+    <li>Difference score (lower is better): <%="%.1f" % @dish_scores[dish]%>
+  </ul>
+<% end %>
