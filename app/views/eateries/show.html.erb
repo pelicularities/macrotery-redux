@@ -1,14 +1,28 @@
+<%= javascript_pack_tag 'eatery_show', 'data-turbolinks-track': 'reload', defer: true %>
+
+
 <h2> Welcome to <%= @eatery.name %> </h2>
 
 <% @eatery.dishes.each do |dish| %>
 
-    <div class="test card bg-dark text-white w-85 mt-2 mb-2">
-    <img class="card-img" src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="Card image">
-    <div class="card-img-overlay">
-    <h5 class="card-title"> <%= dish.name %> </h5>
-    <p class="card-text"> <%= dish.description %> </p>
-    <p class="card-text"> <%= dish.price.to_i.to_s %> </p>
+    <div class="eatery-card card bg-dark text-white w-85 mt-3 mb-3" id="dish_card">
+    <div class="card-bg"></div>
+    <div class="">
+        <div class="card-content pb-2">
+            <div class="description w-90 pl-2">
+                <h5 class="card-title mb-1"> <%= dish.name %> </h5>
+                <p class="card-text"> <%= dish.description %> </p>
+            </div>
+            <div class="dis-flex">
+                <p class="card-text price"> <%= dish.price.to_s %> </p>
+            </div>
+        </div>
+        <h4 class="tick">✅</h4>
+        <div class="protein circle"> <%= dish.protein %> </div>
+        <div class="carb circle"> <%= dish.carbs %> </div>
+        <div class="fat circle"> <%= dish.fats %> </div>
     </div>
+
     </div>
 
 <% end %>
