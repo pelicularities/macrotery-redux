@@ -1,4 +1,75 @@
-.test {
-    height:200px;
+.eatery-card {
+    height:150px;
     font: black;
+    border-radius: 25px;
+    background-image: url("https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80");
+    background-size: cover;
+}
+
+
+.card-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(95,95,95,0.75);
+    position: absolute;
+    bottom: 15%;
+}
+
+.description {
+    line-height: 1;
+    margin-top: 10px;
+}
+
+.description p {
+    font-size: 14px;
+}
+
+.price {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.dis-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+}
+
+.tick {
+    position: absolute;
+    left: 90%;
+    top: 10%;
+}
+
+.protein {
+    background-color: red;
+    left: 65%;
+}
+
+.carb {
+    background-color: green;
+    position: absolute;
+    left: 75%;
+}
+
+.fat {
+    background-color: rgb(206, 206, 0);
+    position: absolute;
+    left: 85%;
+}
+
+.circle {
+    border: 2px solid grey;
+    width: 40px;
+    height: 40px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bold;
+    position: absolute;
+    top: 82%;
 }
