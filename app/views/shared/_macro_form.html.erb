@@ -1,0 +1,10 @@
+
+<%= simple_form_for @macro do |f| %>
+
+<%= f.input :name, label: 'meal name' %>
+<%= f.input :protein, label: 'Protein', size: "200" %>
+<%= f.input :carbs, label: 'Carbs' %>
+<%= f.input :fats, label: 'Fats' %>
+
+<%= f.submit 'Create My Macros' %>
+<% end %>

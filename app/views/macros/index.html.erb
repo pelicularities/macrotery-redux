@@ -1,0 +1,12 @@
+
+
+<h1> This is profile/ macros page </h1>
+
+<% @macro.each do |macro| %>
+
+<p> Your Macros Plan is now:
+<li> Protein:  <%= macro.protein.to_i %>  </li>
+<li> Carbs:  <%= macro.carbs.to_i %>  </li>
+<li> Fats:  <%= macro.fats.to_i %>  </li>
+</p>
+<% end %>
