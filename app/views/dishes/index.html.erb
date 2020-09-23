@@ -1,22 +1,33 @@
-Your macros are: 
-<ul>
-  <li>Protein: <%=@macro[:protein]%> g</li>
-  <li>Carbs: <%=@macro[:carbs]%> g</li>
-  <li>Fats: <%=@macro[:fats]%> g</li>
-  <li>Cal: <%=@macro[:calories]%> kcal</li>
-</ul>
-
-<div>
-  <%= render 'shared/macros_form' %>
-</div>
-
-<h2>Suggested Dishes</h2>
-<% @dishes.each do |dish| %>
-  <ul><%=dish.name%> from <%=dish.eatery.name%>
-    <li>Protein: <%=dish.protein%> g</li>
-    <li>Carbs: <%=dish.carbs%> g</li>
-    <li>Fats: <%=dish.fats%> g</li>
-    <li>Cal: <%=dish.calories%> kcal</li>
-    <li>Difference score (lower is better): <%="%.1f" % @dish_scores[dish]%>
+<div data-controller="macros">
+  Your macros are: 
+  <ul>
+    <li>Protein: <%=@macro[:protein]%> g</li>
+    <li>Carbs: <%=@macro[:carbs]%> g</li>
+    <li>Fats: <%=@macro[:fats]%> g</li>
+    <li>Cal: <%=@macro[:calories]%> kcal</li>
   </ul>
-<% end %>
+
+  <div>
+    <form id="custom-macros">
+      <label for="protein">Protein: </label>
+      <input type="text" id="protein" name="protein" size="3" data-target="macros.protein">
+      <label for="carbs">Carbs: </label>
+      <input type="text" id="carbs" name="carbs" size="3" data-target="macros.carbs">
+      <label for="fats">Fats: </label>
+      <input type="text" id="fats" name="fats" size="3" data-target="macros.fats">
+      <input type="submit" id="search" data-action="click->macros#refresh">
+    </form>
+  </div>
+
+  <h2>Suggested Dishes</h2>
+  <% @dishes.each do |dish| %>
+    <ul><%=dish.name%> from <%=dish.eatery.name%>
+      <li>Protein: <%=dish.protein%> g</li>
+      <li>Carbs: <%=dish.carbs%> g</li>
+      <li>Fats: <%=dish.fats%> g</li>
+      <li>Cal: <%=dish.calories%> kcal</li>
+      <li>Difference score (lower is better): <%="%.1f" % @dish_scores[dish]%>
+    </ul>
+  <% end %>
+</div>
+<%= javascript_pack_tag 'search', defer: true %>
