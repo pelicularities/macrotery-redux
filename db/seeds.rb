@@ -174,7 +174,9 @@ puts 'eateries seeded!'
 puts 'seeding eatery-cuisine relationship...'
 Eatery.all.each do |eatery|
   2.times do
-    eatery_cuisine = EateryCuisine.create!(eatery: eatery, cuisine: Cuisine.all.sample)
+    until eatery_cuisine = EateryCuisine.create(eatery: eatery, cuisine: Cuisine.all.sample)
+      puts "finding a suitable cuisine for #{eatery.name}..."
+    end
     puts "#{eatery.name} is a #{eatery_cuisine.cuisine.name} restaurant!"
   end
 end
