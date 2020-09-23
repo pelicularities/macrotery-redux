@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get '/profile', to: 'users#show'
   get '/macrocalculator', to: 'users#update'
 
-  resources :macros, path: '/profiles/macros'
+  resources :macros, path: '/profile/macros'
 
   resources :orders, only: [:index, :show, :create, :new] do
     collection do
