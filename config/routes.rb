@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: 'pages#home'
+  get '/learn', to: 'pages#learn'
+
+  get '/profile', to: 'users#show'
+  get '/macrocalculator', to: 'users#update'
+
+  resources :macros, path: '/profiles/macros'
+
   resources :orders, only: [:index, :show, :create, :new] do
     collection do
       get :success
