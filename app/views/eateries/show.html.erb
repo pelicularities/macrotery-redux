@@ -3,6 +3,8 @@
 
 <h2> Welcome to <%= @eatery.name %> </h2>
 
+<%= cl_image_tag dish.dish_image.key, class:'p-image', height: 200, width: 200, crop: :fill %>
+
 <% @eatery.dishes.each do |dish| %>
     <div>
 
