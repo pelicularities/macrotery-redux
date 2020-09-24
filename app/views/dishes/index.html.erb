@@ -1,35 +1,48 @@
 <div data-controller="macros">
-  <div>
-  <div>
-    Your <span data-target="macros.name"></span> macros are: 
-      <span data-target="macros.userProtein"><%=@macro[:protein]%> g protein</span>, 
-      <span data-target="macros.userCarbs"><%=@macro[:carbs]%> g carbs</span>,
-      <span data-target="macros.userFats"><%=@macro[:fats]%> g fats</span>,
-      <span data-target="macros.userCalories"><%=@macro[:calories]%> kcal calories</span>
-    </div>
-    <div data-target="advancedSearch" class="d-none">
-      <h5>Filter by</h5>
-      Cuisine
+  <div class="container my-3 border">
+    <div class="row">
+      <div class="col-12 col-md-6 p-3">
+        <h5>Your search criteria</h5>
+        Your <span data-target="macros.name"><%=@macro.name unless @macro[:name].nil?%></span> macros: 
+        <ul>
+          <li data-target="macros.userProtein"><%=@macro[:protein]%> g protein</li>
+          <li data-target="macros.userCarbs"><%=@macro[:carbs]%> g carbs</li>
+          <li data-target="macros.userFats"><%=@macro[:fats]%> g fats</li>
+          <li data-target="macros.userCalories"><%=@macro[:calories]%> kcal calories</li>
+        </ul>
+      </div>
+      <div class="col-12 col-md-6 p-3 border-left">
+        <div>
+          <form id="search-form">
+            Choose preset macros:
+            <select id="macro" name="macro" class="form-control" data-target="macros.select" data-action="change->macros#changeMeal">
+            <option value="0">-- Select macros --</option>
+              <% @macros.each do |macro| %>
+                <option value="<%=macro.id%>"><%=macro.name%></option>
+              <% end %>
+            </select>
+            <table class="my-3">
+              <tr>
+                <td><label for="protein">Protein: </label></td>
+                <td><input type="number" id="protein" name="protein" value="<%=@macro[:protein]%>" min="0" data-target="macros.protein" data-action="change->macros#refresh"></td>
+              </tr>
+              <tr>
+                <td><label for="carbs">Carbs: </label></td>
+                <td><input type="number" id="carbs" name="carbs" value="<%=@macro[:carbs]%>" min="0" data-target="macros.carbs" data-action="change->macros#refresh"></td>
+              </tr>
+              <tr>
+                <td><label for="fats">Fats: </label></td>
+                <td><input type="number" id="fats" name="fats" value="<%=@macro[:fats]%>" min="0" data-target="macros.fats" data-action="change->macros#refresh"></td>
+              </tr>
+            </table>
+          </form>
+        </div>
+
+      </div>
     </div>
   </div>
 
-  <div>
-    <form id="custom-macros">
-      <select id="macro" name="macro" class="form-control" data-target="macros.select" data-action="change->macros#changeMeal">
-      <option id="0">-- Select macros --</option>
-        <% @macros.each do |macro| %>
-          <option value="<%=macro.id%>"><%=macro.name%></option>
-        <% end %>
-      </select>
-      <label for="protein">Protein: </label>
-      <input type="text" id="protein" name="protein" size="3" data-target="macros.protein">
-      <label for="carbs">Carbs: </label>
-      <input type="text" id="carbs" name="carbs" size="3" data-target="macros.carbs">
-      <label for="fats">Fats: </label>
-      <input type="text" id="fats" name="fats" size="3" data-target="macros.fats">
-      <input type="submit" id="search" data-action="">
-    </form>
-  </div>
+  
 
   <ul class="nav nav-pills mb-3" id="results-select" role="tablist">
     <li class="nav-item" role="presentation">
@@ -43,58 +56,24 @@
     <h2>Suggested Dishes</h2>
     <div class="tab-pane fade show active" id="results-list" role="tabpanel" aria-labelledby="results-list-tab">
 
-
-
-
-
-
-
-
-
-
-
-
-      <!-- <% @dishes.each do |dish| %>
-        <ul><%= link_to "#{dish.name} from #{dish.eatery.name}", eatery_path(dish.eatery) %>
-          <li>Protein: <%=dish.protein%> g</li>
-          <li>Carbs: <%=dish.carbs%> g</li>
-          <li>Fats: <%=dish.fats%> g</li>
-          <li>Cal: <%=dish.calories%> kcal</li>
-        </ul>
-      <% end %> -->
-
       <% @dishes.each do |dish| %>
-        <div class="eatery-card card bg-dark text-white w-85 mt-3 mb-3 dish_card" style="background: url('<%=cl_image_path dish.photo.key%>'); background-size: cover; background-position: center center">
+        <div data-target="macros.dishImage" class="eatery-card card bg-dark text-white w-85 mt-3 mb-3 dish_card" style="background: url('<%=cl_image_path dish.photo.key%>'); background-size: cover; background-position: center center">
           <div class="card-content w-100 pb-2">
             <div class="description pl-2">
-              <h5 class="card-title mb-1"> <%= dish.name %> </h5>
+              <h5 data-target="macros.dish" class="card-title mb-1"> <%= dish.name %> </h5>
               <p class="card-text"> <%= dish.description %> </p>
             </div>
             <div class="dis-flex pr-2">
               <p class="card-text price"> <%= number_to_currency(dish.price) %> </p>
             </div>
           </div>
-          <div class="dis-flex ml-2 mt-2">
-            <h4 class="plus font-weight-bold quantity pr-4">+</h4>
-            <h4 class="num font-weight-bold quantity">1</h4>
-            <h4 class="minus font-weight-bold quantity pl-4">-</h4>
-          </div>       
+          <div> <%= cl_image_tag dish.eatery.photo.key, height: 50, width: 50, crop: :fill, class: 'circle' %> </div>
           <div class="protein circle"> <%= dish.protein %> </div>
           <div class="carb circle"> <%= dish.carbs %> </div>
           <div class="fat circle"> <%= dish.fats %> </div>
-          <div class="card-btn"></div>
         </div>
 
       <% end %>
-
-
-
-
-
-
-
-
-
 
     </div>
     <div class="tab-pane fade" id="results-map" role="tabpanel" aria-labelledby="results-map-tab">

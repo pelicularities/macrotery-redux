@@ -27,7 +27,11 @@ export default class extends Controller {
   }
 
   changeMeal() {
-
+    const meal = this.selectTarget.value;
+    console.log(meal);
+    const query = `/dishes?macro=${meal}`;
+    console.log(query);
+    Turbolinks.visit(query);
   }
   
   refresh() {
@@ -39,16 +43,10 @@ export default class extends Controller {
     this.userCarbsTarget.innerHTML = `${carbs} g carbs`;
     this.userFatsTarget.innerHTML = `${fats} g fats`;
     const calories = 4 * protein + 4 * carbs + 9 * fats;
-    this.userCaloriesTarget.innerHTML = `${calories} g calories`;
+    this.userCaloriesTarget.innerHTML = `${calories} kcal calories`;
 
     const query = `/dishes?protein=${protein}&carbs=${carbs}&fats=${fats}`;
-    fetch(query, { headers: { accept: "application/json" } })
-      .then(response => response.json())
-      .then((data) => {
-        console.log(data);
-        data["dishes"].forEach(dish => {
-          
-        });
-      });
+    console.log(query);
+    Turbolinks.visit(query);
   }
 }
