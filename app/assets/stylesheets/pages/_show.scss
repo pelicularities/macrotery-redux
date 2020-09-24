@@ -1,11 +1,19 @@
 .eatery-card {
     height:150px;
-    font: black;
+    border: 2px solid grey;
     border-radius: 25px;
     background-image: url("https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80");
     background-size: cover;
 }
 
+.card-btn {
+    background-color: rgba(255, 0, 0, 0);
+    border-radius: 25px;
+    height: 120px;
+    z-index: 1;
+    position: relative;
+    top: 12%;
+}
 
 .card-content {
     display: flex;
@@ -38,14 +46,26 @@
 .dis-flex {
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 100px;
 }
 
 .tick {
+    display: none;
     position: absolute;
     left: 90%;
     top: 10%;
+}
+
+.quantity {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.shift {
+    position: relative;
+    top: 0%;
 }
 
 .protein {
