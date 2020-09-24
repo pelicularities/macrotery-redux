@@ -42,14 +42,60 @@
   <div class="tab-content" id="results-content">
     <h2>Suggested Dishes</h2>
     <div class="tab-pane fade show active" id="results-list" role="tabpanel" aria-labelledby="results-list-tab">
-      <% @dishes.each do |dish| %>
+
+
+
+
+
+
+
+
+
+
+
+
+      <!-- <% @dishes.each do |dish| %>
         <ul><%= link_to "#{dish.name} from #{dish.eatery.name}", eatery_path(dish.eatery) %>
           <li>Protein: <%=dish.protein%> g</li>
           <li>Carbs: <%=dish.carbs%> g</li>
           <li>Fats: <%=dish.fats%> g</li>
           <li>Cal: <%=dish.calories%> kcal</li>
         </ul>
+      <% end %> -->
+
+      <% @dishes.each do |dish| %>
+        <div class="eatery-card card bg-dark text-white w-85 mt-3 mb-3 dish_card" style="background: url('<%=cl_image_path dish.photo.key%>'); background-size: cover; background-position: center center">
+          <div class="card-content w-100 pb-2">
+            <div class="description pl-2">
+              <h5 class="card-title mb-1"> <%= dish.name %> </h5>
+              <p class="card-text"> <%= dish.description %> </p>
+            </div>
+            <div class="dis-flex pr-2">
+              <p class="card-text price"> <%= number_to_currency(dish.price) %> </p>
+            </div>
+          </div>
+          <div class="dis-flex ml-2 mt-2">
+            <h4 class="plus font-weight-bold quantity pr-4">+</h4>
+            <h4 class="num font-weight-bold quantity">1</h4>
+            <h4 class="minus font-weight-bold quantity pl-4">-</h4>
+          </div>       
+          <div class="protein circle"> <%= dish.protein %> </div>
+          <div class="carb circle"> <%= dish.carbs %> </div>
+          <div class="fat circle"> <%= dish.fats %> </div>
+          <div class="card-btn"></div>
+        </div>
+
       <% end %>
+
+
+
+
+
+
+
+
+
+
     </div>
     <div class="tab-pane fade" id="results-map" role="tabpanel" aria-labelledby="results-map-tab">
       <div id="map"
