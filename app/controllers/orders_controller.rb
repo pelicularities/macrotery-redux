@@ -13,12 +13,18 @@ class OrdersController < ApplicationController
     end
 
     def create
-        @order = Order.new(orders_params)
+        order = Order.new(orders_params)
+        order.user = current_user
+        if order.save
+            redirect_to order_path(order)
+        else
+            redirect_to eatery_path
+        end
     end
 
     private
 
     def orders_params
-        params.require(:order).permit(:dine_in, :preferred_time, :confirmed)
+        params.require(:order_dishes).permit(:order, :dine_in, :preferred_time, :confirmed)
     end
 end

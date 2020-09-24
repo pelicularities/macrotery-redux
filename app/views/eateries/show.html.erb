@@ -1,35 +1,58 @@
 <%= javascript_pack_tag 'eatery_show', 'data-turbolinks-track': 'reload', defer: true %>
 
+<div class="heading mt-4">
+  <img class="img" src='<%= cl_image_path @eatery.photo.key %>' alt='eatery_logo'>
+  <div>
+    <h2 class="pl-4"> Welcome to <%= @eatery.name %> </h2>
+    <div class="location">
+      <img src='https://www.pinclipart.com/picdir/middle/579-5790258_location-logo-png-hd-images-location-logo-png.png'>
+      <h6 class="pl-4"> location: <%= @eatery.address %> </h6>
+    </div>
+  </div>
+</div>
 
-<h2> Welcome to <%= @eatery.name %> </h2>
-
-<%= cl_image_tag dish.dish_image.key, class:'p-image', height: 200, width: 200, crop: :fill %>
-
-<% @eatery.dishes.each do |dish| %>
-    <div>
-
-    <div class="eatery-card card bg-dark text-white w-85 mt-3 mb-3 dish_card">
-        <div class="card-content w-100 pb-2">
-            <div class="description pl-2">
-                <h5 class="card-title mb-1"> <%= dish.name %> </h5>
-                <p class="card-text"> <%= dish.description %> </p>
+<div class="flex-center mt-4">
+  <%= form_for Order.new, url: orders_path, method: "post", local: true, html: { novalidate: true } do %>
+    <% @eatery.dishes.each do |dish| %>
+      <div data-controller="order">
+        <%= check_box_tag "order_dishes[#{dish.id}][id]", dish.id, false, data: { target: "order.checkbox" } %>
+        <div class="eatery-card card bg-dark text-white w-85 mt-3 mb-3 dish_card" style="background-image: url('<%=cl_image_path dish.photo.key%>');">
+            <div class="card-content w-100 pb-2">
+              <div class="description pl-2">
+                  <h5 class="card-title mb-1"> <%= dish.name %> </h5>
+                  <p class="card-text"> <%= dish.description %> </p>
+              </div>
+              <div class="dis-flex pr-2">
+                  <p class="card-text price" data-target="order.price" data-unit-price="<%= dish.price %>"> <%= number_to_currency(dish.price) %> </p>
+              </div>
             </div>
-            <div class="dis-flex pr-2">
-                <p class="card-text price"> <%= number_to_currency(dish.price) %> </p>
+            <h4 class="tick">✅</h4>
+            <div class="dis-flex ml-2 mt-2">
+              <h4 class="plus font-weight-bold quantity pr-4">+</h4>
+              <h4 clasors="num font-weight-bold quantity">1</h4>
+              <h4 class="minus font-weight-bold quantity pl-4">-</h4>
             </div>
+            <div class="protein circle"> <%= dish.protein %> </div>
+            <div class="carb circle"> <%= dish.carbs %> </div>
+            <div class="fat circle"> <%= dish.fats %> </div>
+            <div class="card-btn" data-action="click->order#handleClick"></div>
         </div>
-        <h4 class="tick">✅</h4>
-        <div class="dis-flex ml-2 mt-2">
-            <h4 class="plus font-weight-bold quantity pr-4">+</h4>
-            <h4 class="num font-weight-bold quantity">1</h4>
-            <h4 class="minus font-weight-bold quantity pl-4">-</h4>
-        </div>       
-        <div class="protein circle"> <%= dish.protein %> </div>
-        <div class="carb circle"> <%= dish.carbs %> </div>
-        <div class="fat circle"> <%= dish.fats %> </div>
-        <div class="card-btn"></div>
-    </div>
-    </div>
+        <%= number_field_tag("order_dishes[#{dish.id}][quantity]", 0, data: {
+          action: 'change->order#handleChange',
+          target: 'order.quantity'
+        }, min: 1, class: "d-none") %>
+      </div>
+    <% end %>
 
-<% end %>
+    <%= submit_tag("submit") %>
+  <% end %>
+  <div>
+    <h1>Total Price</h1>
+    <span></span>
+  </div>
+</div>
 
+  
+  
+  
+  
