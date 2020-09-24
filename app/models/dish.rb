@@ -7,6 +7,8 @@ class Dish < ApplicationRecord
   validates :name, uniqueness: { scope: :eatery, message: 'eatery already has a dish by this name' }
   after_find :calculate_calories, if: :calories_empty?
 
+  accepts_nested_attributes_for :order_dishes
+
   private
 
   def calculate_calories
