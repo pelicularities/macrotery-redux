@@ -6,9 +6,11 @@ export default class extends Controller {
     handleClick(event) {
         this.checkboxTarget.checked = !this.checkboxTarget.checked;
         if (this.checkboxTarget.checked) {
-            this.quantityTarget.classList.remove('d-none')
+            this.quantityTarget.classList.remove('d-none');
+            this.quantityTarget.value = 1;
         } else {
-            this.quantityTarget.classList.add('d-none')
+            this.quantityTarget.classList.add('d-none');
+            this.quantityTarget.value = 0;
         }
     }
 
