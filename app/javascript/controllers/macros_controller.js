@@ -29,9 +29,21 @@ export default class extends Controller {
   changeMeal() {
     const meal = this.selectTarget.value;
     console.log(meal);
+
+    // is map currently loaded? if it is, make sure to show map tab
+    const mapTab = document.getElementById('results-map-tab');
+    
+    const mapVisible = mapTab.classList.contains('active');
+
     const query = `/dishes?macro=${meal}`;
     console.log(query);
     Turbolinks.visit(query);
+    // $('#results-map-tab').tab('show');
+
+    if (mapVisible === true) {
+      console.log('show the map!');
+      this.showMap();
+    }
   }
   
   refresh() {
@@ -48,5 +60,20 @@ export default class extends Controller {
     const query = `/dishes?protein=${protein}&carbs=${carbs}&fats=${fats}`;
     console.log(query);
     Turbolinks.visit(query);
+  }
+
+  showMap() {
+    console.log('this is showMap()');
+    const listTab = document.getElementById('results-list-tab');
+    const listContent = document.getElementById('results-list');
+    const mapTab = document.getElementById('results-map-tab');
+    const mapContent = document.getElementById('results-map');
+
+    listTab.classList.remove('active');
+    listContent.classList.remove('active');
+    listContent.classList.remove('show');
+    mapTab.classList.add('active');
+    mapContent.classList.add('active');
+    mapContent.classList.add('show');
   }
 }
