@@ -2,7 +2,11 @@ class DishesController < ApplicationController
 
   def index
     @user = current_user
-    if params[:protein] && params[:carbs] && params[:fats]
+    @macros = @user.macros
+    
+    if params[:macro].nil? == false && params[:macro].to_i.zero? == false
+      @macro = Macro.find(params[:macro])
+    elsif params[:protein] && params[:carbs] && params[:fats]
       @macro = {
         protein: params[:protein].to_i,
         carbs: params[:carbs].to_i,
@@ -10,30 +14,26 @@ class DishesController < ApplicationController
       }
       @macro[:calories] = 4 * @macro[:protein] + 4 * @macro[:carbs] + 9 * @macro[:fats]
     else
-      @macro = @user.macros.sample  # just picking one, for testing purposes
+      @macro = @user.macros.first  # default to first available macro
     end
-
-    @dish_scores = {}
 
     @dishes = Dish.all.sort_by { |dish| calculate_score(@macro, dish) }.first(20)
 
-    @eateries = []
-    @dishes.each { |dish| @eateries << dish.eatery }
-    @eateries.uniq!
-
-    @markers = @eateries.select { |eatery| eatery.latitude.nil? == false }.map do |eatery|
-      {
-        lat: eatery.latitude,
-        lng: eatery.longitude
-      }
-    end
-
-    @dishes.each do |dish|
-      @dish_scores[dish] = calculate_score(@macro, dish)
-    end
-
     respond_to do |format|
-      format.html
+      format.html {
+        @eateries = []
+        @dishes.each { |dish| @eateries << dish.eatery }
+        @eateries.uniq!
+
+        @markers = @eateries.select { |eatery| eatery.latitude.nil? == false }.map do |eatery|
+          eatery_dishes = @dishes.select { |dish| dish.eatery == eatery }
+          {
+            lat: eatery.latitude,
+            lng: eatery.longitude,
+            infoWindow: render_to_string(partial: "info_window", locals: { eatery: eatery, eatery_dishes: eatery_dishes })
+          }
+        end
+      }
       format.json { render json: { dishes: @dishes } }
     end
   end
