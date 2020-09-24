@@ -1,9 +1,10 @@
 <h2><%= link_to eatery.name, eatery_path(eatery.id) %></h2>
 <p><%= eatery.address %></p>
 <h5>Dishes at this eatery that match your macros</h5>
-<ul>
-  <% eatery_dishes.each do |eatery_dish|%>
-    <li><%=eatery_dish.name%> (<%=eatery_dish.protein%>P <%=eatery_dish.carbs%>C <%=eatery_dish.fats%>F, <%=eatery_dish.calories%> kcal)</li>
-  <% end %>
-</ul>
+<% eatery_dishes.each do |eatery_dish|%>
+  <div>
+    <p><strong><%=eatery_dish.name%></strong><br />
+    <%=eatery_dish.protein%>P <%=eatery_dish.carbs%>C <%=eatery_dish.fats%>F <%=eatery_dish.calories%> kcal</p>
+  </div>
+<% end %>
 <div class='text-center'><%= link_to "See #{eatery.name}", eatery_path(eatery.id), class: 'btn btn-primary' %></div>
