@@ -1,10 +1,23 @@
 
-<%= simple_form_for @macro do |f| %>
 
-<%= f.input :name, label: 'meal name' %>
-<%= f.input :protein, label: 'Protein', size: "200" %>
-<%= f.input :carbs, label: 'Carbs' %>
-<%= f.input :fats, label: 'Fats' %>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+      <div class="macro_form">
 
-<%= f.submit 'Create My Macros' %>
-<% end %>
+        <%= simple_form_for @macro do |f| %>
+
+        <%= f.input :name, label: 'Meal Of The Day' %>
+          <%= f.input :protein, label: 'Protein Per Meal', placeholder: '0-200' %>
+
+
+
+        <%= f.input :carbs, label: 'Carbs Per Meal', placeholder: '0-200' %>
+        <%= f.input :fats, label: 'Fats Per Meal', placeholder: '0-200' %>
+
+        <%= f.button :submit, "Save My Macros", class: "btn btn-info" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

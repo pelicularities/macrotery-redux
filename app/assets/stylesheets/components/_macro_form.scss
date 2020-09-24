@@ -1,0 +1,52 @@
+
+// .container {
+//   margin-left: 20%;
+// }
+
+.macro_form {
+  background: white;
+  padding: 10px 20px;
+  margin-top: 50px;
+  border-radius: 3px;
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  .btn {
+    width: 100%;
+    margin-bottom: 20px
+  }
+}
+
+.error {
+    position: relative;
+}
+.error .tip, .question:hover .tip {
+    visibility: visible;
+}
+
+.tip {
+    z-index: 100;
+    background-color: rgba(0,0,0,0.75);
+    box-shadow: 0 0 8px rgba(0,0,0,0.3);
+    bottom: auto;
+    font-size: 0.8em;
+    padding: 2px 10px;
+    color: #fff;
+    padding: 6px 12px;
+    right: auto;
+    top: 47px;
+    left: 10px;
+    white-space: nowrap;
+    position: absolute;
+    visibility: hidden;
+}
+
+.tip:after {
+    border-bottom: 10px solid rgba(0,0,0,0.8);
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    top: -10px;
+    content: '';
+    display: block;
+    height: 0;
+    left: 10px;
+    position: absolute;
+}

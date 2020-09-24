@@ -1,12 +1,36 @@
 
 
-<h1> This is profile/ macros page </h1>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+      <h1> Your Macros Plan: </h1>
 
-<% @macro.each do |macro| %>
+      <table class="table table-hover">
+        <thead>
+          <tr class="table-secondary">
+            <th scope="col"></th>
+            <th scope="col">Protein</th>
+            <th scope="col">Carbs</th>
+            <th scope="col">Fats</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @macro.each do |macro| %>
+          <tr>
+            <th scope="row"><%= macro.name %></th>
+            <td><%= macro.protein.to_i %></td>
+            <td><%= macro.carbs.to_i %></td>
+            <td><%= macro.fats.to_i %></td>
+            <td><%= link_to edit_macro_path(macro) do %><i class="fas fa-pen"> </i><% end %>
+            <td><%= link_to macro_path(macro), method: :delete do %><i class="fas fa-trash"> </i><% end %>
+            </td>
+            </tr>
+            <% end%>
+          </tbody>
+        </table>
 
-<p> Your Macros Plan is now:
-<li> Protein:  <%= macro.protein.to_i %>  </li>
-<li> Carbs:  <%= macro.carbs.to_i %>  </li>
-<li> Fats:  <%= macro.fats.to_i %>  </li>
-</p>
-<% end %>
+      </div>
+    </div>
+  </div>
