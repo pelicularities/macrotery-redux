@@ -21,9 +21,9 @@ Rails.application.routes.draw do
 
   resources :eateries, only: [:show]
 
-  resources :profiles, only: [:show, :create, :update] do
-    resources :macros, only: [:create, :update, :destroy]
-  end
+  # resources :profiles, only: [:show, :create, :update] do
+  #   resources :macros, only: [:new, :create, :update, :destroy]
+  # end
 
 
 

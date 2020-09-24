@@ -5,4 +5,15 @@ class Dish < ApplicationRecord
   has_one_attached :photo
   validates :name, :price, :protein, :carbs, :fats, presence: true
   validates :name, uniqueness: { scope: :eatery, message: 'eatery already has a dish by this name' }
+  after_find :calculate_calories, if: :calories_empty?
+
+  private
+
+  def calculate_calories
+    self.calories = self.protein * 4 + self.carbs * 4 + self.fats * 9
+  end
+
+  def calories_empty?
+    self.calories.nil?
+  end
 end
