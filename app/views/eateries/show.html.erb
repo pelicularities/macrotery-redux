@@ -32,9 +32,9 @@ data-total-amount="0">
             </div>
             <h4 class="tick">✅</h4>
             <div class="dis-flex ml-2 mt-2">
-              <h4 class="plus font-weight-bold quantity pr-4">+</h4>
-              <h4 clasors="num font-weight-bold quantity">1</h4>
-              <h4 class="minus font-weight-bold quantity pl-4">-</h4>
+              <h4 class="font-weight-bold pr-4" data-action="click->order#increase">+</h4>
+              <h4 clasors="num font-weight-bold " data-target="order.quantitylabel"></h4>
+              <h4 class="font-weight-bold pl-4" data-action="click->order#decrease">-</h4>
             </div>
             <div class="protein circle" data-target="order.protein" data-unit-protein="<%= dish.protein %>"> <%= dish.protein %> </div>
             <div class="carb circle" data-target="order.carbs" data-unit-carbs="<%= dish.carbs %>"> <%= dish.carbs %> </div>
@@ -42,11 +42,14 @@ data-total-amount="0">
             <div class="card-btn" data-action="click->order#handleClick"></div>
         </div>
         <div class="data">
-          <%= check_box_tag "order_dishes[#{dish.id}][id]", dish.id, false, data: { target: "order.checkbox" } %>
-          <%= number_field_tag("order_dishes[#{dish.id}][quantity]", 0, data: {
-            action: 'change->order#handleChange',
-            target: 'order.quantity'
-          }, min: 1, class: "d-none") %>
+          <div class="checkbox">
+            <%= check_box_tag "order_dishes[#{dish.id}][id]", dish.id, false, data: { target: "order.checkbox" } %>
+          </div>
+            <%= number_field_tag("order_dishes[#{dish.id}][quantity]", 0, data: {
+              action: 'change->order#handleChange',
+              target: 'order.quantity'
+            }, min: 1, class: "d-none") %>
+
         </div>
       </div>
     <% end %>
