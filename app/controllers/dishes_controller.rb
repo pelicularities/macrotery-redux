@@ -17,8 +17,17 @@ class DishesController < ApplicationController
       @macro = @user.macros.first  # default to first available macro
     end
 
-    # user_location = [1.3060493499999999,103.8310084178641]  # will need to change this later, to get actual user location
-    user_location = request.location
+    if params[:lat].nil? || params[:lng].nil? || params[:lat].empty? || params[:lng].empty?
+      # lat and lng not given: check if request_location is valid
+      # otherwise, default to 360 Orchard Road
+      user_location = request.location.nil? ? request_location : [1.3060493499999999,103.8310084178641]
+    else
+      # if lat and lng are given, use that as user_location
+      # if user gives permission for location info, take user location using JS
+      # and pass it in as query string
+      user_location = [params[:lat], params[:lng]]
+    end
+
     nearby_eateries = Eatery.near(user_location, 5)
     nearby_dishes = nearby_eateries.map(&:dishes).flatten
 
