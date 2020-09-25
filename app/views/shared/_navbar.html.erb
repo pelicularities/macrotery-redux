@@ -13,15 +13,15 @@
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
       <li class="nav-item active">
-        <%= link_to "Search", "#", class: "nav-link upper", style: "color: white"%>
+        <%= link_to "Find Meals", dishes_path, class: "nav-link upper", style: "color: white"%>
       </li>
-      <li class="nav-item">
+      <!--<li class="nav-item">
         <%= link_to "Order", "#", class: "nav-link upper", style: "color: white" %>
-      </li>
+      </li>-->
       <li class="nav-item dropdown">
         <%= image_tag "https://static.photocdn.pt/images/articles/2019/08/07/images/articles/2019/07/31/linkedin_profile_picture_tips-1.jpg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-          <%= link_to "My Profile", "#", class: "dropdown-item" %>
+          <%= link_to "My Profile", macros_path, class: "dropdown-item" %>
           <!--             <%= link_to "My History", "#", class: "dropdown-item" %> -->
           <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
         </div>
