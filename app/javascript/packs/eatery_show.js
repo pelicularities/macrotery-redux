@@ -10,7 +10,7 @@ const testFunction = () => {
             let minus = event.currentTarget.parentNode.children[2].children[2].classList.toggle("show");
 
             event.currentTarget.parentNode.children[6].classList.toggle("shift"); // btn surface retain within card
-            // console.log(event.currentTarget.parentNode.children);
+            console.log(event.currentTarget.parentNode.children);
 
             const add = event.currentTarget.parentNode.children[2].children[0];
             const number = event.currentTarget.parentNode.children[2].children[1];
@@ -33,4 +33,4 @@ const testFunction = () => {
     });
 };
 
-export default testFunction;
+export default testFunction();
