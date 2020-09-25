@@ -17,7 +17,21 @@ class DishesController < ApplicationController
       @macro = @user.macros.first  # default to first available macro
     end
 
-    @dishes = Dish.all.sort_by { |dish| calculate_score(@macro, dish) }.first(20)
+    if params[:lat].nil? || params[:lng].nil? || params[:lat].empty? || params[:lng].empty?
+      # lat and lng not given: check if request_location is valid
+      # otherwise, default to Taman Jurong Shopping Centre
+      user_location = request.location.nil? ? request_location : [1.33478625, 103.72010845018316]
+    else
+      # if lat and lng are given, use that as user_location
+      # if user gives permission for location info, take user location using JS
+      # and pass it in as query string
+      user_location = [params[:lat], params[:lng]]
+    end
+
+    nearby_eateries = Eatery.near(user_location, 5)
+    nearby_dishes = nearby_eateries.map(&:dishes).flatten
+
+    @dishes = nearby_dishes.sort_by { |dish| calculate_score(@macro, dish) }.first(20)
 
     respond_to do |format|
       format.html {

@@ -24,6 +24,14 @@ export default class extends Controller {
 
   connect() {
     console.log('Stimulus is connected');
+
+    // haven't yet figured out how to do this part
+    // const user_location = this.appendLocation();
+    // if (user_location !== '') {
+    //   // successfully got user's location
+    //   const query = `/dishes?${user_location}`;
+    //   Turbolinks.visit(query);
+    // }
   }
 
   changeMeal() {
@@ -35,7 +43,7 @@ export default class extends Controller {
     
     const mapVisible = mapTab.classList.contains('active');
 
-    const query = `/dishes?macro=${meal}`;
+    const query = `/dishes?macro=${meal}&${this.appendLocation()}`;
     console.log(query);
     Turbolinks.visit(query);
     // $('#results-map-tab').tab('show');
@@ -57,7 +65,7 @@ export default class extends Controller {
     const calories = 4 * protein + 4 * carbs + 9 * fats;
     this.userCaloriesTarget.innerHTML = `${calories} kcal calories`;
 
-    const query = `/dishes?protein=${protein}&carbs=${carbs}&fats=${fats}`;
+    const query = `/dishes?protein=${protein}&carbs=${carbs}&fats=${fats}&${this.appendLocation()}`;
     console.log(query);
     Turbolinks.visit(query);
   }
@@ -75,5 +83,23 @@ export default class extends Controller {
     mapTab.classList.add('active');
     mapContent.classList.add('active');
     mapContent.classList.add('show');
+  }
+
+  // haven't figured out yet how to handle this part
+  appendLocation() {
+    console.log("I'm in appendLocation()");
+    let locationString = '';
+    navigator.geolocation.getCurrentPosition((data) => {
+      const lat = data.coords.latitude;
+      const lng = data.coords.longitude;
+      console.log(lat);
+      console.log(lng);
+      locationString = `lat=${lat}&lng=${lng}`; 
+      console.log(locationString);
+    },
+    (err) => {
+      console.warn(`ERROR(${err.code}): ${err.message}`);
+    });
+    return locationString;
   }
 }
