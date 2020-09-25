@@ -41,15 +41,15 @@ data-total-amount="0">
             <div class="fat circle" data-target="order.fats" data-unit-fats="<%= dish.fats %>"> <%= dish.fats %> </div>
             <div class="card-btn" data-action="click->order#handleClick"></div>
         </div>
-        <div class="data">
-          <div class="checkbox">
-            <%= check_box_tag "order_dishes[#{dish.id}][id]", dish.id, false, data: { target: "order.checkbox" } %>
-          </div>
-            <%= number_field_tag("order_dishes[#{dish.id}][quantity]", 0, data: {
-              action: 'change->order#handleChange',
-              target: 'order.quantity'
-            }, min: 1, class: "d-none") %>
 
+        <div class="checkbox">
+          <%= check_box_tag "order_dishes[#{dish.id}][id]", dish.id, false, data: { target: "order.checkbox" } %>
+        </div>
+        <div class="data">
+          <%= number_field_tag("order_dishes[#{dish.id}][quantity]", 0, data: {
+            action: 'change->order#handleChange',
+            target: 'order.quantity'
+          }, min: 1, class: "d-none") %>
         </div>
       </div>
     <% end %>

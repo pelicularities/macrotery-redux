@@ -18,6 +18,8 @@ export default class extends Controller {
             this.amount += prevPrice
         }
 
+        this.amount = Math.round(this.amount * 100) / 100;
+
         this.data.set('amount', this.amount);
         this.totalpriceTarget.innerText = `$${this.amount}`;
     }
