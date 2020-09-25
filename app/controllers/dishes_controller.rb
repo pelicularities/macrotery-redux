@@ -19,8 +19,8 @@ class DishesController < ApplicationController
 
     if params[:lat].nil? || params[:lng].nil? || params[:lat].empty? || params[:lng].empty?
       # lat and lng not given: check if request_location is valid
-      # otherwise, default to 360 Orchard Road
-      user_location = request.location.nil? ? request_location : [1.3060493499999999,103.8310084178641]
+      # otherwise, default to Taman Jurong Shopping Centre
+      user_location = request.location.nil? ? request_location : [1.33478625, 103.72010845018316]
     else
       # if lat and lng are given, use that as user_location
       # if user gives permission for location info, take user location using JS
