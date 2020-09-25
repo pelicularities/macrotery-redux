@@ -24,12 +24,14 @@ export default class extends Controller {
 
   connect() {
     console.log('Stimulus is connected');
-    const user_location = this.appendLocation();
-    if (user_location !== '') {
-      // successfully got user's location
-      const query = `/dishes?${user_location}`;
-      Turbolinks.visit(query);
-    }
+
+    // haven't yet figured out how to do this part
+    // const user_location = this.appendLocation();
+    // if (user_location !== '') {
+    //   // successfully got user's location
+    //   const query = `/dishes?${user_location}`;
+    //   Turbolinks.visit(query);
+    // }
   }
 
   changeMeal() {
@@ -83,6 +85,7 @@ export default class extends Controller {
     mapContent.classList.add('show');
   }
 
+  // haven't figured out yet how to handle this part
   appendLocation() {
     console.log("I'm in appendLocation()");
     let locationString = '';
