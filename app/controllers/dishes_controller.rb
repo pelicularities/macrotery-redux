@@ -33,9 +33,6 @@ class DishesController < ApplicationController
 
     @dishes = nearby_dishes.sort_by { |dish| calculate_score(@macro, dish) }.first(20)
 
-    # what happens if no dishes match this condition?
-    # view needs to fail nicely
-
     respond_to do |format|
       format.html {
         @eateries = []
