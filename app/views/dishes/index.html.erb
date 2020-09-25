@@ -56,6 +56,9 @@
     <h2>Suggested Dishes</h2>
     <div class="tab-pane fade show active" id="results-list" role="tabpanel" aria-labelledby="results-list-tab">
 
+      <% if @dishes.empty? %>
+        :( Sorry, no dishes match your criteria.
+      <% end %>
       <% @dishes.each do |dish| %>
         <%= link_to eatery_path(dish.eatery) do %>
           <div data-target="macros.dishImage" class="eatery-card card bg-dark text-white w-85 mt-3 mb-3 dish_card" style="background: url('<%=cl_image_path dish.photo.key%>'); background-size: cover; background-position: center center">
@@ -87,3 +90,4 @@
     </div>
   </div>
 </div>
+<%= javascript_pack_tag 'user_location', 'data-turbolinks-track': 'reload', defer: true %>

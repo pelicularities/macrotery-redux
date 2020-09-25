@@ -17,7 +17,15 @@ class DishesController < ApplicationController
       @macro = @user.macros.first  # default to first available macro
     end
 
-    @dishes = Dish.all.sort_by { |dish| calculate_score(@macro, dish) }.first(20)
+    # user_location = [1.3060493499999999,103.8310084178641]  # will need to change this later, to get actual user location
+    user_location = request.location
+    nearby_eateries = Eatery.near(user_location, 5)
+    nearby_dishes = nearby_eateries.map(&:dishes).flatten
+
+    @dishes = nearby_dishes.sort_by { |dish| calculate_score(@macro, dish) }.first(20)
+
+    # what happens if no dishes match this condition?
+    # view needs to fail nicely
 
     respond_to do |format|
       format.html {

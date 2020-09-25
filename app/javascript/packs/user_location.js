@@ -3,8 +3,3 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
-// searchButton = document.getElementById('search')
-
-// searchButton.addEventListener("click", (event) => {
-//   event.preventDefault();
-// });
