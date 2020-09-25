@@ -2,18 +2,21 @@
 
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-xs-12 col-sm-4 col-sm-offset-4">
-      <h1> Your Macros Plan: </h1>
+    <div class="col-xs-12 col-sm-6 col-sm-offset-6">
+      <div class="container d-flex justify-content-between" style="margin-top: 20px">
+        <h1> Your Macros Plan: </h1>
+        <%= link_to new_macro_path do %><i class="fas fa-plus-square" style="font-size: 40px; color: #283c63"></i><% end %>
+      </div>
 
-      <table class="table table-hover">
+      <table class="table table-hover" style="margin-top: 20px">
         <thead>
-          <tr class="table-secondary">
+          <tr class="table-info" style="color: white">
             <th scope="col"></th>
-            <th scope="col">Protein</th>
-            <th scope="col">Carbs</th>
-            <th scope="col">Fats</th>
-            <th scope="col">Edit</th>
-            <th scope="col">Delete</th>
+            <th scope="col" style="color: white">Protein</th>
+            <th scope="col" style="color: white">Carbs</th>
+            <th scope="col" style="color: white">Fats</th>
+            <th scope="col" style="color: #404b69">Edit</th>
+            <th scope="col" style="color: #404b69">Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -24,8 +27,8 @@
             <td><%= macro.carbs.to_i %></td>
             <td><%= macro.fats.to_i %></td>
             <td><%= link_to edit_macro_path(macro) do %><i class="fas fa-pen"> </i><% end %>
-            <td><%= link_to macro_path(macro), method: :delete do %><i class="fas fa-trash"> </i><% end %>
-            </td>
+              <td><%= link_to macro_path(macro), method: :delete do %><i class="fas fa-trash"> </i><% end %>
+              </td>
             </tr>
             <% end%>
           </tbody>
