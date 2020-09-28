@@ -23,7 +23,7 @@ export default class extends Controller {
   ];
 
   connect() {
-    console.log('Stimulus is connected');
+    console.log('macrosController is connected');
 
     // if url params does not include lat and long
     // get user location
@@ -40,13 +40,16 @@ export default class extends Controller {
         params.append('lat', lat);
         params.append('lng', lng);
         console.log(params.toString());
-        const query = `${url.pathname}?${params}`;
-        console.log(query);
-        Turbolinks.visit(query);
+        
+        // console.log(query);
+        // Turbolinks.visit(query);
       });
-
-      
     }
+    const query = `${url.pathname}?${params}`;
+    console.log(query);
+    const data = this.fetchJSON(query);
+    console.log("I'm inside the connect function");
+    console.log(data);
   }
 
   changeMeal() {
@@ -60,13 +63,16 @@ export default class extends Controller {
 
     const query = `/dishes?macro=${meal}`;
     console.log(query);
-    Turbolinks.visit(query);
+    const data = this.fetchJSON(query);
+    console.log("I'm inside the changeMeal function");
+    console.log(data);
+    // Turbolinks.visit(query);
     // $('#results-map-tab').tab('show');
 
-    if (mapVisible === true) {
-      console.log('show the map!');
-      this.showMap();
-    }
+    // if (mapVisible === true) {
+    //   console.log('show the map!');
+    //   this.showMap();
+    // }
   }
   
   refresh() {
@@ -82,39 +88,34 @@ export default class extends Controller {
 
     const query = `/dishes?protein=${protein}&carbs=${carbs}&fats=${fats}`;
     console.log(query);
-    Turbolinks.visit(query);
+    const data = this.fetchJSON(query);
+    console.log("I'm inside the refresh function");
+    console.log(data);
+    // Turbolinks.visit(query);
   }
 
-  showMap() {
-    console.log('this is showMap()');
-    const listTab = document.getElementById('results-list-tab');
-    const listContent = document.getElementById('results-list');
-    const mapTab = document.getElementById('results-map-tab');
-    const mapContent = document.getElementById('results-map');
-
-    listTab.classList.remove('active');
-    listContent.classList.remove('active');
-    listContent.classList.remove('show');
-    mapTab.classList.add('active');
-    mapContent.classList.add('active');
-    mapContent.classList.add('show');
+  fetchJSON(query) {
+    fetch(query, { headers: { accept: 'application/json' } })
+    .then(response => response.json())
+    .then((data) => {
+      console.log("I'm inside the fetchJSON function");
+      console.log(data);
+      return data;
+    });
   }
 
-  // // haven't figured out yet how to handle this part
-  // appendLocation() {
-  //   console.log("I'm in appendLocation()");
-  //   let locationString = '';
-  //   navigator.geolocation.getCurrentPosition((data) => {
-  //     const lat = data.coords.latitude;
-  //     const lng = data.coords.longitude;
-  //     console.log(lat);
-  //     console.log(lng);
-  //     locationString = `lat=${lat}&lng=${lng}`; 
-  //     console.log(locationString);
-  //   },
-  //   (err) => {
-  //     console.warn(`ERROR(${err.code}): ${err.message}`);
-  //   });
-  //   return locationString;
+  // showMap() {
+  //   console.log('this is showMap()');
+  //   const listTab = document.getElementById('results-list-tab');
+  //   const listContent = document.getElementById('results-list');
+  //   const mapTab = document.getElementById('results-map-tab');
+  //   const mapContent = document.getElementById('results-map');
+
+  //   listTab.classList.remove('active');
+  //   listContent.classList.remove('active');
+  //   listContent.classList.remove('show');
+  //   mapTab.classList.add('active');
+  //   mapContent.classList.add('active');
+  //   mapContent.classList.add('show');
   // }
 }

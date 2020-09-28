@@ -1,9 +1,9 @@
-<div data-controller="macros">
+<div>
   <div class="container my-3 border">
-    <div class="row">
+    <div class="row" data-controller="macros">
       <div class="col-12 col-md-6 p-3">
         <h5>Your search criteria</h5>
-        Your <span data-target="macros.name"><%=@macro.name unless @macro[:name].nil?%></span> macros: 
+        Your <span data-target="macros.name"><%=@macro.name unless @macro[:name].nil?%></span> dishes: 
         <ul>
           <li data-target="macros.userProtein"><%=@macro[:protein]%> g protein</li>
           <li data-target="macros.userCarbs"><%=@macro[:carbs]%> g carbs</li>
@@ -61,20 +61,20 @@
       <% end %>
       <% @dishes.each do |dish| %>
         <%= link_to eatery_path(dish.eatery) do %>
-          <div data-target="macros.dishImage" class="eatery-card card bg-dark text-white w-85 mt-3 mb-3 dish_card" style="background: url('<%=cl_image_path dish.photo.key%>'); background-size: cover; background-position: center center">
+          <div data-controller="dishes" data-target="dishes.dishImage" class="eatery-card card bg-dark text-white w-85 mt-3 mb-3 dish_card" style="background: url('<%=cl_image_path dish.photo.key%>'); background-size: cover; background-position: center center">
             <div class="card-content w-100 pb-2">
               <div class="description pl-2">
-                <h5 data-target="macros.dish" class="card-title mb-1"> <%=dish.name%> </h5>
-                <p class="card-text"> <%= dish.description %> </p>
+                <h5 data-target="dishes.name" class="card-title mb-1"> <%=dish.name%> </h5>
+                <p data-target="dishes.description" class="card-text"> <%= dish.description %> </p>
               </div>
               <div class="dis-flex pr-2">
-                <p class="card-text price"> <%= number_to_currency(dish.price) %> </p>
+                <p data-target="dishes.price" class="card-text price"> <%= number_to_currency(dish.price) %> </p>
               </div>
             </div>
-            <div> <%= cl_image_tag dish.eatery.photo.key, height: 50, width: 50, crop: :fill, class: 'circle' %> </div>
-            <div class="protein circle"> <%= dish.protein %> </div>
-            <div class="carb circle"> <%= dish.carbs %> </div>
-            <div class="fat circle"> <%= dish.fats %> </div>
+            <div data-target="dishes.eateryImage"> <%= cl_image_tag dish.eatery.photo.key, height: 50, width: 50, crop: :fill, class: 'circle' %> </div>
+            <div data-target="dishes.protein" class="protein circle"> <%= dish.protein %> </div>
+            <div data-target="dishes.carbs" class="carb circle"> <%= dish.carbs %> </div>
+            <div data-target="dishes.fats" class="fat circle"> <%= dish.fats %> </div>
           </div>
         <% end %>
 
@@ -84,6 +84,7 @@
     <div class="tab-pane fade" id="results-map" role="tabpanel" aria-labelledby="results-map-tab">
       <div id="map"
         style="width: 100%; height: 600px;"
+        data-target="dishes.markers"
         data-markers="<%= @markers.to_json %>"
         data-mapbox-api-key="<%=ENV["MAPBOX_API_KEY"]%>">
       </div>

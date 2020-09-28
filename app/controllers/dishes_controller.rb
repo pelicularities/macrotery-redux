@@ -33,12 +33,17 @@ class DishesController < ApplicationController
 
     @dishes = nearby_dishes.sort_by { |dish| calculate_score(@macro, dish) }.first(20)
 
+    @eateries = []
+    @dishes.each { |dish| @eateries << dish.eatery }
+    @eateries.uniq!
+
+    @data = {
+      dishes: @dishes,
+      eateries: @eateries
+    }
+
     respond_to do |format|
       format.html {
-        @eateries = []
-        @dishes.each { |dish| @eateries << dish.eatery }
-        @eateries.uniq!
-
         @markers = @eateries.select { |eatery| eatery.latitude.nil? == false }.map do |eatery|
           eatery_dishes = @dishes.select { |dish| dish.eatery == eatery }
           {
@@ -48,12 +53,15 @@ class DishesController < ApplicationController
           }
         end
       }
-      format.json { render json: { dishes: @dishes } }
+      format.json { render json: { dishes: @dishes, data: @data } }
     end
   end
 
   def show
-    @dish = Dish.find(params[:id])
+    @dish = Dish.find(params[:id]).include(:eatery)
+    respond_to do |format|
+      format.json { render json: { dish: @dish } }
+    end
   end
 
   private
