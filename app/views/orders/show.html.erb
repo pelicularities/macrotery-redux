@@ -4,3 +4,24 @@
 
 <h2>Thank You!</h2>
 </div>
+
+
+<div class="container">
+  <div class="row py-4">
+    <div class="col-md-3">dish test</div>
+
+    <div class="col">
+      <h1>Order #<%= @order.id %> <small><span class="badge badge-primary"><%= @order.state %></span></small></h1>
+      <ul class="list-unstyled">
+        <li><strong>ISSUED ON</strong> <%= @order.created_at.to_date %></li>
+        <% @order.dishes.each do |dish| %>
+        <li><strong>DISH</strong> <%= dish.name %> [<%= humanized_money_with_symbol dish.price %>]</li>
+        <% end %>
+        <li><strong>TOTAL</strong> <%= humanized_money_with_symbol @order.amount %></li>
+        </li>
+      </ul>
+<!--       <p>Estimated delivery in <strong>2 business days</strong></p> -->
+    <%= link_to "pay the order", new_order_payment_path(@order) %>
+    </div>
+  </div>
+</div>

@@ -3,9 +3,11 @@ class Dish < ApplicationRecord
   has_many :order_dishes, dependent: :destroy
   has_many :reviews, through: :order_dishes
   has_one_attached :photo
-  validates :name, :price, :protein, :carbs, :fats, presence: true
+  validates :name, :price_cents, :protein, :carbs, :fats, presence: true
   validates :name, uniqueness: { scope: :eatery, message: 'eatery already has a dish by this name' }
   after_find :calculate_calories, if: :calories_empty?
+
+  monetize :price_cents
 
   accepts_nested_attributes_for :order_dishes
 

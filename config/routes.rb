@@ -9,11 +9,13 @@ Rails.application.routes.draw do
   resources :macros, path: '/profile/macros'
 
   resources :orders, only: [:index, :show, :create, :new] do
-    collection do
-      get :success
+    resources :payments, only: :new do
+      collection do
+        get :success
+      end
     end
-    resources :order_dishes, only: [:update, :create, :destroy]
-  end
+      resources :order_dishes, only: [:update, :create, :destroy]
+    end
 
   resources :dishes, only: [:index,:show] do
     resources :reviews, only: [:create, :index]
