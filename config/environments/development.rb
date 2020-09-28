@@ -63,4 +63,10 @@ Rails.application.configure do
 
   # ngrok hosts
   config.hosts << "4c83dfd1de83.ngrok.io"
+
+  # allow bullet to report N+1 issues
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.rails_logger = true
+  end
 end
