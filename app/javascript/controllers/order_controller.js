@@ -1,7 +1,7 @@
 import { Controller } from "stimulus";
 
 export default class extends Controller {
-    static targets = ['checkbox', 'price', 'quantity', 'protein', 'carbs', 'fats', 'quantitylabel', 'addlabel', 'minuslabel', 'add', 'minus', 'btn']
+    static targets = ['checkbox', 'price', 'quantity', 'protein', 'carbs', 'fats', 'quantitylabel', 'addlabel', 'minuslabel', 'add', 'minus', 'dis', 'tick']
 
     connect() {
         this.quantity = this.data.get('quantity');
@@ -23,14 +23,20 @@ export default class extends Controller {
             this.quantitylabelTarget.innerText = 1;
             this.addlabelTarget.innerText = '+';
             this.minuslabelTarget.innerText = '-';
-
+            this.disTarget.classList.add('dis');
+            this.tickTarget.classList.add('tick');
+            this.disTarget.classList.remove('nodis');
+            this.tickTarget.classList.remove('notick');
             checkbox = true;
 
         } else {
             this.quantityTarget.classList.add('d-none');
             this.addlabelTarget.classList.add('d-none');
             this.minuslabelTarget.classList.add('d-none');
-
+            this.disTarget.classList.remove('dis');
+            this.tickTarget.classList.remove('tick');
+            this.disTarget.classList.add('nodis');
+            this.tickTarget.classList.add('notick');
             checkbox = false;
 
         }
