@@ -14,7 +14,7 @@ class DishesController < ApplicationController
       }
       @macro[:calories] = 4 * @macro[:protein] + 4 * @macro[:carbs] + 9 * @macro[:fats]
     else
-      @macro = @user.macros.first  # default to first available macro
+      @macro = @user.default_macro  # default to first available macro
     end
 
     if params[:lat].nil? || params[:lng].nil? || params[:lat].empty? || params[:lng].empty?
