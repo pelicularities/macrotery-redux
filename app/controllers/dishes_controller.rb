@@ -36,31 +36,24 @@ class DishesController < ApplicationController
     @eateries = []
     @dishes.each { |dish| @eateries << dish.eatery }
     @eateries.uniq!
+
+    @markers = @eateries.select { |eatery| eatery.latitude.nil? == false }.map do |eatery|
+      eatery_dishes = @dishes.select { |dish| dish.eatery == eatery }
+      {
+        lat: eatery.latitude,
+        lng: eatery.longitude,
+        infoWindow: render_to_string(partial: "info_window", locals: { eatery: eatery, eatery_dishes: eatery_dishes }, layout: false, formats: [:html])
+      }
+    end
     
     respond_to do |format|
       format.html {
-        @markers = @eateries.select { |eatery| eatery.latitude.nil? == false }.map do |eatery|
-          eatery_dishes = @dishes.select { |dish| dish.eatery == eatery }
-          {
-            lat: eatery.latitude,
-            lng: eatery.longitude,
-            infoWindow: render_to_string(partial: "info_window", locals: { eatery: eatery, eatery_dishes: eatery_dishes })
-          }
-        end
+        
       }
-      # format.json { render json: { data: render_to_string(partial: "dishes/dishes_list", :layout => false, locals: { dishes: @dishes } ) } }
       format.json {
-        @markers = @eateries.select { |eatery| eatery.latitude.nil? == false }.map do |eatery|
-          eatery_dishes = @dishes.select { |dish| dish.eatery == eatery }
-          {
-            lat: eatery.latitude,
-            lng: eatery.longitude,
-            infoWindow: render_to_string(partial: "dishes/info_window", locals: { eatery: eatery, eatery_dishes: eatery_dishes }, layout: false, formats: [:html])
-          }
-        end
         html_content = render_to_string(partial: 'dishes/dishes_list', locals: { dishes: @dishes }, layout: false, formats: [:html])
-        map_content = render_to_string(partial: 'dishes/map', locals: { markers: @markers }, layout: false, formats: [:html])
-        render json: { dishes: html_content, map: map_content }
+        # map_content = render_to_string(partial: 'dishes/map', locals: { markers: @markers }, layout: false, formats: [:html])
+        render json: { dishes: html_content, markers: @markers }
       }
     end
   end

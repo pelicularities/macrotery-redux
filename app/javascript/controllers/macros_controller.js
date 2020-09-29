@@ -8,6 +8,7 @@
 // </div>
 
 import { Controller } from "stimulus"
+import mapboxgl from 'mapbox-gl';
 
 export default class extends Controller {
   static targets = [ 
@@ -39,43 +40,25 @@ export default class extends Controller {
         lng = data.coords.longitude;
         params.append('lat', lat);
         params.append('lng', lng);
-        console.log(params.toString());
-        
-        // console.log(query);
-        // Turbolinks.visit(query);
+        const query = `${url.pathname}?${params.toString()}`;
+        console.log(query);
+        this.fetchJSON(query);
       });
     }
-    const query = `${url.pathname}?${params}`;
-    console.log(query);
-    const data = this.fetchJSON(query);
-    console.log("I'm inside the connect function");
-    console.log(data);
   }
 
   changeMeal() {
+    console.log("I'm inside the changeMeal function");
     const meal = this.selectTarget.value;
     console.log(meal);
 
-    // is map currently loaded? if it is, make sure to show map tab
-    const mapTab = document.getElementById('results-map-tab');
-    
-    const mapVisible = mapTab.classList.contains('active');
-
     const query = `/dishes?macro=${meal}`;
     console.log(query);
-    const data = this.fetchJSON(query);
-    console.log("I'm inside the changeMeal function");
-    console.log(data);
-    // Turbolinks.visit(query);
-    // $('#results-map-tab').tab('show');
-
-    // if (mapVisible === true) {
-    //   console.log('show the map!');
-    //   this.showMap();
-    // }
+    this.fetchJSON(query);
   }
   
   refresh() {
+    console.log("I'm inside the refresh function");
     const protein = this.proteinTarget.value;
     const carbs = this.carbsTarget.value;
     const fats = this.fatsTarget.value;
@@ -88,10 +71,14 @@ export default class extends Controller {
 
     const query = `/dishes?protein=${protein}&carbs=${carbs}&fats=${fats}`;
     console.log(query);
-    const data = this.fetchJSON(query);
+    this.fetchJSON(query);
     console.log("I'm inside the refresh function");
-    console.log(data);
-    // Turbolinks.visit(query);
+  }
+
+  fitMapToMarkers(map, markers) {
+    const bounds = new mapboxgl.LngLatBounds();
+    markers.forEach(marker => bounds.extend([ marker.lng, marker.lat ]));
+    map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0 });
   }
 
   fetchJSON(query) {
@@ -100,10 +87,19 @@ export default class extends Controller {
     .then((data) => {
       console.log("I'm inside the fetchJSON function");
       const dishList = document.querySelector('#dish-list');
-      const map = document.querySelector('#map');
       dishList.innerHTML = data.dishes;
-      console.log(data.map);
-      map.innerHTML = data.map;
+      console.log(data.markers);
+      const markers = data.markers;
+      const oldMarkers = document.querySelectorAll('.mapboxgl-marker');
+      oldMarkers.forEach(marker => marker.remove());
+      markers.forEach((marker) => {
+        const popup = new mapboxgl.Popup().setHTML(marker.infoWindow);
+        new mapboxgl.Marker()
+          .setLngLat([ marker.lng, marker.lat ])
+          .setPopup(popup)
+          .addTo(map);
+      });
+      this.fitMapToMarkers(map, markers);
     });
   }
 
