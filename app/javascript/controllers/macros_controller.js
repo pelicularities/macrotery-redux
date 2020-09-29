@@ -20,7 +20,8 @@ export default class extends Controller {
     'userProtein',
     'userCarbs',
     'userFats',
-    'userCalories'
+    'userCalories',
+    'params'
   ];
 
   connect() {
@@ -38,11 +39,12 @@ export default class extends Controller {
       navigator.geolocation.getCurrentPosition((data) => {
         lat = data.coords.latitude;
         lng = data.coords.longitude;
-        params.append('lat', lat);
-        params.append('lng', lng);
+        params.set('lat', lat);
+        params.set('lng', lng);
         const query = `${url.pathname}?${params.toString()}`;
         console.log(query);
         this.fetchJSON(query);
+        this.paramsTarget.value = params.toString();
       });
     }
   }
@@ -50,29 +52,43 @@ export default class extends Controller {
   changeMeal() {
     console.log("I'm inside the changeMeal function");
     const meal = this.selectTarget.value;
+    const mealName = this.selectTarget.options[this.selectTarget.selectedIndex].text;
+    this.nameTarget.innerHTML = mealName;
     console.log(meal);
 
-    const query = `/dishes?macro=${meal}`;
+    const url = new URL(document.location.href);
+    let params = new URLSearchParams(this.paramsTarget.value);
+    params.set('macro', meal);
+    params.delete('protein');
+    params.delete('carbs');
+    params.delete('fats');
+
+    const query = `${url.pathname}?${params.toString()}`;
     console.log(query);
     this.fetchJSON(query);
+    this.paramsTarget.value = params.toString();
   }
   
   refresh() {
     console.log("I'm inside the refresh function");
+    this.nameTarget.innerHTML = '';
+
     const protein = this.proteinTarget.value;
     const carbs = this.carbsTarget.value;
     const fats = this.fatsTarget.value;
 
-    this.userProteinTarget.innerHTML = `${protein} g protein`;
-    this.userCarbsTarget.innerHTML = `${carbs} g carbs`;
-    this.userFatsTarget.innerHTML = `${fats} g fats`;
-    const calories = 4 * protein + 4 * carbs + 9 * fats;
-    this.userCaloriesTarget.innerHTML = `${calories} kcal calories`;
+    const url = new URL(document.location.href);
+    let params = new URLSearchParams(this.paramsTarget.value);
+    params.set('protein', protein);
+    params.set('carbs', carbs);
+    params.set('fats', fats);
+    params.delete('macro');
 
-    const query = `/dishes?protein=${protein}&carbs=${carbs}&fats=${fats}`;
+    const query = `${url.pathname}?${params.toString()}`;
+
     console.log(query);
     this.fetchJSON(query);
-    console.log("I'm inside the refresh function");
+    this.paramsTarget.value = params.toString();
   }
 
   fitMapToMarkers(map, markers) {
@@ -86,9 +102,23 @@ export default class extends Controller {
     .then(response => response.json())
     .then((data) => {
       console.log("I'm inside the fetchJSON function");
+
+      const protein = data.macro.protein;
+      const carbs = data.macro.carbs;
+      const fats = data.macro.fats;
+  
+      this.userProteinTarget.innerHTML = `${protein} g protein`;
+      this.userCarbsTarget.innerHTML = `${carbs} g carbs`;
+      this.userFatsTarget.innerHTML = `${fats} g fats`;
+  
+      const calories = 4 * protein + 4 * carbs + 9 * fats;
+      this.userCaloriesTarget.innerHTML = `${calories} kcal calories`;
+
       const dishList = document.querySelector('#dish-list');
       dishList.innerHTML = data.dishes;
+      console.log(data.dishes);
       console.log(data.markers);
+
       const markers = data.markers;
       const oldMarkers = document.querySelectorAll('.mapboxgl-marker');
       oldMarkers.forEach(marker => marker.remove());

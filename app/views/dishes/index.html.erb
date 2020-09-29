@@ -1,6 +1,7 @@
 <div>
   <div class="container my-3 border">
     <div class="row" data-controller="macros">
+      <input type="hidden" id="params" data-target="macros.params" value="">
       <div class="col-12 col-md-6 p-3">
         <h5>Your search criteria</h5>
         Your <span data-target="macros.name"><%=@macro.name unless @macro[:name].nil?%></span> macros:

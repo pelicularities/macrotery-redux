@@ -53,7 +53,7 @@ class DishesController < ApplicationController
       format.json {
         html_content = render_to_string(partial: 'dishes/dishes_list', locals: { dishes: @dishes }, layout: false, formats: [:html])
         # map_content = render_to_string(partial: 'dishes/map', locals: { markers: @markers }, layout: false, formats: [:html])
-        render json: { dishes: html_content, markers: @markers }
+        render json: { dishes: html_content, markers: @markers, macro: @macro }
       }
     end
   end
