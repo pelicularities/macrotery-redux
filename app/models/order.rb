@@ -7,4 +7,8 @@ class Order < ApplicationRecord
   monetize :amount_cents
 
   accepts_nested_attributes_for :order_dishes
+
+  def eatery
+    self.order_dishes.first.dish.eatery
+  end
 end

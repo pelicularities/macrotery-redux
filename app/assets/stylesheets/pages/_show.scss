@@ -20,7 +20,7 @@
 
 
 .eatery-card {
-    height:150px;
+    height:200px;
     border: 2px solid grey;
     border-radius: 25px;
     // background-image: url("https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80");
@@ -28,12 +28,12 @@
 }
 
 .card-btn {
-    background-color: rgba(255, 0, 0, 0);
+    background-color: rgba(156, 156, 156, 0);
     border-radius: 25px;
-    height: 120px;
+    height: 170px;
     z-index: 1;
     position: relative;
-    top: 12%;
+    top: 5%;
 }
 
 .card-content {
@@ -52,7 +52,7 @@
 }
 
 .description p {
-    font-size: 14px;
+    font-size: 10px;
 }
 
 .description h5 {
@@ -67,13 +67,37 @@
 .dis-flex {
     display: flex;
     align-items: center;
+
+    h4 {
+        z-index: 1;
+    }
+}
+
+.dis {
+    background-color: rgba(95,95,95,0.75);
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom: 3px solid rgb(255, 255, 255);
+    height: 60px;
+    position: relative;
+    top: -157px;
+}
+
+.nodis {
+    background-color: rgba(95,95,95,0);
+    border-bottom: none;
 }
 
 .tick {
-    display: none;
     position: absolute;
+    top: 8px;
     left: 90%;
-    top: 10%;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.notick {
+    display: none;
 }
 
 .quantity {
@@ -147,4 +171,53 @@
 .macro {
     top: 5%;
     color: white;
+}
+
+
+
+// for order show page
+
+.dish-photo {
+    object-fit: cover;
+    border: 2px solid rgb(190, 190, 190);
+    border-radius: 25px;
+}
+
+.payment-quantity {
+    padding: 0 65px;
+}
+
+.payment-unit-price {
+    padding: 0 25px;
+}
+
+.payment-total {
+    padding: 0 15px;
+}
+
+.order-position-quantity {
+    position: relative;
+    left: -20px;
+}
+
+.order-position-unit {
+    position: relative;
+    left: -30px;
+}
+
+.order-position-total {
+    position: relative;
+    left: -30px;
+}
+
+.border-sign {
+    border-top: 2px solid  rgb(190, 190, 190);
+}
+
+.pending {
+    border-left: 2px solid rgb(255,78,96);
+    border-right: 2px solid rgb(255,78,96);
+    border-radius: 25px;
+    font-size: 20px;
+    color: rgb(255,78,96);
 }

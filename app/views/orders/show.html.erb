@@ -1,27 +1,68 @@
 
-<div class="container">
-<h1>Your order is confirmed!</h1>
-
-<h2>Thank You!</h2>
+<div class="container text-center">
+<h4>Payment to:</h4>
+<h3><%= @order.eatery.name %></h3>
+<h6>at <%= @order.eatery.address %></h6>
 </div>
 
 
-<div class="container">
-  <div class="row py-4">
-    <div class="col-md-3">dish test</div>
-
-    <div class="col">
-      <h1>Order #<%= @order.id %> <small><span class="badge badge-primary"><%= @order.state %></span></small></h1>
-      <ul class="list-unstyled">
-        <li><strong>ISSUED ON</strong> <%= @order.created_at.to_date %></li>
-        <% @order.dishes.each do |dish| %>
-        <li><strong>DISH</strong> <%= dish.name %> [<%= humanized_money_with_symbol dish.price %>]</li>
-        <% end %>
-        <li><strong>TOTAL</strong> <%= humanized_money_with_symbol @order.amount %></li>
-        </li>
-      </ul>
-<!--       <p>Estimated delivery in <strong>2 business days</strong></p> -->
-    <%= link_to "pay the order", new_order_payment_path(@order) %>
+<div class="container text-center">
+  <div class=" justify-content-center py-2">
+    <div class="">
+      <% if (@order.dine_in) %>
+        <div class="">Dine-in Order</div>
+      <% else %>
+        <div class="">Take-away Order</div>
+      <% end %>
     </div>
+
+    <div class="">
+      <h2>Order #<%= @order.id %><span class="pending p-2 ml-3"><%= @order.state %></span></h2>
+        
+  <!--       <p>Estimated delivery in <strong>2 business days</strong></p> -->
+      <strong>ISSUED ON</strong> <%= @order.created_at.to_date %>
+      <h4><%= link_to "Pay the order", new_order_payment_path(@order), class: "btn btn-primary" %></h4>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row border-sign pt-3 ml-1 mr-1">
+    <div class="col-4 text-center pr-0">
+      <strong><u>Dish</u></strong>
+    </div>
+    <div class="col-3 text-center pl-0 order-position-quantity">
+      <strong><u>Quantity</u></strong>
+    </div>
+    <div class="col-3 text-center pl-0 order-position-unit">
+      <strong><u>Unit price</u></strong>
+    </div>
+    <div class="col-2 text-center pl-0 order-position-total">
+      <strong><u>Total</u></strong>
+    </div>
+  </div>
+
+  <% @order.order_dishes.each do |order_dish| %>
+  <div class="row mt-2 mb-4">
+    <div class="col-3 text-center">
+      <div>
+        <img src="<%=cl_image_path order_dish.dish.photo.key%>" alt="dish_image" width="150" height="100" class="dish-photo">
+      </div>
+      <strong><%= order_dish.dish.name %></strong>
+    </div>
+    <div class="col-2 payment-quantity">
+    <%= order_dish.quantity %>
+    </div>
+    <div class="col-3 payment-unit-price">
+    <%= humanized_money_with_symbol order_dish.dish.price %>
+    </div>
+    <div class="col-2 payment-total pr-0">
+    <%= humanized_money_with_symbol (order_dish.quantity.to_i * order_dish.dish.price.to_f) %>
+    </div>
+  </div>
+  <% end %>
+  <div class="d-flex justify-content-end mb-4 border-sign pt-3">
+    <strong>TOTAL AMOUNT: </strong> 
+    <span class="pl-4 pr-4"><%= humanized_money_with_symbol @order.amount %></span>
   </div>
 </div>

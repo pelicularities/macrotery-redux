@@ -34,19 +34,20 @@
         </div>
       </div>
       <div class="dis-flex ml-2 mt-2">
-        <h4 class="font-weight-bold pr-4" data-action="click->order#increase" data-target="order.addlabel"></h4>
+        <h4 class="font-weight-bold pl-2 pr-4" data-action="click->order#increase" data-target="order.addlabel"></h4>
         <h4 clasors="font-weight-bold " data-target="order.quantitylabel"></h4>
-        <h4 class="font-weight-bold pl-4" data-action="click->order#decrease" data-target="order.minuslabel"></h4>
+        <h4 class="font-weight-bold pl-4 pr-2" data-action="click->order#decrease" data-target="order.minuslabel"></h4>
       </div>
       <div class="protein circle" data-target="order.protein" data-unit-protein="<%= dish.protein %>"> <%= dish.protein %> </div>
       <div class="carb circle" data-target="order.carbs" data-unit-carbs="<%= dish.carbs %>"> <%= dish.carbs %> </div>
       <div class="fat circle" data-target="order.fats" data-unit-fats="<%= dish.fats %>"> <%= dish.fats %> </div>
       <div class="card-btn" data-action="click->order#handleClick" data-target="order.btn"></div>
+      <div data-target="order.dis" class=""></div>
+      <div data-target="order.tick" class="">✓</div>
     </div>
 
-    <div class="checkbox">
+    <div class="checkbox d-none">
       <input type="checkbox" data-target="order.checkbox">
-
     </div>
     <div class="d-none">
       <%= number_field_tag("order_dishes[#{dish.id}][quantity]", 0, data: {
@@ -58,6 +59,8 @@
     </div>
   </div>
   <% end %>
+
+
   <div class="blank"></div>
   <div class="total">
     <h4>Total Macros :</h4>
@@ -73,7 +76,7 @@
     <div class="d-flex justify-content-end pb-2">
 
       <input type="radio" id="dine_in" name="order[dine_in]" value="1">
-      <label class="btn btn-outline-primary opacity-half" for="dine_in">Dine In</label><br>
+      <label class="btn btn-outline-primary" for="dine_in">Dine In</label><br>
       <input type="radio" id="take_away" name="order[dine_in]" value="0">
       <label for="take_away">Take Away</label><br>
 
