@@ -59,18 +59,18 @@ export default class extends Controller {
         const unitCarbs = this.carbsTarget.dataset.unitCarbs;
         const unitFats = this.fatsTarget.dataset.unitFats;
 
-        // const calcPrice = Math.round((quantity * unitPrice) * 100) / 100;
-        // const calcProtein = Math.round((quantity * unitProtein) * 100) / 100;
-        // const calcCarbs = Math.round((quantity * unitCarbs) * 100) / 100;
-        // const calcFats = Math.round((quantity * unitFats) * 100) / 100;
+        const calcPrice = Math.round((quantity * unitPrice) * 100) / 100;
+        const calcProtein = Math.round((quantity * unitProtein) * 100) / 100;
+        const calcCarbs = Math.round((quantity * unitCarbs) * 100) / 100;
+        const calcFats = Math.round((quantity * unitFats) * 100) / 100;
 
         this.data.set('quantity', quantity)
         this.quantity = this.data.get('quantity');
 
-        // this.priceTarget.innerText = `$${calcPrice}`;
-        // this.proteinTarget.innerText = `${calcProtein}`;
-        // this.carbsTarget.innerText = `${calcCarbs}`;
-        // this.fatsTarget.innerText = `${calcFats}`;
+        this.priceTarget.innerText = `$${calcPrice}`;
+        this.proteinTarget.innerText = `${calcProtein}`;
+        this.carbsTarget.innerText = `${calcCarbs}`;
+        this.fatsTarget.innerText = `${calcFats}`;
         this.quantitylabelTarget.innerText = quantity;
 
         if (!this.checkboxTarget.checked) {
