@@ -33,4 +33,4 @@ const testFunction = () => {
     });
 };
 
-export default testFunction();
+// export default testFunction();
