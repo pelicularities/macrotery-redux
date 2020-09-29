@@ -12,83 +12,79 @@
 </div>
 
 <div class=" mt-4" data-controller="total" data-action="total-change->total#handleUpdate"
-data-total-amount="0" data-total-allprotein="0" data-total-allcarbs="0" data-total-allfats="0">
+  data-total-amount="0" data-total-allprotein="0" data-total-allcarbs="0" data-total-allfats="0">
 
 
 
 
   <%= form_for Order.new, url: orders_path, method: "post", local: true, html: {
     novalidate: true
-     } do %>
-    <% @eatery.dishes.each do |dish| %>
-      <div data-controller="order" class="container">
-        <div class="eatery-card card bg-dark text-white w-85 mt-3 mb-3 dish_card" style="background-image: url('<%=cl_image_path dish.photo.key%>');">
-            <div class="card-content w-100 pb-2">
-              <div class="description pl-2">
-                  <h5 class="card-title mb-1"> <%= dish.name %> </h5>
-                  <p class="card-text"> <%= dish.description %> </p>
-              </div>
-              <div class="dis-flex pr-2">
-                  <p class="card-text price" data-target="order.price" data-unit-price="<%= dish.price %>"> <%= number_to_currency(dish.price) %> </p>
-              </div>
-            </div>
-            <div class="dis-flex ml-2 mt-2">
-              <h4 class="font-weight-bold pr-4" data-action="click->order#increase" data-target="order.addlabel"></h4>
-              <h4 clasors="font-weight-bold " data-target="order.quantitylabel"></h4>
-              <h4 class="font-weight-bold pl-4" data-action="click->order#decrease" data-target="order.minuslabel"></h4>
-            </div>
-            <div class="protein circle" data-target="order.protein" data-unit-protein="<%= dish.protein %>"> <%= dish.protein %> </div>
-            <div class="carb circle" data-target="order.carbs" data-unit-carbs="<%= dish.carbs %>"> <%= dish.carbs %> </div>
-            <div class="fat circle" data-target="order.fats" data-unit-fats="<%= dish.fats %>"> <%= dish.fats %> </div>
-            <div class="card-btn" data-action="click->order#handleClick" data-target="order.btn"></div>
-        </div>
-
-        <div class="checkbox">
-          <input type="checkbox" data-target="order.checkbox" name=<%= "order_dishes[#{dish.id}]" %>>
-
-        </div>
-        <div class="d-none">
-          <%= number_field_tag("order_dishes[#{dish.id}][quantity]", 0, data: {
-            action: 'change->order#handleChange',
-            target: 'order.quantity'
-          }, min: 1, class: "d-none") %>
-          <div data-target="order.add"></div>
-          <div data-target="order.minus"></div>
-        </div>
-      </div>
-    <% end %>
-    <div class="blank"></div>
-    <div class="total">
-      <h4>Total Macros :</h4>
-      <div>
-        <div class="macro protein circle" data-target="total.totalprotein"> 0 </div>
-        <div class="macro carb circle" data-target="total.totalcarbs"> 0 </div>
-        <div class="macro fat circle" data-target="total.totalfats"> 0 </div>
-      </div>
-      <div class="d-flex justify-content-between pt-3 pr-3">
-        <h4 class="pr-3">Total Price : </h4>
-        <h2 data-target="total.totalprice"><%= number_to_currency(0) %></h2>
-      </div>
-      <div class="d-flex justify-content-end pb-2">
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-          <label class="btn btn-outline-primary opacity-half">
-            <input type="radio" name="options" id="option2" autocomplete="off"> Dine-in
-          </label>
-          <label class="btn btn-outline-primary opacity-half">
-            <input type="radio" name="options" id="option3" autocomplete="off"> Take-away
-          </label>
-        </div>
-      </div>
-      <div class="d-flex justify-content-center">
-        <%= submit_tag("Proceed to order", class: 'btn btn-primary btn-lg pr-2 pl-2') %>
-      </div>
-    </div>
-  <% end %>
-<!--
-  <%= form_tag orders_path do %>
+  } do %>
   <%= hidden_field_tag 'eatery_id', @eatery.id %>
-  <%= submit_tag 'Purchase', class: 'btn btn-secondary' %>
+  <% @eatery.dishes.each do |dish| %>
+  <div data-controller="order" class="container">
+    <div class="eatery-card card bg-dark text-white w-85 mt-3 mb-3 dish_card" style="background-image: url('<%=cl_image_path dish.photo.key%>');">
+      <div class="card-content w-100 pb-2">
+        <div class="description pl-2">
+          <h5 class="card-title mb-1"> <%= dish.name %> </h5>
+          <p class="card-text"> <%= dish.description %> </p>
+        </div>
+        <div class="dis-flex pr-2">
+          <p class="card-text price" data-target="order.price" data-unit-price="<%= dish.price %>"> <%= number_to_currency(dish.price) %> </p>
+        </div>
+      </div>
+      <div class="dis-flex ml-2 mt-2">
+        <h4 class="font-weight-bold pr-4" data-action="click->order#increase" data-target="order.addlabel"></h4>
+        <h4 clasors="font-weight-bold " data-target="order.quantitylabel"></h4>
+        <h4 class="font-weight-bold pl-4" data-action="click->order#decrease" data-target="order.minuslabel"></h4>
+      </div>
+      <div class="protein circle" data-target="order.protein" data-unit-protein="<%= dish.protein %>"> <%= dish.protein %> </div>
+      <div class="carb circle" data-target="order.carbs" data-unit-carbs="<%= dish.carbs %>"> <%= dish.carbs %> </div>
+      <div class="fat circle" data-target="order.fats" data-unit-fats="<%= dish.fats %>"> <%= dish.fats %> </div>
+      <div class="card-btn" data-action="click->order#handleClick" data-target="order.btn"></div>
+    </div>
+
+    <div class="checkbox">
+      <input type="checkbox" data-target="order.checkbox">
+
+    </div>
+    <div class="d-none">
+      <%= number_field_tag("order_dishes[#{dish.id}][quantity]", 0, data: {
+        action: 'change->order#handleChange',
+        target: 'order.quantity'
+      }, min: 1, class: "d-none") %>
+      <div data-target="order.add"></div>
+      <div data-target="order.minus"></div>
+    </div>
+  </div>
   <% end %>
- -->
+  <div class="blank"></div>
+  <div class="total">
+    <h4>Total Macros :</h4>
+    <div>
+      <div class="macro protein circle" data-target="total.totalprotein"> 0 </div>
+      <div class="macro carb circle" data-target="total.totalcarbs"> 0 </div>
+      <div class="macro fat circle" data-target="total.totalfats"> 0 </div>
+    </div>
+    <div class="d-flex justify-content-between pt-3 pr-3">
+      <h4 class="pr-3">Total Price : </h4>
+      <h2 data-target="total.totalprice"><%= number_to_currency(0) %></h2>
+    </div>
+    <div class="d-flex justify-content-end pb-2">
+
+      <input type="radio" id="dine_in" name="order[dine_in]" value="1">
+      <label class="btn btn-outline-primary opacity-half" for="dine_in">Dine In</label><br>
+      <input type="radio" id="take_away" name="order[dine_in]" value="0">
+      <label for="take_away">Take Away</label><br>
+
+    </div>
+    <div class="d-flex justify-content-center">
+      <%= submit_tag("Proceed to order", class: 'btn btn-primary btn-lg pr-2 pl-2') %>
+    </div>
+  </div>
+  <% end %>
+
+
+
 
 </div>
