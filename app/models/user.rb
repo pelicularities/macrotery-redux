@@ -26,16 +26,14 @@ class User < ApplicationRecord
     # else all user macros need to be changed to default: false
     # get new default and set it to true
     # save
-
     unless self.default_macro == new_default && self.macros.include?(new_default)
       self.macros.each do |macro|
         macro.default = false
         macro.save!
       end
       new_default.default = true
-      new_default.save!
+      new_default.save ? true : false
     end
-
   end
 
   private

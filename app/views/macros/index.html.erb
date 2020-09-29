@@ -47,9 +47,9 @@
 
             <td class="form-check">
               <% if current_user.default_macro == macro %>
-                <input class="form-check-input" type="radio" name="default" data-target="macroOptions" id="<%=macro.id%>" value="<%=macro.id%>" checked>
+                <input class="form-check-input" type="radio" name="default" data-target="macroOptions" data-action="change->profile#changeDefault" id="<%=macro.id%>" value="<%=macro.id%>" checked>
               <% else %>
-                <input class="form-check-input" type="radio" name="default" data-target="macroOptions" id="<%=macro.id%>" value="<%=macro.id%>">
+                <input class="form-check-input" type="radio" name="default" data-target="macroOptions" data-action="change->profile#changeDefault" id="<%=macro.id%>" value="<%=macro.id%>">
               <% end %>
             </td>
 

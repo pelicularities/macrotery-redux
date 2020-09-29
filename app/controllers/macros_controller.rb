@@ -40,6 +40,17 @@ before_action :set_macros, only: [:edit, :show, :update, :destroy]
     redirect_to macros_path
   end
 
+  def change_default
+    new_default = Macro.find(params[:new_default])
+    success = current_user.change_default(new_default) 
+
+    respond_to do |format|
+      format.json {
+        render json: { macro: new_default, success: success }
+      }
+    end      
+  end
+
 
 
 private
