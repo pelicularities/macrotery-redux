@@ -2,7 +2,7 @@ class MacrosController < ApplicationController
 before_action :set_macros, only: [:edit, :show, :update, :destroy]
 
   def index
-    @macro= current_user.macros.order(updated_at: :desc)
+    @macro= current_user.macros.order(created_at: :desc)
   end
 
   def new

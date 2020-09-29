@@ -116,8 +116,8 @@ export default class extends Controller {
 
       const dishList = document.querySelector('#dish-list');
       dishList.innerHTML = data.dishes;
-      console.log(data.dishes);
-      console.log(data.markers);
+      // console.log(data.dishes);
+      // console.log(data.markers);
 
       const markers = data.markers;
       const oldMarkers = document.querySelectorAll('.mapboxgl-marker');
