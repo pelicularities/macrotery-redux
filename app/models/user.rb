@@ -26,11 +26,14 @@ class User < ApplicationRecord
     # else all user macros need to be changed to default: false
     # get new default and set it to true
     # save
-    if default = true
-      #send the content to dishes page.
 
-    else
-      # no need to do anything
+    unless self.default_macro == new_default && self.macros.include?(new_default)
+      self.macros.each do |macro|
+        macro.default = false
+        macro.save!
+      end
+      new_default.default = true
+      new_default.save!
     end
 
   end
