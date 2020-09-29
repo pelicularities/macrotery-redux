@@ -1,6 +1,7 @@
-<div data-controller="macros">
+<div>
   <div class="container my-3 border">
-    <div class="row">
+    <div class="row" data-controller="macros">
+      <input type="hidden" id="params" data-target="macros.params" value="">
       <div class="col-12 col-md-6 p-3">
         <h5>Your search criteria</h5>
         Your <span data-target="macros.name"><%=@macro.name unless @macro[:name].nil?%></span> macros:
@@ -55,31 +56,9 @@
   <div class="tab-content" id="results-content">
     <h2>Suggested Dishes</h2>
     <div class="tab-pane fade show active" id="results-list" role="tabpanel" aria-labelledby="results-list-tab">
-
-      <% if @dishes.empty? %>
-        :( Sorry, no dishes match your criteria.
-      <% end %>
-      <% @dishes.each do |dish| %>
-        <%= link_to eatery_path(dish.eatery) do %>
-          <div data-target="macros.dishImage" class="eatery-card card bg-dark text-white w-85 mt-3 mb-3 dish_card" style="background: url('<%=cl_image_path dish.photo.key%>'); background-size: cover; background-position: center center">
-            <div class="card-content w-100 pb-2">
-              <div class="description pl-2">
-                <h5 data-target="macros.dish" class="card-title mb-1"> <%=dish.name%> </h5>
-                <p class="card-text"> <%= dish.description %> </p>
-              </div>
-              <div class="dis-flex pr-2">
-                <p class="card-text price"> <%= number_to_currency(dish.price) %> </p>
-              </div>
-            </div>
-            <div> <%= cl_image_tag dish.eatery.photo.key, height: 50, width: 50, crop: :fill, class: 'circle' %> </div>
-            <div class="protein circle"> <%= dish.protein %> </div>
-            <div class="carb circle"> <%= dish.carbs %> </div>
-            <div class="fat circle"> <%= dish.fats %> </div>
-          </div>
-        <% end %>
-
-      <% end %>
-
+      <div id="dish-list">
+        <%= render 'dishes_list', dishes: @dishes %>
+      </div>
     </div>
     <div class="tab-pane fade" id="results-map" role="tabpanel" aria-labelledby="results-map-tab">
       <div id="map"

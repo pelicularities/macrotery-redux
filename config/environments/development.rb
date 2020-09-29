@@ -8,7 +8,7 @@ Rails.application.configure do
   config.cache_classes = false
 
   # Do not eager load code on boot.
-  config.eager_load = false
+  config.eager_load = true
 
   # Show full error reports.
   config.consider_all_requests_local = true
@@ -63,5 +63,12 @@ Rails.application.configure do
 
   # ngrok hosts
   config.hosts << "4c83dfd1de83.ngrok.io"
+  config.hosts << "4993bae4096c.ngrok.io"
   config.hosts << "87f21c268b36.ngrok.io"
+
+  # allow bullet to report N+1 issues
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.rails_logger = true
+  end
 end

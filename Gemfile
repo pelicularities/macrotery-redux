@@ -38,6 +38,7 @@ gem 'cloudinary', '~> 1.16.0'
 gem 'geocoder'
 gem 'faker'
 gem 'font-awesome-sass'
+gem 'rack-mini-profiler'
 gem "serviceworker-rails"
 gem 'simple_form'
 
@@ -56,6 +57,9 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+
+  # Bullet to avoid N+1 problems
+  gem 'bullet', group: 'development'
 end
 
 group :test do
