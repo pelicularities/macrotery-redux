@@ -27,7 +27,12 @@
             <td><%= macro.carbs.to_i %></td>
             <td><%= macro.fats.to_i %></td>
             <td><%= link_to edit_macro_path(macro) do %><i class="fas fa-pen"> </i><% end %>
-              <td><%= link_to macro_path(macro), method: :delete do %><i class="fas fa-trash"> </i><% end %>
+              <td>
+                <% if @macro.count > 1 %>
+                  <%= link_to macro_path(macro), method: :delete do %>
+                    <i class="fas fa-trash"> </i>
+                  <% end %>
+                <% end %>
               </td>
             </tr>
             <% end%>
