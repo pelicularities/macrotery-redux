@@ -33,27 +33,36 @@ class DishesController < ApplicationController
 
     @dishes = nearby_dishes.sort_by { |dish| calculate_score(@macro, dish) }.first(20)
 
+    @eateries = []
+    @dishes.each { |dish| @eateries << dish.eatery }
+    @eateries.uniq!
+
+    @markers = @eateries.select { |eatery| eatery.latitude.nil? == false }.map do |eatery|
+      eatery_dishes = @dishes.select { |dish| dish.eatery == eatery }
+      {
+        lat: eatery.latitude,
+        lng: eatery.longitude,
+        infoWindow: render_to_string(partial: "info_window", locals: { eatery: eatery, eatery_dishes: eatery_dishes }, layout: false, formats: [:html])
+      }
+    end
+    
     respond_to do |format|
       format.html {
-        @eateries = []
-        @dishes.each { |dish| @eateries << dish.eatery }
-        @eateries.uniq!
-
-        @markers = @eateries.select { |eatery| eatery.latitude.nil? == false }.map do |eatery|
-          eatery_dishes = @dishes.select { |dish| dish.eatery == eatery }
-          {
-            lat: eatery.latitude,
-            lng: eatery.longitude,
-            infoWindow: render_to_string(partial: "info_window", locals: { eatery: eatery, eatery_dishes: eatery_dishes })
-          }
-        end
+        
       }
-      format.json { render json: { dishes: @dishes } }
+      format.json {
+        html_content = render_to_string(partial: 'dishes/dishes_list', locals: { dishes: @dishes }, layout: false, formats: [:html])
+        # map_content = render_to_string(partial: 'dishes/map', locals: { markers: @markers }, layout: false, formats: [:html])
+        render json: { dishes: html_content, markers: @markers, macro: @macro }
+      }
     end
   end
 
   def show
-    @dish = Dish.find(params[:id])
+    @dish = Dish.find(params[:id]).include(:eatery)
+    respond_to do |format|
+      format.json { render json: { dish: @dish } }
+    end
   end
 
   private

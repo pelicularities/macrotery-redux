@@ -16,7 +16,19 @@
             <th scope="col" style="color: white">Carbs</th>
             <th scope="col" style="color: white">Fats</th>
             <th scope="col" style="color: #404b69">Edit</th>
-            <th scope="col" style="color: #404b69">Delete</th>
+
+            <th scope="col" <% if @macro.count > 1 %>
+            style="color: #404b69"
+            <% else %>
+            style="color: #FFCDD2"
+            <% end %>> Delete</th>
+
+            <th scope="col" <% if @macro.count > 1 %>
+            style="color: #404b69"
+            <% else %>
+            style="color: #FFCDD2"
+            <% end %>> Default</th>
+
           </tr>
         </thead>
         <tbody>
@@ -27,8 +39,22 @@
             <td><%= macro.carbs.to_i %></td>
             <td><%= macro.fats.to_i %></td>
             <td><%= link_to edit_macro_path(macro) do %><i class="fas fa-pen"> </i><% end %>
-              <td><%= link_to macro_path(macro), method: :delete do %><i class="fas fa-trash"> </i><% end %>
-              </td>
+            <td>
+                <% if @macro.count > 1 %>
+                  <%= link_to macro_path(macro), method: :delete do %>
+                    <i class="fas fa-trash"> </i>
+                  <% end %>
+                <% end %>
+            </td>
+
+            <td class="form-check">
+              <% if @macro.count > 0 %>
+
+              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+              <% end %>
+            </td>
+
+
             </tr>
             <% end%>
           </tbody>
