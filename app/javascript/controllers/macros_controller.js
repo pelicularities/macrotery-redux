@@ -99,8 +99,11 @@ export default class extends Controller {
     .then(response => response.json())
     .then((data) => {
       console.log("I'm inside the fetchJSON function");
-      console.log(data);
-      return data;
+      const dishList = document.querySelector('#dish-list');
+      const map = document.querySelector('#map');
+      dishList.innerHTML = data.dishes;
+      console.log(data.map);
+      map.innerHTML = data.map;
     });
   }
 
