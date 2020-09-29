@@ -18,7 +18,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       fats: 75
     }
     default_macro = Macro.new(defaults)
-    default_macro.name = "Recommend"
+    default_macro.name = "Recommended"
     default_macro.user = current_user
     default_macro.save!
   end
