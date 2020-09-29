@@ -15,7 +15,9 @@
 data-total-amount="0" data-total-allprotein="0" data-total-allcarbs="0" data-total-allfats="0">
   
 
-  <%= form_for Order.new, url: orders_path, method: "post", local: true, html: { 
+
+
+  <%= form_for Order.new, url: orders_path, method: "post", local: true, html: {
     novalidate: true
      } do %>
     <% @eatery.dishes.each do |dish| %>
@@ -42,7 +44,8 @@ data-total-amount="0" data-total-allprotein="0" data-total-allcarbs="0" data-tot
         </div>
 
         <div class="checkbox">
-          <%= check_box_tag "order_dishes[#{dish.id}][id]", dish.id, false, data: { target: "order.checkbox" } %>
+          <input type="checkbox" data-target="order.checkbox" name=<%= "order_dishes[#{dish.id}]" %>>
+
         </div>
         <div class="d-none">
           <%= number_field_tag("order_dishes[#{dish.id}][quantity]", 0, data: {
@@ -82,7 +85,10 @@ data-total-amount="0" data-total-allprotein="0" data-total-allcarbs="0" data-tot
     </div>
   <% end %>
 
+  <%= form_tag orders_path do %>
+  <%= hidden_field_tag 'eatery_id', @eatery.id %>
+  <%= submit_tag 'Purchase', class: 'btn btn-secondary' %>
+  <% end %>
+
 
 </div>
-  
-  

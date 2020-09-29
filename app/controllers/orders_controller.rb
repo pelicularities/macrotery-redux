@@ -5,7 +5,7 @@ class OrdersController < ApplicationController
     end
 
     def show
-        @order = Order.find(params[:id])
+        @order = current_user.orders.find(params[:id])
     end
 
     def new
@@ -13,10 +13,33 @@ class OrdersController < ApplicationController
     end
 
     def create
-        order = Order.new(orders_params)
-        order.user = current_user
-        if order.save
-            redirect_to order_path(order)
+        @order = Order.create(user: current_user)
+        params[:order_dishes].each do |key, value|
+          if value[:quantity].to_i >= 1
+            @dish = Dish.find(key.to_i)
+            OrderDish.create(order: @order, dish: @dish, quantity: value[:quantity].to_i)
+            @order.amount_cents += @dish.price_cents * value[:quantity].to_i
+          end
+        end
+
+        @order.save
+
+
+        if @order.id
+          session = Stripe::Checkout::Session.create(
+            payment_method_types: ['card'],
+            line_items: [{
+              name: "your order",
+              amount: @order.amount_cents,
+              currency: 'sgd',
+              quantity: 1
+            }],
+            success_url: order_url(@order),
+            cancel_url: order_url(@order)
+            )
+
+          @order.update(checkout_session_id: session.id)
+          redirect_to order_path(@order)
         else
             redirect_to eatery_path
         end

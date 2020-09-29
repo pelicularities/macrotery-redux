@@ -213,7 +213,7 @@ Eatery.all.each do |eatery|
     dish = Dish.new
     dish.eatery = eatery
     dish.name = Faker::Food.unique.dish
-    dish.price = (Faker::Number.between(from: 1, to: 400) * 5.0)/100
+    dish.price_cents = rand(100..4000)
     dish.protein = Faker::Number.between(from: 10, to: 60)
     dish.carbs = Faker::Number.between(from: 40, to: 120)
     dish.fats = Faker::Number.between(from: 15, to: 50)
