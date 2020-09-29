@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :users
+  # devise_for :users
+  devise_for :users, controllers: {
+    registrations: 'users/registrations'
+  }
+
+
   root to: 'pages#home'
   get '/learn', to: 'pages#learn'
 
@@ -27,7 +32,7 @@ Rails.application.routes.draw do
   #   resources :macros, only: [:new, :create, :update, :destroy]
   # end
 
-
+  mount StripeEvent::Engine, at: '/stripe-webhooks'
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -31,6 +31,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'devise'
 gem 'stripe'
 gem 'money-rails'
+gem 'stripe_event'
 
 gem 'autoprefixer-rails'
 gem 'cloudinary', '~> 1.16.0'

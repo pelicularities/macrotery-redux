@@ -41,6 +41,7 @@ before_action :set_macros, only: [:edit, :show, :update, :destroy]
   end
 
 
+
 private
 
 
@@ -52,8 +53,6 @@ private
     params.require(:macro).permit(:name, :protein, :carbs, :fats)
   end
 
-  def most_recent
-  end
 
 
 end

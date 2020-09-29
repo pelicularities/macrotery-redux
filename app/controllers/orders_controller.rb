@@ -13,7 +13,7 @@ class OrdersController < ApplicationController
     end
 
     def create
-        @order = Order.create(user: current_user)
+        @order = Order.create(user: current_user, dine_in: params[:order][:dine_in])
         params[:order_dishes].each do |key, value|
           if value[:quantity].to_i >= 1
             @dish = Dish.find(key.to_i)
