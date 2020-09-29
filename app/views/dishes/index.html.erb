@@ -3,7 +3,7 @@
     <div class="row" data-controller="macros">
       <div class="col-12 col-md-6 p-3">
         <h5>Your search criteria</h5>
-        Your <span data-target="macros.name"><%=@macro.name unless @macro[:name].nil?%></span> dishes: 
+        Your <span data-target="macros.name"><%=@macro.name unless @macro[:name].nil?%></span> macros:
         <ul>
           <li data-target="macros.userProtein"><%=@macro[:protein]%> g protein</li>
           <li data-target="macros.userCarbs"><%=@macro[:carbs]%> g carbs</li>
@@ -42,7 +42,7 @@
     </div>
   </div>
 
-  
+
 
   <ul class="nav nav-pills mb-3" id="results-select" role="tablist">
     <li class="nav-item" role="presentation">

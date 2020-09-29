@@ -29,6 +29,8 @@ gem 'redis', '~> 4.0'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'devise'
+gem 'stripe'
+gem 'money-rails'
 
 gem 'autoprefixer-rails'
 gem 'cloudinary', '~> 1.16.0'
