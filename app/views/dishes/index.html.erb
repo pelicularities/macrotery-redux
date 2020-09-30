@@ -1,70 +1,66 @@
 <div>
-  <div class="container my-3 border">
+  <div class="container my-3">
     <div class="row" data-controller="macros">
       <input type="hidden" id="params" data-target="macros.params" value="">
-      <div class="col-12 col-md-6 p-3">
-        <h5>Your search criteria</h5>
-        Your <span data-target="macros.name"><%=@macro.name unless @macro[:name].nil?%></span> macros:
-        <ul>
-          <li data-target="macros.userProtein"><%=@macro[:protein]%> g protein</li>
-          <li data-target="macros.userCarbs"><%=@macro[:carbs]%> g carbs</li>
-          <li data-target="macros.userFats"><%=@macro[:fats]%> g fats</li>
-          <li data-target="macros.userCalories"><%=@macro[:calories]%> kcal calories</li>
-        </ul>
-      </div>
-      <div class="col-12 col-md-6 p-3 border-left">
-        <div>
-          <form id="search-form">
-            Choose preset macros:
-            <select id="macro" name="macro" class="form-control" data-target="macros.select" data-action="change->macros#changeMeal">
-            <option value="0">-- Select macros --</option>
-              <% @macros.each do |macro| %>
+      <div class="col-12 col-md-6 p-3 border">
+        <form id="search-form">
+          <h5>Use preset macros</h5>
+          <select id="macro" name="macro" class="form-control" data-target="macros.select" data-action="change->macros#changeMeal">
+            <% @macros.each do |macro| %>
+              <% if macro == @default_macro %>
+                <option value="<%=macro.id%>" selected><%=macro.name%></option>
+              <% else %>
                 <option value="<%=macro.id%>"><%=macro.name%></option>
               <% end %>
-            </select>
-            <table class="my-3">
+            <% end %>
+          </select>
+          <h5 class="mt-3">Or set your own</h5>
+          <table class="my-3 text-center" id="macro-table">
+            <thead>
               <tr>
-                <td><label for="protein">Protein: </label></td>
+                <th><label for="protein">Protein</label></td>
+                <th><label for="carbs">Carbs</label></td>
+                <th><label for="fats">Fats</label></td>
+                <th><label for="fats">kcal</label></td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
                 <td><input type="number" id="protein" name="protein" value="<%=@macro[:protein]%>" min="0" data-target="macros.protein" data-action="change->macros#refresh"></td>
-              </tr>
-              <tr>
-                <td><label for="carbs">Carbs: </label></td>
                 <td><input type="number" id="carbs" name="carbs" value="<%=@macro[:carbs]%>" min="0" data-target="macros.carbs" data-action="change->macros#refresh"></td>
-              </tr>
-              <tr>
-                <td><label for="fats">Fats: </label></td>
                 <td><input type="number" id="fats" name="fats" value="<%=@macro[:fats]%>" min="0" data-target="macros.fats" data-action="change->macros#refresh"></td>
+                <td><input type="number" id="calories" name="calories" value="<%=@macro[:calories]%>" min="0" data-target="macros.calories" disabled></td>
               </tr>
-            </table>
-          </form>
-        </div>
-
+            </tbody>
+          </table>
+        </form>
       </div>
     </div>
   </div>
-
-
-
-  <ul class="nav nav-pills mb-3" id="results-select" role="tablist">
-    <li class="nav-item" role="presentation">
-      <a class="nav-link active" id="results-list-tab" data-toggle="pill" href="#results-list" role="tab" aria-controls="results-list" aria-selected="true">List</a>
-    </li>
-    <li class="nav-item" role="presentation">
-      <a class="nav-link" id="results-map-tab" data-toggle="pill" href="#results-map" role="tab" aria-controls="results-map" aria-selected="false">Map</a>
-    </li>
-  </ul>
-  <div class="tab-content" id="results-content">
-    <h2>Suggested Dishes</h2>
-    <div class="tab-pane fade show active" id="results-list" role="tabpanel" aria-labelledby="results-list-tab">
-      <div id="dish-list">
-        <%= render 'dishes_list', dishes: @dishes %>
-      </div>
+  <div class="container">
+    <div class="d-flex">
+      <ul class="nav nav-pills mb-3 mx-auto" id="results-select" role="tablist">
+        <li class="nav-item" role="presentation">
+          <a class="nav-link active" id="results-list-tab" data-toggle="pill" href="#results-list" role="tab" aria-controls="results-list" aria-selected="true">List</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="results-map-tab" data-toggle="pill" href="#results-map" role="tab" aria-controls="results-map" aria-selected="false">Map</a>
+        </li>
+      </ul>
     </div>
-    <div class="tab-pane fade" id="results-map" role="tabpanel" aria-labelledby="results-map-tab">
-      <div id="map"
-        style="width: 100%; height: 600px;"
-        data-markers="<%= @markers.to_json %>"
-        data-mapbox-api-key="<%=ENV["MAPBOX_API_KEY"]%>">
+    <h2>Suggested Dishes</h2>
+    <div class="tab-content" id="results-content">
+      <div class="tab-pane fade show active" id="results-list" role="tabpanel" aria-labelledby="results-list-tab">
+        <div id="dish-list">
+          <%= render 'dishes_list', dishes: @dishes %>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="results-map" role="tabpanel" aria-labelledby="results-map-tab">
+        <div id="map"
+          style="width: 100%; height: 375px;"
+          data-markers="<%= @markers.to_json %>"
+          data-mapbox-api-key="<%=ENV["MAPBOX_API_KEY"]%>">
+        </div>
       </div>
     </div>
   </div>

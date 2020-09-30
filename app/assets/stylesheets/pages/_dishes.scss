@@ -1,0 +1,24 @@
+// Specific CSS for your home-page
+
+#protein, #carbs, #fats, #calories {
+  width: 50px;
+  text-align: center;
+  border: 1px $my-secondary solid;
+  border-radius: 2px;
+}
+
+#protein {
+  background-color: #ffbbbb;
+}
+
+#carbs {
+  background-color: #bbffbb;
+}
+
+#fats {
+  background-color: #ffffbb;
+}
+
+#macro-table th {
+  width: 80px;
+}

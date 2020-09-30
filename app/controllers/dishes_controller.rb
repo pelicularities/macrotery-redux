@@ -2,7 +2,10 @@ class DishesController < ApplicationController
 
   def index
     @user = current_user
-    @macros = @user.macros
+
+    # sort macros so that the default macro appears first
+    @macros = current_user.macros
+    @default_macro = current_user.default_macro
     
     if params[:macro].nil? == false && params[:macro].to_i.zero? == false
       @macro = Macro.find(params[:macro])
@@ -14,7 +17,7 @@ class DishesController < ApplicationController
       }
       @macro[:calories] = 4 * @macro[:protein] + 4 * @macro[:carbs] + 9 * @macro[:fats]
     else
-      @macro = @user.default_macro  # default to first available macro
+      @macro = current_user.default_macro  # use default macro
     end
 
     if params[:lat].nil? || params[:lng].nil? || params[:lat].empty? || params[:lng].empty?

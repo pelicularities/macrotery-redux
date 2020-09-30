@@ -17,6 +17,7 @@ export default class extends Controller {
     'protein',
     'carbs',
     'fats',
+    'calories',
     'userProtein',
     'userCarbs',
     'userFats',
@@ -107,12 +108,12 @@ export default class extends Controller {
       const carbs = data.macro.carbs;
       const fats = data.macro.fats;
   
-      this.userProteinTarget.innerHTML = `${protein} g protein`;
-      this.userCarbsTarget.innerHTML = `${carbs} g carbs`;
-      this.userFatsTarget.innerHTML = `${fats} g fats`;
+      this.proteinTarget.value = protein;
+      this.carbsTarget.value = carbs;
+      this.fatsTarget.value = fats;
   
       const calories = 4 * protein + 4 * carbs + 9 * fats;
-      this.userCaloriesTarget.innerHTML = `${calories} kcal calories`;
+      this.caloriesTarget.value = calories;
 
       const dishList = document.querySelector('#dish-list');
       dishList.innerHTML = data.dishes;
