@@ -2,7 +2,7 @@ class MacrosController < ApplicationController
 before_action :set_macros, only: [:edit, :show, :update, :destroy]
 
   def index
-    @macro= current_user.macros.order(updated_at: :desc)
+    @macro= current_user.macros.order(created_at: :desc)
   end
 
   def new
@@ -38,6 +38,17 @@ before_action :set_macros, only: [:edit, :show, :update, :destroy]
   def destroy
     @macro.destroy
     redirect_to macros_path
+  end
+
+  def change_default
+    new_default = Macro.find(params[:new_default])
+    success = current_user.change_default(new_default) 
+
+    respond_to do |format|
+      format.json {
+        render json: { macro: new_default, success: success }
+      }
+    end      
   end
 
 
