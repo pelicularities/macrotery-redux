@@ -14,9 +14,6 @@
 <div class=" mt-4" data-controller="total" data-action="total-change->total#handleUpdate"
   data-total-amount="0" data-total-allprotein="0" data-total-allcarbs="0" data-total-allfats="0">
 
-
-
-
   <%= form_for Order.new, url: orders_path, method: "post", local: true, html: {
     novalidate: true
   } do %>
@@ -33,17 +30,21 @@
           <p class="card-text price" data-target="order.price" data-unit-price="<%= dish.price %>"> <%= number_to_currency(dish.price) %> </p>
         </div>
       </div>
+
+      <% # + 1 - %>
       <div class="dis-flex ml-2 mt-2">
         <h4 class="font-weight-bold pl-2 pr-4" data-action="click->order#increase" data-target="order.addlabel"></h4>
         <h4 clasors="font-weight-bold " data-target="order.quantitylabel"></h4>
         <h4 class="font-weight-bold pl-4 pr-2" data-action="click->order#decrease" data-target="order.minuslabel"></h4>
       </div>
+
+      <% # red green yellow macros %>
       <div class="protein circle" data-target="order.protein" data-unit-protein="<%= dish.protein %>"> <%= dish.protein %> </div>
       <div class="carb circle" data-target="order.carbs" data-unit-carbs="<%= dish.carbs %>"> <%= dish.carbs %> </div>
       <div class="fat circle" data-target="order.fats" data-unit-fats="<%= dish.fats %>"> <%= dish.fats %> </div>
       <div class="card-btn" data-action="click->order#handleClick" data-target="order.btn"></div>
       <div data-target="order.dis" class=""></div>
-      <div data-target="order.tick" class="">✓</div>
+      <div data-target="order.tick" class="notick">✓</div>
     </div>
 
     <div class="checkbox d-none">
