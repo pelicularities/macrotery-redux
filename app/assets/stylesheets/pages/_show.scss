@@ -177,6 +177,31 @@
 
 // for order show page
 
+
+.text-size-ten {
+    font-size: 10px; // for table
+}
+
+.text-size-twelve {
+    font-size: 12px; // for table
+}
+
+.text-size-sixteen {
+    font-size: 16px; // for table
+}
+
+.text-size-fourteen {
+    font-size: 14px; // for table
+}
+
+.td-width {
+    width: 100px; // for table photo td
+}
+
+.vertical-align-top td {
+    vertical-align: top; // for table
+}
+
 .dish-photo {
     object-fit: cover;
     border: 2px solid rgb(190, 190, 190);
@@ -211,7 +236,9 @@
 }
 
 .border-sign {
+    padding-top: 10px;
     border-top: 2px solid  rgb(190, 190, 190);
+    border-bottom: 2px solid  rgb(190, 190, 190); // for table
 }
 
 .pending {
