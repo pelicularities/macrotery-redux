@@ -3,10 +3,10 @@
 <div class="heading mt-4 container">
   <img class="img" src='<%= cl_image_path @eatery.photo.key %>' alt='eatery_logo'>
   <div>
-    <h2 class="pl-4"> Welcome to <%= @eatery.name %> </h2>
+    <h5 class="pl-4"> Welcome to <%= @eatery.name %> </h5>
     <div class="location">
       <img src='https://www.pinclipart.com/picdir/middle/579-5790258_location-logo-png-hd-images-location-logo-png.png' class="pl-4">
-      <h6 class="pl-4"> location: <%= @eatery.address %> </h6>
+      <h6 class="pl-4 text-size-ten"> location: <%= @eatery.address %> </h6>
     </div>
   </div>
 </div>
@@ -26,7 +26,7 @@
     <div class="eatery-card card bg-dark text-white w-85 mt-3 mb-3 dish_card" style="background-image: url('<%=cl_image_path dish.photo.key%>');">
       <div class="card-content w-100 pb-2">
         <div class="description pl-2">
-          <h5 class="card-title mb-1"> <%= dish.name %> </h5>
+          <h5 class="card-title mb-1 text-size-sixteen"> <%= dish.name %> </h5>
           <p class="card-text"> <%= dish.description %> </p>
         </div>
         <div class="dis-flex pr-2">
@@ -63,26 +63,26 @@
 
   <div class="blank"></div>
   <div class="total">
-    <h4>Total Macros :</h4>
+    <h6>Total Macros:</h6>
     <div>
       <div class="macro protein circle" data-target="total.totalprotein"> 0 </div>
       <div class="macro carb circle" data-target="total.totalcarbs"> 0 </div>
       <div class="macro fat circle" data-target="total.totalfats"> 0 </div>
     </div>
-    <div class="d-flex justify-content-between pt-3 pr-3">
-      <h4 class="pr-3">Total Price : </h4>
-      <h2 data-target="total.totalprice"><%= number_to_currency(0) %></h2>
+    <div class="d-flex justify-content-between pt-1">
+      <h6 class="pr-3">Total Price: </h6>
+      <h4 data-target="total.totalprice"><%= number_to_currency(0) %></h4>
     </div>
-    <div class="d-flex justify-content-end pb-2">
+    <div class="d-flex justify-content-center radio-div-ht">
 
-      <input type="radio" id="dine_in" name="order[dine_in]" value="1">
-      <label class="btn btn-outline-primary" for="dine_in">Dine In</label><br>
+      <input type="radio" id="dine_in" name="order[dine_in]" value="1" checked>
+      <label class="btn radio-label text-size-fourteen" for="dine_in">Dine In</label><br>
       <input type="radio" id="take_away" name="order[dine_in]" value="0">
-      <label for="take_away">Take Away</label><br>
+      <label class="btn radio-label text-size-fourteen" for="take_away">Take Away</label><br>
 
     </div>
     <div class="d-flex justify-content-center">
-      <%= submit_tag("Proceed to order", class: 'btn btn-primary btn-lg pr-2 pl-2') %>
+      <%= submit_tag("Proceed to order", class: 'btn btn-primary pr-2 pl-2') %>
     </div>
   </div>
   <% end %>
