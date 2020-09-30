@@ -1,4 +1,7 @@
-
-<h1> This is WIP edit page </h1>
-<%= render 'shared/macro_form' %>
-
+<div class="container">
+<%= link_to macros_path do %>
+    <i class="fas fa-arrow-left"></i> Back To My Macros
+  <% end %>
+  <h1 class="mt-3">Edit Macros</h1>
+  <%= render 'shared/macro_form' %>
+</div>

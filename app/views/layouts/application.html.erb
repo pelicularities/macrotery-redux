@@ -12,14 +12,14 @@
     <%= render 'shared/ios_pwa_links' %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: false %>
   </head>
 
   <body>
     <%= render 'shared/navbar' %>
     <%= render 'shared/flashes' %>
     <div class="">
-    <%= yield %>
+      <%= yield %>
     </div>
   </body>
 </html>
