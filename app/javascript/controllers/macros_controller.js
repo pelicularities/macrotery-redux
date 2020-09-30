@@ -134,12 +134,10 @@ export default class extends Controller {
           .setPopup(popup)
           .addTo(map);
       });
-      const el = document.createElement('div');
-      el.className = 'marker';
-      el.style.backgroundColor = 'red';
-      el.style.borderRadius = '50%';
-      el.style.width = '10px';
-      el.style.height = '10px';
+      const el = document.createElement('i');
+      el.className = 'marker fas fa-map-pin';
+      el.style.fontSize = '28px';
+      el.style.color = '#ff4e60';
       const userLocationMarker = new mapboxgl.Marker(el).setLngLat([ lng, lat ]).addTo(map);
       this.fitMapToMarkers(map, markers);
     });
