@@ -39,11 +39,13 @@ h4 {
     font-size: 16px
 }
 
+
 h2 {
   font-size: 20px
 }
 
-.card {
+
+.index-card {
     width: 200px;
     border-radius: 3px;
     box-shadow: 0 0 5px rgb(230,230,230);
@@ -53,7 +55,7 @@ h2 {
 }
 
 
-.card p {
+.index-card p {
     opacity: .5;
 }
 
@@ -67,7 +69,7 @@ p {
 }
 
 
-.card img {
+.index-card img {
     height: 100px;
     margin-bottom: 15px;
 

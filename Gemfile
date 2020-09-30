@@ -34,6 +34,7 @@ gem 'money-rails'
 gem 'stripe_event'
 
 gem 'autoprefixer-rails'
+gem "chartkick"
 gem 'cloudinary', '~> 1.16.0'
 gem 'geocoder'
 gem 'faker'
