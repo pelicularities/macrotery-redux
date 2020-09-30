@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   resources :macros, path: '/profile/macros'
 
-  post '/change_default_macros', to: 'macros#change_default'
+  get '/change_default_macros/:new_default', to: 'macros#change_default', as: 'change_default_macros'
 
   resources :orders, only: [:index, :show, :create, :new] do
     resources :payments, only: :new do

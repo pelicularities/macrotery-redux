@@ -2,7 +2,15 @@ class MacrosController < ApplicationController
 before_action :set_macros, only: [:edit, :show, :update, :destroy]
 
   def index
-    @macro= current_user.macros.order(created_at: :desc)
+    @macro = current_user.macros.order(created_at: :desc)
+    @default_macro = current_user.default_macro
+    @default_graph = {
+      'Protein' => @default_macro.protein * 4,
+      'Carbs' => @default_macro.carbs * 4,
+      'Fats' => @default_macro.fats * 9
+    }
+    @other_macros = current_user.macros.select { |macro| macro != @default_macro };
+    @macro_string = @macro.map(&:id).join(" ")
   end
 
   def new
@@ -44,11 +52,13 @@ before_action :set_macros, only: [:edit, :show, :update, :destroy]
     new_default = Macro.find(params[:new_default])
     success = current_user.change_default(new_default) 
 
-    respond_to do |format|
-      format.json {
-        render json: { macro: new_default, success: success }
-      }
-    end      
+    redirect_to macros_path
+
+    # respond_to do |format|
+    #   format.json {
+    #     render json: { macro: new_default, success: success }
+    #   }
+    # end      
   end
 
 
