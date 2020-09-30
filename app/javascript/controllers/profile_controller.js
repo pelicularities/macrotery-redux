@@ -18,11 +18,15 @@ export default class extends Controller {
   }
 
   changeDefault(event) {
+    console.log('before');
+    event.preventDefault();
+    console.log('during');
+
     // find which element fired the event
     const newDefault = event.target
-    console.log(newDefault.value);
+    console.log(newDefault.dataset.value);
     const query = `/change_default_macros`;
-    const queryBody = { new_default: newDefault.value };
+    const queryBody = { new_default: newDefault.dataset.value };
     fetch(query, {
        method: 'post',
        headers: 
@@ -38,26 +42,27 @@ export default class extends Controller {
       console.log(data.macro);
       console.log(data.success);
     });
+    Turbolinks.visit('/profile/macros');
 
     // update table so that the default-macros class is applied to the new default
     // get an array of the macro IDs for this user
-    let macrosIDs = document.getElementById('macroIDs');
-    macrosIDs = macrosIDs.value.split(' ');
-    console.log('macrosIDs');
+    // let macrosIDs = document.getElementById('macroIDs');
+    // macrosIDs = macrosIDs.value.split(' ');
+    // console.log('macrosIDs');
     
-    // modify the DOM elements based on macroIDs
-    macrosIDs.forEach((macro) => {
-      const th = document.querySelector(`#row-${macro} th`);
-      const tds = document.querySelectorAll(`#row-${macro} td`);
-      if (macro === newDefault.value) {
-        // this is the new default, let's apply the .default-macros class
-        th.classList.add('default-macros')
-        tds.forEach(td => td.classList.add('default-macros'));
-      } else {
-        // this is not a default, let's remove the .default-macros class
-        th.classList.remove('default-macros')
-        tds.forEach(td => td.classList.remove('default-macros'));
-      }
-    });
+    // // modify the DOM elements based on macroIDs
+    // macrosIDs.forEach((macro) => {
+    //   const th = document.querySelector(`#row-${macro} th`);
+    //   const tds = document.querySelectorAll(`#row-${macro} td`);
+    //   if (macro === newDefault.value) {
+    //     // this is the new default, let's apply the .default-macros class
+    //     th.classList.add('default-macros')
+    //     tds.forEach(td => td.classList.add('default-macros'));
+    //   } else {
+    //     // this is not a default, let's remove the .default-macros class
+    //     th.classList.remove('default-macros')
+    //     tds.forEach(td => td.classList.remove('default-macros'));
+    //   }
+    // });
   }
 }

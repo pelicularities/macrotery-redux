@@ -66,6 +66,7 @@ Rails.application.configure do
   config.hosts << "c3e2cb22fcc2.ngrok.io" # Zack's ngrok
   config.hosts << "4993bae4096c.ngrok.io"
   config.hosts << "87f21c268b36.ngrok.io"
+  config.hosts << "2bf69b1a8297.ngrok.io"
 
   # allow bullet to report N+1 issues
   config.after_initialize do
