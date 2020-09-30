@@ -15,11 +15,15 @@
       <div class="col-12 col-md-6 p-3 border-left">
         <div>
           <form id="search-form">
-            Choose preset macros:
+            Use preset macros:
             <select id="macro" name="macro" class="form-control" data-target="macros.select" data-action="change->macros#changeMeal">
             <option value="0">-- Select macros --</option>
               <% @macros.each do |macro| %>
-                <option value="<%=macro.id%>"><%=macro.name%></option>
+                <% if macro == current_user.default_macro %>
+                  <option value="<%=macro.id%>" selected><%=macro.name%></option>
+                <% else %>
+                  <option value="<%=macro.id%>"><%=macro.name%></option>
+                <% end %>
               <% end %>
             </select>
             <table class="my-3">
