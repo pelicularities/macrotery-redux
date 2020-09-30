@@ -1,28 +1,60 @@
 // Specific CSS for your home-page
 
-._text-carousel {
-  position: relative;
-  white-space: nowrap;
-}
 
-._text-carousel span {
-    position: relative;
-    display: inline-block;
-}
-
-.fadeInDown {
-  animation-name: fadeInDown
-}
-
-.animated {
-  animation-duration: 1s;
-  animtion-fill-mode: both;
-}
-
-.home {
-  color: #ff4e60;
+.intro {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .banner {
-  height: 300px;
+  height: 400px;
+  margin-bottom: 20px
+}
+
+
+.cards {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    margin-top: 20px
+}
+
+h4 {
+    display: block;
+    // margin-block-start: 1.33em;
+    // margin-block-end: 1.33em;
+    // margin-inline-start: 0px;
+    // margin-inline-end: 0px;
+    font-weight: bold;
+    font-size: 16px
+}
+
+.card {
+    width: 200px;
+    border-radius: 3px;
+    box-shadow: 0 0 5px rgb(230,230,230);
+    text-align: center;
+    padding: 10px;
+    border: 1px solid rgb(230,230,230);
+}
+
+
+.card p {
+    opacity: .5;
+}
+
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+
+.card img {
+    height: 100px;
+    margin-bottom: 15px;
 }
