@@ -21,13 +21,12 @@
   <% @eatery.dishes.each do |dish| %>
   <div data-controller="order" class="container">
     <div class="eatery-card card bg-dark text-white w-85 mt-3 mb-3 dish_card" style="background-image: url('<%=cl_image_path dish.photo.key%>');">
-      <div class="card-content w-100 pb-2">
+      <div class="card-content w-100">
         <div class="description pl-2">
-          <h5 class="card-title mb-1 text-size-sixteen"> <%= dish.name %> </h5>
-          <p class="card-text"> <%= dish.description %> </p>
+          <h5 class="mb-1"> <%= dish.name %> </h5>
         </div>
-        <div class="dis-flex pr-2">
-          <p class="card-text price" data-target="order.price" data-unit-price="<%= dish.price %>"> <%= number_to_currency(dish.price) %> </p>
+        <div class="pr-2">
+          <p class="price" data-target="order.price" data-unit-price="<%= dish.price %>"> <%= number_to_currency(dish.price) %> </p>
         </div>
       </div>
 

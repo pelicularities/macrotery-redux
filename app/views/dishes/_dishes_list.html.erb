@@ -1,23 +1,24 @@
 <% if dishes.empty? %>
   :( Sorry, no dishes match your criteria.
 <% end %>
-<% dishes.each do |dish| %>
-  <%= link_to eatery_path(dish.eatery) do %>
-    <div class="eatery-card card bg-dark text-white w-85 mt-3 mb-3 dish_card" style="background: url('<%=cl_image_path dish.photo.key%>'); background-size: cover; background-position: center center">
-      <div class="card-content w-100 pb-2">
-        <div class="description pl-2">
-          <h5 class="card-title mb-1"> <%=dish.name%> </h5>
-          <p class="card-text"> <%= dish.description %> </p>
-        </div>
-        <div class="dis-flex pr-2">
-          <p class="card-text price"> <%= number_to_currency(dish.price) %> </p>
-        </div>
-      </div>
-      <div> <%= cl_image_tag dish.eatery.photo.key, height: 50, width: 50, crop: :fill, class: 'circle' %> </div>
-      <div class="protein circle"> <%= dish.protein %> </div>
-      <div class="carb circle"> <%= dish.carbs %> </div>
-      <div class="fat circle"> <%= dish.fats %> </div>
-    </div>
-  <% end %>
 
-<% end %>
+<div class="container">
+  <% dishes.each do |dish| %>
+    <%= link_to eatery_path(dish.eatery) do %>
+      <div class="eatery-card card bg-dark text-white w-85 mt-3 mb-3 dish_card" style="background: url('<%=cl_image_path dish.photo.key%>'); background-size: cover; background-position: center center">
+        <div class="card-content w-100">
+          <div class="description pl-2">
+            <h5 class=" mb-1"> <%=dish.name%> </h5>
+          </div>
+          <div class="pr-2">
+            <p class="price"> <%= number_to_currency(dish.price) %> </p>
+          </div>
+        </div>
+        <div> <%= cl_image_tag dish.eatery.photo.key, height: 50, width: 50, crop: :fill, class: 'circle' %> </div>
+        <div class="protein circle"> <%= dish.protein %> </div>
+        <div class="carb circle"> <%= dish.carbs %> </div>
+        <div class="fat circle"> <%= dish.fats %> </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
