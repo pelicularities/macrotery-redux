@@ -7,6 +7,10 @@ class Macro < ApplicationRecord
   after_create :calculate_calories
   after_find :calculate_calories, if: :calories_empty?
 
+  def calories
+    self.protein * 4 + self.carbs * 4 + self.fats * 9
+  end
+  
   private
 
   def calculate_calories

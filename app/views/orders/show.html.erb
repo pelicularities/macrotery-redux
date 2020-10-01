@@ -1,7 +1,7 @@
 
 <div class="container text-center">
 <h5>Payment to:</h5>
-<h4><%= @order.eatery.name %></h4>
+<h3><%= @order.eatery.name %></h3>
 <h6 class="text-size-ten">at <%= @order.eatery.address %></h6>
 </div>
 
@@ -17,11 +17,17 @@
     </div>
 
     <div class="">
-      <h4>Order #<%= @order.id %><span class="pending p-2 ml-3"><%= @order.state %></span></h4>
+      <h4>Order #<%= @order.id %><span class="pending pt-0 pb-0 pl-2 pr-2 ml-3"><%= @order.state %></span></h4>
         
   <!--       <p>Estimated delivery in <strong>2 business days</strong></p> -->
       <h6 class="text-size-ten"><strong>ISSUED ON</strong> <%= @order.created_at.to_date %></h6>
-      <h4><%= link_to "Pay the order", new_order_payment_path(@order), class: "btn btn-primary" %></h4>
+
+  <!--       button for 'pay your order' / 'back' -->
+      <% if (@order.state = 'pending') %>
+        <h4><%= link_to "Pay your order", new_order_payment_path(@order), class: "btn btn-primary" %></h4>
+      <% else %>
+        <h4><%= link_to "Back", dishes_path(), class: "btn btn-primary" %></h4>
+      <% end %>
     </div>
   </div>
 </div>
