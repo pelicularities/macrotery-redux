@@ -23,7 +23,7 @@
     <div class="eatery-card card bg-dark text-white w-85 mt-3 mb-3 dish_card" style="background-image: url('<%=cl_image_path dish.photo.key%>');">
       <div class="card-content w-100">
         <div class="description pl-2">
-          <h5 class="mb-1"> <%= dish.name %> </h5>
+          <h5 class="text-size-sixteen mb-1"> <%= dish.name %> </h5>
         </div>
         <div class="pr-2">
           <p class="price" data-target="order.price" data-unit-price="<%= dish.price %>"> <%= number_to_currency(dish.price) %> </p>

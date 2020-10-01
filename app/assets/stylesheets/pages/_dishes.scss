@@ -8,15 +8,18 @@
 }
 
 #protein {
-  background-color: #ffbbbb;
+  background-color: rgb(175, 0, 0);
+  color: white;
 }
 
 #carbs {
-  background-color: #bbffbb;
+  background-color: rgb(0, 175, 0);
+  color: white;
 }
 
 #fats {
-  background-color: #ffffbb;
+  background-color: rgb(175, 175, 0);
+  color: white;
 }
 
 #macro-table th {

@@ -8,16 +8,17 @@
       <div class="eatery-card card bg-dark text-white w-85 mt-3 mb-3 dish_card" style="background: url('<%=cl_image_path dish.photo.key%>'); background-size: cover; background-position: center center">
         <div class="card-content w-100">
           <div class="description pl-2">
-            <h5 class=" mb-1"> <%=dish.name%> </h5>
+            <h5 class="text-size-sixteen mb-1"> <%=dish.name%> </h5>
           </div>
           <div class="pr-2">
             <p class="price"> <%= number_to_currency(dish.price) %> </p>
           </div>
         </div>
-        <div> <%= cl_image_tag dish.eatery.photo.key, height: 50, width: 50, crop: :fill, class: 'circle' %> </div>
+        <div class="logo"> <%= cl_image_tag dish.eatery.photo.key, height: 50, width: 50, crop: :fill, class: 'circle' %> </div>
         <div class="protein circle"> <%= dish.protein %> </div>
         <div class="carb circle"> <%= dish.carbs %> </div>
         <div class="fat circle"> <%= dish.fats %> </div>
+        <div class="dis-two pl-5"><%= dish.eatery.name %></div>
       </div>
     <% end %>
   <% end %>
