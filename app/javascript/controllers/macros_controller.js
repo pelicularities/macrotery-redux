@@ -12,7 +12,6 @@ import mapboxgl from 'mapbox-gl';
 
 export default class extends Controller {
   static targets = [ 
-    'name',
     'select',
     'protein',
     'carbs',
@@ -54,7 +53,6 @@ export default class extends Controller {
     console.log("I'm inside the changeMeal function");
     const meal = this.selectTarget.value;
     const mealName = this.selectTarget.options[this.selectTarget.selectedIndex].text;
-    this.nameTarget.innerHTML = mealName;
     console.log(meal);
 
     const url = new URL(document.location.href);
@@ -72,7 +70,6 @@ export default class extends Controller {
   
   refresh() {
     console.log("I'm inside the refresh function");
-    this.nameTarget.innerHTML = '';
 
     const protein = this.proteinTarget.value;
     const carbs = this.carbsTarget.value;
