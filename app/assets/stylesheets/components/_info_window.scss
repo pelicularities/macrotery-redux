@@ -16,8 +16,10 @@
 
 .modalPopup {
   background: white;
-  width: 95%;
-  height: 95vh;
+  width: 90%;
+  height: 90vh;
+  padding: 3rem;
+  overflow: scroll;
   position: relative;
   i {
     position: absolute;
