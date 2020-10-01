@@ -18,7 +18,10 @@
         <div class="protein circle"> <%= dish.protein %> </div>
         <div class="carb circle"> <%= dish.carbs %> </div>
         <div class="fat circle"> <%= dish.fats %> </div>
-        <div class="dis-two pl-5"><%= dish.eatery.name %></div>
+        <div class="d-flex dis-two pl-5 pr-3 justify-content-between">
+          <div class=""><%= dish.eatery.name %></div>
+          <div><%= @distances[dish] %> km</div>
+        </div>
       </div>
     <% end %>
   <% end %>
