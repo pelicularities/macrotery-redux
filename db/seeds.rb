@@ -106,7 +106,7 @@ User.all.each do |user|
     new_meal = Macro.new(meal)
     new_meal.user = user
     new_meal.save
-    puts "seeded #{user.first_name}'s #{meal.name}"
+    puts "seeded #{user.first_name}'s #{meal[:name]}"
   end
 end
 puts 'user meals seeded!'
@@ -157,7 +157,7 @@ puts 'cuisines seeded!'
 
 puts 'seeding eateries...'
 addresses = [
-  '350 Orchard Road, Singapore'
+  '350 Orchard Road, Singapore',
   '68 Orchard Road, Singapore',
   '8 Grange Road, Singapore',
   '2 Orchard Turn, Singapore',
@@ -578,13 +578,13 @@ presentation_eateries = {
 
 names[0, 5].each do |eatery_name|
   eatery = Eatery.find_by name: eatery_name
-  presentation_eateries[eatery].dishes.each_with_index do |dish, index|
+  presentation_eateries[eatery][:dishes].each_with_index do |dish, index|
     new_dish = Dish.new(dish)
     new_dish.eatery = eatery
     dish.description = Faker::Food.description
     dish.save!
 
-    dish_image = presentation_eateries[eatery].images[index]
+    dish_image = presentation_eateries[eatery][:images][index]
     file = URI.open(dish_image)
     new_dish.photo.attach(io: file, filename: "dish#{new_dish.id}.png", content_type: 'image/png')
     puts "seeded #{new_dish.name}!"
