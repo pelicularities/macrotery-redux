@@ -1,7 +1,19 @@
 // Specific CSS for your home-page
 
-.index-container h2{
-  margin-bottom: 0px
+.banner {
+  // width: 100%;
+  // background-position: center;
+  margin-bottom: 20px;
+  background-size: cover
+
+}
+
+// .index-container {
+//   flex-direction: row;
+// }
+
+.index-container h2 {
+  padding-bottom: 10px;
 }
 
 
@@ -17,32 +29,21 @@
   margin-bottom: 20px
 }
 
-// .intro {
-//     padding-right: 15px;
-//     padding-left: 15px;
-//     margin-right: auto;
-//     margin-left: auto;
-// }
-
-.banner {
-  width: 100%;
-  margin-bottom: 20px;
-  background-position: center;
-}
 
 
 
 .intro img{
   width: 100%;
-  // height: 400px;
+  height: 100%;
   margin-bottom: 20px
 }
 
 
 .cards {
-    display: flex;
-    justify-content: space-between;
+    // // justify-content: space-between;
     margin-bottom: 30px;
+    // vertical-align: middle;
+
 }
 
 h4 {
@@ -63,11 +64,11 @@ h2 {
 
 .index-card {
     width: 200px;
-    border-radius: 3px;
-    box-shadow: 0 0 5px rgb(230,230,230);
+    // border-radius: 3px;
+    // box-shadow: 0 0 5px rgb(230,230,230);
     text-align: center;
     padding: 10px;
-    border: 1px solid rgb(230,230,230);
+    // border: 1px solid rgb(230,230,230);
 }
 
 
