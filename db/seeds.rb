@@ -584,7 +584,7 @@ names[0, 5].each do |eatery_name|
     new_dish.description = Faker::Food.description
     new_dish.save!
 
-    dish_image = presentation_eateries[eatery][:images][index]
+    dish_image = presentation_eateries[eatery_name][:images][index]
     file = URI.open(dish_image)
     new_dish.photo.attach(io: file, filename: "dish#{new_dish.id}.png", content_type: 'image/png')
     puts "seeded #{new_dish.name}!"
