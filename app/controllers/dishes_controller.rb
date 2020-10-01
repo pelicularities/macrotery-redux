@@ -36,8 +36,17 @@ class DishesController < ApplicationController
 
     @dishes = nearby_dishes.sort_by { |dish| calculate_score(@macro, dish) }.first(20)
 
+    # looping through array of dishes in order to populate:
+    # @distances: hash of distances to user, using the dish instance as the key
+    # @eateries: array of eateries containing at least one dish that meets search critera 
+    @distances = {}
     @eateries = []
-    @dishes.each { |dish| @eateries << dish.eatery }
+
+    @dishes.each do |dish|
+      @eateries << dish.eatery
+      @distances[dish] = dish.eatery.distance_to(user_location).round(1)
+    end
+
     @eateries.uniq!
 
     @markers = @eateries.select { |eatery| eatery.latitude.nil? == false }.map do |eatery|

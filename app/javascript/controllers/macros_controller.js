@@ -120,6 +120,10 @@ export default class extends Controller {
       // console.log(data.dishes);
       // console.log(data.markers);
 
+      let params = new URLSearchParams(this.paramsTarget.value);
+      let lat = params.get("lat");
+      let lng = params.get("lng");
+
       const markers = data.markers;
       const oldMarkers = document.querySelectorAll('.mapboxgl-marker');
       oldMarkers.forEach(marker => marker.remove());
@@ -130,6 +134,11 @@ export default class extends Controller {
           .setPopup(popup)
           .addTo(map);
       });
+      const el = document.createElement('i');
+      el.className = 'marker fas fa-map-pin';
+      el.style.fontSize = '28px';
+      el.style.color = '#ff4e60';
+      const userLocationMarker = new mapboxgl.Marker(el).setLngLat([ lng, lat ]).addTo(map);
       this.fitMapToMarkers(map, markers);
     });
   }
