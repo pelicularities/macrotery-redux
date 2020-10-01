@@ -581,8 +581,8 @@ names[0, 5].each do |eatery_name|
   presentation_eateries[eatery_name][:dishes].each_with_index do |dish, index|
     new_dish = Dish.new(dish)
     new_dish.eatery = eatery
-    dish.description = Faker::Food.description
-    dish.save!
+    new_dish.description = Faker::Food.description
+    new_dish.save!
 
     dish_image = presentation_eateries[eatery][:images][index]
     file = URI.open(dish_image)
