@@ -98,6 +98,14 @@ export default class extends Controller {
     map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0 });
   }
 
+  showPopupModal(marker, content) {
+    marker.addEventListener('click', () => {
+      document.querySelector('body').insertAdjacentHTML('afterbegin', '<div class="modalBackground"><div class="modalPopup"><i id="closeModal" class="far fa-times-circle"></i><div class="modalPopupBody"></div></div></div>');
+      document.querySelector('.modalPopupBody').innerHTML = content;
+      document.querySelector('#closeModal').addEventListener('click', () => document.querySelector('.modalBackground').remove());
+    });
+  }
+
   fetchJSON(query) {
     fetch(query, { headers: { accept: 'application/json' } })
     .then(response => response.json())
@@ -129,11 +137,15 @@ export default class extends Controller {
       oldMarkers.forEach(marker => marker.remove());
       markers.forEach((marker) => {
         const popup = new mapboxgl.Popup().setHTML(marker.infoWindow);
-        new mapboxgl.Marker()
+        const newMarker = new mapboxgl.Marker()
           .setLngLat([ marker.lng, marker.lat ])
-          .setPopup(popup)
           .addTo(map);
+        this.showPopupModal(newMarker.getElement(), marker.infoWindow);
       });
+      const newMarkers = document.querySelectorAll('.mapboxgl-marker');
+      // newMarkers.forEach((marker) => this.showPopupModal(marker, marker.infoWindow));
+
+
       const el = document.createElement('i');
       el.className = 'marker fas fa-map-pin';
       el.style.fontSize = '28px';

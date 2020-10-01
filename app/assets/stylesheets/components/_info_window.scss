@@ -1,0 +1,30 @@
+.modalBackground {
+  position: fixed;
+  background: #00000075;
+  width: 100%;
+  height: 100vh;
+  z-index: 1000;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalPopupBody {
+  
+}
+
+.modalPopup {
+  background: white;
+  width: 90%;
+  height: 90vh;
+  padding: 3rem;
+  overflow: scroll;
+  position: relative;
+  i {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+  }
+}
