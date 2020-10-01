@@ -2,7 +2,20 @@
 <div class="navbar navbar-expand navbar-light navbar-macrotery">
 <!--
  <i class="fas fa-angle-left" id="nav_return"></i> -->
- <i class="fas fa-angle-double-left" id="nav_return"></i>
+ <% # hacky code for back button. but it works %>
+ <% if request.original_fullpath.start_with?('/eateries') %>
+  <%= link_to dishes_path do %>
+    <i class="fas fa-angle-double-left" id="nav_return"style="visibility: visible;"></i>
+  <% end %>
+ <% elsif request.original_fullpath.start_with?('/orders') %>
+  <%= link_to dishes_path do %><i class="fas fa-angle-double-left" id="nav_return"></i><% end %>
+ <% elsif request.original_fullpath == '/profile/macros/new' %>
+  <%= link_to macros_path do %><i class="fas fa-angle-double-left" id="nav_return"></i><% end %>
+ <% elsif /\/profile\/macros\/(\d)+\/edit/.match?(request.original_fullpath) %>
+  <%= link_to macros_path do %><i class="fas fa-angle-double-left" id="nav_return"></i><% end %>
+ <% else %>
+  <i class="fas fa-angle-double-left" id="nav_return"></i>
+ <% end %>
 
   <%= link_to root_path, class: "navbar-brand" do %>
    <%= image_tag "icons/android-icon-192x192.png", class:'rounded-circle'%>
