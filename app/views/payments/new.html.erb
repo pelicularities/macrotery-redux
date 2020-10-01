@@ -3,7 +3,7 @@
 <h4 class="text-size-twelve">Your order will be sent to <%= @order.eatery.name %> upon payment confirmed.</h4>
 </div>
 
-<div class="container border-sign">
+<div class="container border-top py-2">
   <table class="pt-3 pb-3 text-center text-size-sixteen vertical-align-top">
     <tr class="text-size-twelve">
       <th class="td-width"><u>Dish</u></th>
@@ -13,9 +13,7 @@
     </tr>
     <% @order.order_dishes.each do |order_dish| %>
     <tr class="text-size-twelve">
-      <td>
-        <p> <%= order_dish.dish.name %> </p>
-      </td>
+      <td><%= order_dish.dish.name %></td>
       <td><%= order_dish.quantity %></td>
       <td><%= humanized_money_with_symbol order_dish.dish.price %></td>
       <td><%= humanized_money_with_symbol (order_dish.quantity.to_i * order_dish.dish.price.to_f) %></td>

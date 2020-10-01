@@ -2,7 +2,7 @@
   :( Sorry, no dishes match your criteria.
 <% end %>
 
-<div class="container">
+
   <% dishes.each do |dish| %>
     <%= link_to eatery_path(dish.eatery) do %>
       <div class="eatery-card card bg-dark text-white w-85 mt-3 mb-3 dish_card" style="background: url('<%=cl_image_path dish.photo.key%>'); background-size: cover; background-position: center center">
@@ -25,4 +25,3 @@
       </div>
     <% end %>
   <% end %>
-</div>
