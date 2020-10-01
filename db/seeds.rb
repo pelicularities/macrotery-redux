@@ -65,6 +65,17 @@ users.each do |user|
 end
 puts 'users seeded!'
 
+#######
+# TODO
+#######
+# Grace's user meals should include
+# one for diabetics -- low overall macros, high protein, low carbs and fat
+# one for strength athletes -- high protein, high carbs, low fat
+# one for "cheat day" -- med protein, high carbs, high fat
+
+
+
+
 puts 'seeding user meals...'
 User.all.each do |user|
   ['Breakfast', 'Lunch', 'Dinner'].each do |meal|
@@ -107,6 +118,22 @@ puts 'seeding cuisines...'
   puts "seeded #{cuisine.name}"
 end
 puts 'cuisines seeded!'
+
+############
+# TODO
+############
+# should have eateries in Shanghai
+# should have eateries in Woodlands
+# should have eateries in Tampines
+# should have eateries in Orchard
+# 5 eateries per location
+# Orchard eateries should have nice logos
+# Orchard eateries' food images should match their names
+# Orchard eateries' food macros should match their names
+# Orchard eateries' prices should match their names
+# not using description any more
+# There should be one eatery nearby (at 350 Orchard Road? Shaw?)
+# that has a meal that matches the diabetic, strength athlete and cheat meal profiles
 
 puts 'seeding eateries...'
 addresses = [
