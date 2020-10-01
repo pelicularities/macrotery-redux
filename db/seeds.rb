@@ -578,7 +578,7 @@ presentation_eateries = {
 
 names[0, 5].each do |eatery_name|
   eatery = Eatery.find_by name: eatery_name
-  presentation_eateries[eatery][:dishes].each_with_index do |dish, index|
+  presentation_eateries[eatery_name][:dishes].each_with_index do |dish, index|
     new_dish = Dish.new(dish)
     new_dish.eatery = eatery
     dish.description = Faker::Food.description
