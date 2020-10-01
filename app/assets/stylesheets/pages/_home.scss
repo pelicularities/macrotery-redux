@@ -82,15 +82,16 @@ p {
     margin-block-end: 1em;
     margin-inline-start: 0px;
     margin-inline-end: 0px;
-    font-size: 14px
+    font-size: 14px;
 }
 
 
 .index-card img {
     height: 100px;
     margin-bottom: 15px;
-    width: 100%
-
+    width: 100%;
+    object-fit: cover;
+    object-position: center top;
 }
 
 
