@@ -281,3 +281,8 @@
     font-size: 20px;
     color: rgb(255,78,96);
 }
+
+#warning {
+  color: $text-primary;
+  display: none;
+}

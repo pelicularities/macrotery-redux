@@ -63,15 +63,25 @@
 
   <div class="blank"></div>
   <div class="total">
-    <h6>Total Macros: <i class="fas fa-exclamation-triangle" id="randomDanger" data-target="total.randomDanger" data-action="click->total#collapseYourMacros"></i></h6>
+    <h6>
+      Total Macros:
+      <a id="warning" data-toggle="collapse" href="#your-macros" role="button" aria-expanded="false" aria-controls="your-macros">
+        <i class="fas fa-exclamation-triangle"></i>
+      </a>
+    </h6>
     <div>
       <div class="macro protein circle" data-target="total.totalprotein"> 0 </div>
       <div class="macro carb circle" data-target="total.totalcarbs"> 0 </div>
       <div class="macro fat circle" data-target="total.totalfats"> 0 </div>
     </div>
-    <div class="collapse" id="your-macros" data-target="total.yourMacros">
-      more stuff
-    </div>
+    <% if @fats && @carbs && @protein %>
+      <div class="collapse py-3" id="your-macros" data-target="total.yourMacros">
+        You have exceeded your selected macros of
+        <span data-target="total.userProtein"><%=@protein%></span> g protein,
+        <span data-target="total.userCarbs"><%=@carbs%></span> g carbs,
+        and <span data-target="total.userFats"><%=@fats%></span> g fat!
+      </div>
+    <% end %>
     <div class="d-flex justify-content-between pt-1">
       <h6 class="pr-3">Total Price: </h6>
       <h4 data-target="total.totalprice"><%= number_to_currency(0) %></h4>
