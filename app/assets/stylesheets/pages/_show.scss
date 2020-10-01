@@ -2,11 +2,12 @@
 
 .dis-two {
     background-color: rgba(95,95,95,0.75);
-    border-top-left-radius: 25px;
-    border-top-right-radius: 25px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
     border-bottom: 2px solid rgb(255, 255, 255);
     height: 25px;
     position: relative;
+    top: -2px;
 }
 
 .logo {
