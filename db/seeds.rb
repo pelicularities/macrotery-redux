@@ -112,7 +112,7 @@ puts 'seeding eateries...'
 addresses = [
   '360 Orchard Road, Singapore',
   '1 Raffles Place, Singapore',
-  '1 Woodlands Place, Singapore',
+  '888 Woodlands Drive 50, Singapore',
   '10 Tampines Central 1, Singapore',
   '50 Jurong Gateway Rd, Singapore',
   '3 Yung Sheng Rd, Singapore',
