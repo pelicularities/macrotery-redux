@@ -86,17 +86,17 @@
       <h6 class="pr-3">Total Price: </h6>
       <h4 data-target="total.totalprice"><%= number_to_currency(0) %></h4>
     </div>
-    <div class="d-flex justify-content-center radio-div-ht">
+    <div class="d-flex justify-content-around radio-div-ht">
+      <input class="mt-1" type="radio" id="dine_in" name="order[dine_in]" value="1" checked>
+      <label class="mar radio-label text-size-twelve" for="dine_in">Dine In</label>
+      <input class="mt-1" type="radio" id="take_away" name="order[dine_in]" value="0">
+      <label class="mar radio-label text-size-twelve" for="take_away">Take Away</label>
 
-      <input type="radio" id="dine_in" name="order[dine_in]" value="1" checked>
-      <label class="btn radio-label text-size-fourteen" for="dine_in">Dine In</label><br>
-      <input type="radio" id="take_away" name="order[dine_in]" value="0">
-      <label class="btn radio-label text-size-fourteen" for="take_away">Take Away</label><br>
+      <div class="d-flex justify-content-center">
+        <%= submit_tag("Proceed to order", class: 'btn btn-sm btn-primary px-1') %>
+      </div>
+    </div>
 
-    </div>
-    <div class="d-flex justify-content-center">
-      <%= submit_tag("Proceed to order", class: 'btn btn-primary pr-2 pl-2') %>
-    </div>
   </div>
   <% end %>
 
