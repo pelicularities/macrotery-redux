@@ -1,24 +1,36 @@
 <div class="container text-center">
   <h5>Welcome <%= "#{@orders.first.user.first_name} #{@orders.first.user.last_name}" %></h5>
-  <h6 class="text-size-ten"> Checkout the details of your past meal orders </h6>
-  <h5><%= @orders.first.user.default_macro.name %></h5>
-
-  <div class="dropdown show pb-2">
-    <a class="btn btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Dropdown link
-    </a>
-
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-      <a class="dropdown-item" href="#">Action</a>
-      <a class="dropdown-item" href="#">Another action</a>
-      <a class="dropdown-item" href="#">Something else here</a>
+  <h6 class="text-size-ten"> (Checkout the details of your past meal orders) </h6>
+  <div class="border my-2 py-2">
+    <h6><span class="text-size-twelve">Your default macros is </span> <%= @orders.first.user.default_macro.name %></h6>
+    <div>
+      <% dtotal = 0 %>
+      <div class="d-flex justify-content-around mx-5 px-2">
+        <div class="h-circle h-p">
+          <%= @orders.first.user.default_macro.protein %>
+          <% dtotal += @orders.first.user.default_macro.protein * 4 %>
+        </div>
+        <div class="h-circle h-c">
+          <%= @orders.first.user.default_macro.carbs %>
+          <% dtotal +=  @orders.first.user.default_macro.carbs * 4 %>
+        </div>
+        <div class="h-circle h-f">
+          <%= @orders.first.user.default_macro.fats %>
+          <% dtotal +=  @orders.first.user.default_macro.fats * 9 %>
+        </div>
+        <div class="text-size-twelve">
+          = <%= dtotal %> kcal
+        </div>
+      </div>
     </div>
   </div>
-
 </div>
 
 <div class="container">
-  <% @orders.each do |order| %>
+  <% # for collapse id %>
+  <% id = 96 %>
+
+  <% @orders.each do |order| %> <% id += 1 %>
     <div class="card mb-3 radius">
       <div class="pl-3">
         <p class="text-right pr-2"><%= order.created_at.to_date %></p>
@@ -26,14 +38,14 @@
         <div class="d-flex">
           <h6 class="h-title"><%= order.order_dishes.first.dish.eatery.name %></h6>
           <div class="h-pen pl-4">
-            <a class="btn btn-sm" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            <a class="btn btn-sm" data-toggle="collapse" href=<%= "##{id.chr}"%> role="button" aria-expanded="false" aria-controls="collapseExample">
               <i class="fas fa-chevron-circle-down"></i>
             </a>
           </div>
         </div>
 
           <div class="container border-top py-2">
-            <div class="collapse" id="collapseExample">
+            <div class="collapse" id=<%= "#{id.chr}"%>>
               <table class="history-table pt-3 pb-3 text-center text-size-sixteen vertical-align-top">
                 <tr class="text-size-twelve">
                   <th class="td-width"><u>Dish</u></th>
@@ -85,27 +97,47 @@
                 <% end %>
               </table>
             </div>
-            <table class="history-table pt-3 pb-3 text-center text-size-sixteen vertical-align-top">
-              <tr class="text-size-twelve py-1">
-                <td class="td-width">Total amount:</td>
-                <td>
-                  <div class="d-flex">
-                    <div class="h-circle h-p">
-                      <%= totalp %>
-                    </div>
-                    <div class="h-circle h-c">
-                      <%= totalc %>
-                    </div>
-                    <div class="h-circle h-f">
-                      <%= totalf %>
-                    </div>
-                  </div> 
-                </td>
-                <td><%= totalcal %> kcal</td>
-                <td><%= humanized_money_with_symbol (totalprice) %></td>
-              </tr>
+            <div class="text-center text-size-sixteen container pl-0 pt-2">
+              <div class="text-size-twelve row justify-content-between">
+                <div class="">Total macros:</div>
+
+                <div class="d-flex">
+                  <div class="h-circle h-p">
+                    <%= totalp %>
+                  </div>
+                  <div class="h-circle h-c">
+                    <%= totalc %>
+                  </div>
+                  <div class="h-circle h-f">
+                    <%= totalf %>
+                  </div>
+                </div> 
+
+                <div><%= totalcal %> kcal</div>
+              </div>
+              <div class="text-size-twelve row d-flex justify-content-between">
+                <div>Macros target rating:</div>
+
+                <div class="d-flex">
+                  <% # calculation %>
+                  <% bars = ((((dtotal - totalcal)/dtotal.to_f/2)*100)/10).round %>
+                  <% if (bars > 0) %>
+                    <% bars.times do %>
+                    <div><i class="far fa-thumbs-up pr-1"></i></div>
+                    <% end %>
+                  <% else %>
+                    <% (-bars).times do %>
+                    <div><i class="far fa-thumbs-down pr-1"></i></div>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+              <div class="text-size-twelve row justify-content-between mt-1">
+                <div>Total spent:</div>
+                <div><%= humanized_money_with_symbol (totalprice) %></div>
+              </div>
             
-            </table>
+            </div>
           </div>
 
 
