@@ -347,42 +347,42 @@ lettuce_leaf_images = [
 tea_dishes = [
   {
     name: 'Blueberry Cheesecake',
-    price_cents: '590',
-    protein: 9,
-    carbs: 43,
-    fats: 29
+    price_cents: 1290,
+    protein: 17,
+    carbs: 93,
+    fats: 52
   },
   {
     name: 'Burnt Cheesecake',
-    price_cents: '590',
+    price_cents: 1890,
     protein: 13,
-    carbs: 40,
-    fats: 30
+    carbs: 111,
+    fats: 55
   },
   {
     name: 'Scones',
-    price_cents: '490',
+    price_cents: 490,
     protein: 7,
     carbs: 45,
     fats: 16
   },
   {
     name: 'Signature Cupcake',
-    price_cents: '690',
+    price_cents: 690,
     protein: 3,
     carbs: 48,
     fats: 13
   },
   {
     name: 'Signature Hot Chocolate',
-    price_cents: '650',
+    price_cents: 650,
     protein: 10,
     carbs: 40,
     fats: 18
   },
   {
     name: 'Macaron',
-    price_cents: '300',
+    price_cents: 300,
     protein: 4,
     carbs: 28,
     fats: 11
@@ -413,17 +413,17 @@ ox_tales_dishes = [
   },
   {
     name: 'Beef Fried Rice',
-    price_cents: 1150,
-    protein: 33,
-    carbs: 56,
+    price_cents: 1450,
+    protein: 48,
+    carbs: 79,
     fats: 28
   },
   {
     name: 'Beef Burger',
-    price_cents: 1450,
-    protein: 43,
-    carbs: 33,
-    fats: 32
+    price_cents: 1750,
+    protein: 33,
+    carbs: 87,
+    fats: 47
   },
   {
     name: 'Beef Steak',
@@ -532,9 +532,9 @@ go_fish_dishes = [
   {
     name: 'Sushi Platter',
     price_cents: 1850,
-    protein: 50,
+    protein: 40,
     carbs: 78,
-    fats: 40
+    fats: 29
   },
   {
     name: 'Sashimi Platter',
