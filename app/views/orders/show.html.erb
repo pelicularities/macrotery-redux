@@ -1,7 +1,7 @@
 
 <div class="container text-center">
 <h5>Payment to:</h5>
-<h4><%= @order.eatery.name %></h4>
+<h3><%= @order.eatery.name %></h3>
 <h6 class="text-size-ten">at <%= @order.eatery.address %></h6>
 </div>
 
@@ -17,39 +17,64 @@
     </div>
 
     <div class="">
-      <h4>Order #<%= @order.id %><span class="pending p-2 ml-3"><%= @order.state %></span></h4>
+      <h4>Order #<%= @order.id %><span class="pending pt-0 pb-0 pl-2 pr-2 ml-3"><%= @order.state %></span></h4>
         
   <!--       <p>Estimated delivery in <strong>2 business days</strong></p> -->
       <h6 class="text-size-ten"><strong>ISSUED ON</strong> <%= @order.created_at.to_date %></h6>
-      <h4><%= link_to "Pay the order", new_order_payment_path(@order), class: "btn btn-primary" %></h4>
+
+  <!--       button for 'pay your order' / 'back' & 'order history -->
+      <% if (@order.state == 'pending') %>
+        <h4><%= link_to "Pay your order", new_order_payment_path(@order), class: "btn btn-primary" %></h4>
+      <% else %>
+        <div class="mx-4 mt-5">
+          <h4 class="text-size-sixteen">Thank You! <br> Your order has been sent to <%= @order.eatery.name %>.<br><br> Please show the order number below upon arriving for 
+          <% if (@order.dine_in) %>
+            seatings.
+          <% else %>
+            collection.
+          <% end %>
+          </h4>
+          <h3><%= "##{@order.id}#{@order.created_at.to_date.to_s.gsub(/\D/, '')}" %></h3>
+          <div class="d-flex justify-content-around pt-3">
+          <h4><%= link_to "Back", dishes_path(), class: "btn btn-sm btn-primary" %></h4>
+          <h4><%= link_to "Order history", orders_path(), class: "btn btn-sm btn-primary" %></h4>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
 
-<div class="container border-sign">
-  <table class="pt-3 pb-3 text-center text-size-sixteen vertical-align-top">
-    <tr class="text-size-fourteen">
-      <th class="td-width"><u>Dish</u></th>
-      <th class="td-width"><u>Qty</u></th>
-      <th class="td-width"><u>Each</u></th>
-      <th><u>Total</u></th>    
-    </tr>
-    <% @order.order_dishes.each do |order_dish| %>
-    <tr>
-      <td>
-        <img src="<%=cl_image_path order_dish.dish.photo.key%>" alt="dish_image" width="100" height="75" class="dish-photo"><br>
-        <p class="text-size-twelve"> <%= order_dish.dish.name %> </p>
-      </td>
-      <td><%= order_dish.quantity %></td>
-      <td><%= humanized_money_with_symbol order_dish.dish.price %></td>
-      <td><%= humanized_money_with_symbol (order_dish.quantity.to_i * order_dish.dish.price.to_f) %></td>
-    </tr>
-    <% end %>
-  </table>
-</div>
 
-  <div class="d-flex justify-content-end mb-4 pt-3">
-    <strong>TOTAL AMOUNT: </strong> 
-    <span class="pl-4 pr-4"><%= humanized_money_with_symbol @order.amount %></span>
+  <!-- display of order dishes if pending / else display nothing -->
+<% if (@order.state == 'pending') %>
+  <div class="container border-sign">
+    <table class="pt-3 pb-3 text-center text-size-sixteen vertical-align-top">
+      <tr class="text-size-fourteen">
+        <th class="td-width"><u>Dish</u></th>
+        <th class="td-width"><u>Qty</u></th>
+        <th class="td-width"><u>Each</u></th>
+        <th><u>Total</u></th>    
+      </tr>
+      <% @order.order_dishes.each do |order_dish| %>
+      <tr>
+        <td>
+          <img src="<%=cl_image_path order_dish.dish.photo.key%>" alt="dish_image" width="100" height="75" class="dish-photo"><br>
+          <p class="text-size-twelve"> <%= order_dish.dish.name %> </p>
+        </td>
+        <td><%= order_dish.quantity %></td>
+        <td><%= humanized_money_with_symbol order_dish.dish.price %></td>
+        <td><%= humanized_money_with_symbol (order_dish.quantity.to_i * order_dish.dish.price.to_f) %></td>
+      </tr>
+      <% end %>
+    </table>
   </div>
-</div>
+
+    <div class="d-flex justify-content-end mb-4 pt-3">
+      <strong>TOTAL AMOUNT: </strong> 
+      <span class="pl-4 pr-4"><%= humanized_money_with_symbol @order.amount %></span>
+    </div>
+  </div>
+<% else %>
+
+<% end %>
