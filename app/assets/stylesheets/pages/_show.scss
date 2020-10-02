@@ -208,7 +208,7 @@
 }
 
 
-// for order show page
+// for order show & payment page
 
 
 .text-size-ten {
@@ -268,12 +268,6 @@
     left: -30px;
 }
 
-.border-sign {
-    padding-top: 10px;
-    border-top: 2px solid  rgb(190, 190, 190);
-    border-bottom: 2px solid  rgb(190, 190, 190); // for table
-}
-
 .pending {
     border-left: 2px solid rgb(255,78,96);
     border-right: 2px solid rgb(255,78,96);
@@ -285,4 +279,82 @@
 #warning {
   color: $red;
   display: none;
+}
+
+// for history page
+
+.history-table {
+    margin-left: -25px;
+
+    td {
+        padding: 4px;
+        padding-top: 8px;
+        // border: 1px solid black;
+    }
+}
+
+.h-p {
+    background-color: rgb(175, 0, 0);
+    color: white;
+}
+
+.h-c {
+    background-color: rgb(0, 175, 0);
+    color: white;
+}
+
+.h-f {
+    background-color: rgb(175, 175, 0);
+    color: white;
+}
+
+.h-circle {
+    border: 2px solid grey;
+    width: 25px;
+    height: 25px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    position: relative;
+    top: -4px;
+}
+
+.h-logo {
+    border: 2px solid grey;
+    width: 40px;
+    height: 40px;
+    border-radius: 25px;
+    font-weight: bold;
+    position: absolute;
+    top: 20px;
+}
+
+.h-title {
+    padding-left: 50px;
+    margin-top: -10px;
+}
+
+.h-pen {
+    margin-top: -15px;
+}
+
+.radius {
+    border-radius: 15px;
+}
+
+.b {
+    width: 5px;
+    background-color: red;
+}
+
+.g {
+    width: 5px;
+    background-color: green;
+}
+
+.empty {
+    width: 5px;
 }

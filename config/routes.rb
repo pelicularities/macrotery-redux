@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   get '/profile', to: 'users#show'
   get '/macrocalculator', to: 'users#update'
 
+  get '/profile/history', to: 'orders#index'
+
   resources :macros, path: '/profile/macros'
 
   get '/change_default_macros/:new_default', to: 'macros#change_default', as: 'change_default_macros'
