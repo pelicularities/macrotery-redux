@@ -7,7 +7,7 @@
   <%= link_to dishes_path do %>
     <i class="fas fa-angle-double-left" id="nav_return"style="visibility: visible;"></i>
   <% end %>
- <% elsif request.original_fullpath.start_with?('/orders/') %>
+ <% elsif request.original_fullpath.start_with?('/orders/') && @order.state != 'paid' %>
   <%= link_to eatery_path(@order.eatery) do %><i class="fas fa-angle-double-left" id="nav_return"></i><% end %>
  <% elsif request.original_fullpath == '/profile/macros/new' %>
   <%= link_to macros_path do %><i class="fas fa-angle-double-left" id="nav_return"></i><% end %>

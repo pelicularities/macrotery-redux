@@ -24,7 +24,7 @@
 
   <!--       button for 'pay your order' / 'back' & 'order history -->
       <% if (@order.state == 'pending') %>
-        <h4><%= link_to "Pay your order", new_order_payment_path(@order), class: "btn btn-primary" %></h4>
+        <h4><%= link_to "Pay Your Order", new_order_payment_path(@order), class: "btn btn-primary" %></h4>
       <% else %>
         <div class="mx-4 mt-5">
           <h4 class="text-size-sixteen">Thank You! <br> Your order has been sent to <%= @order.eatery.name %>.<br><br> Please show the order number below upon arriving for 
@@ -36,8 +36,8 @@
           </h4>
           <h3><%= "##{@order.id}#{@order.created_at.to_date.to_s.gsub(/\D/, '')}" %></h3>
           <div class="d-flex justify-content-around pt-3">
-          <h4><%= link_to "Back", dishes_path(), class: "btn btn-sm btn-primary" %></h4>
-          <h4><%= link_to "Order history", orders_path(), class: "btn btn-sm btn-primary" %></h4>
+          <h4><%= link_to "Find Another Meal", dishes_path(), class: "btn btn-sm btn-primary" %></h4>
+          <h4><%= link_to "Order History", orders_path(), class: "btn btn-sm btn-primary" %></h4>
           </div>
         </div>
       <% end %>
