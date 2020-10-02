@@ -1,7 +1,7 @@
 import { Controller } from "stimulus";
 
 export default class extends Controller {
-    static targets = ['totalprice', 'totalprotein', 'totalcarbs', 'totalfats', 'dinein'];
+    static targets = ['totalprice', 'totalprotein', 'totalcarbs', 'totalfats', 'dinein', 'yourMacros', 'userProtein', 'userCarbs', 'userFats' ];
 
     connect() {
         this.amount = parseFloat(this.data.get("amount"));
@@ -82,6 +82,31 @@ export default class extends Controller {
         this.totalcarbsTarget.innerText = this.carbs;
         this.totalfatsTarget.innerText = this.fats;
 
-    }
+        if (this.userProteinTarget && this.userCarbsTarget && this.userFatsTarget) {
+          console.log('this user has macros');
+          console.log(this.userProteinTarget.innerText);
+          console.log(this.userCarbsTarget.innerText);
+          console.log(this.userFatsTarget.innerText);
 
+          let isOver;
+
+          if (this.protein > this.userProteinTarget.innerText) {
+            isOver = true;
+          } else if (this.carbs > this.userCarbsTarget.innerText) {
+            isOver = true;
+          } else if (this.fats > this.userFatsTarget.innerText) {
+            isOver = true;
+          } else {
+            isOver = false;
+          }
+          console.log(isOver);
+
+          const warning = document.getElementById('warning');
+          if (isOver) {
+            warning.style.display = 'inline';
+          } else {
+            warning.style.display = 'none';
+          }
+        }
+    }
 }

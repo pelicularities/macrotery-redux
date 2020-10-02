@@ -161,8 +161,19 @@ export default class extends Controller {
         const userLocationMarker = new mapboxgl.Marker(el).setLngLat([lng, lat]).addTo(map);
         this.fitMapToMarkers(map, markers);
       });
-  }
 
+    }
+    
+  appendMacros(e) {
+    e.preventDefault();
+    const path = e.currentTarget.href;
+    const protein = this.proteinTarget.value;
+    const carbs = this.carbsTarget.value;
+    const fats = this.fatsTarget.value;
+
+    const url = `${path}?protein=${protein}&carbs=${carbs}&fats=${fats}`;
+    Turbolinks.visit(url);
+  }
   // showMap() {
   //   console.log('this is showMap()');
   //   const listTab = document.getElementById('results-list-tab');

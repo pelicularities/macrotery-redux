@@ -4,7 +4,7 @@
 
 
   <% dishes.each do |dish| %>
-    <%= link_to eatery_path(dish.eatery) do %>
+    <%= link_to eatery_path(dish.eatery), data: { action: 'click->macros#appendMacros' } do %>
       <div class="eatery-card card bg-dark text-white w-85 mt-3 mb-3 dish_card" style="background: url('<%=cl_image_path dish.photo.key%>'); background-size: cover; background-position: center center">
         <div class="card-content w-100">
           <div class="description pl-2">
