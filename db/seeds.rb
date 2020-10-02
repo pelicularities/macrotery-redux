@@ -181,10 +181,10 @@ addresses = [
 
 logos = [
   'https://res.cloudinary.com/graceteng/image/upload/v1601565848/000_lettuce_leaf_logo_twcvho.png',
-  'https://res.cloudinary.com/graceteng/image/upload/v1601565848/000_go_fish_logo_qcfrum.png',
-  'https://res.cloudinary.com/graceteng/image/upload/v1601565848/000_pincer_movement_logo_ovx94l.png',
-  'https://res.cloudinary.com/graceteng/image/upload/v1601565847/000_ox_tales_logo_rlot9r.png',
   'https://res.cloudinary.com/graceteng/image/upload/v1601565825/tea_logo_hxcubc.png',
+  'https://res.cloudinary.com/graceteng/image/upload/v1601565847/000_ox_tales_logo_rlot9r.png',
+  'https://res.cloudinary.com/graceteng/image/upload/v1601565848/000_pincer_movement_logo_ovx94l.png',
+  'https://res.cloudinary.com/graceteng/image/upload/v1601565848/000_go_fish_logo_qcfrum.png',
   'https://99designs-blog.imgix.net/blog/wp-content/uploads/2019/10/attachment_90692173-e1571110647786.png',
   'https://99designs-blog.imgix.net/blog/wp-content/uploads/2019/10/attachment_93150414-e1571110566194.png',
   'https://99designs-blog.imgix.net/blog/wp-content/uploads/2019/10/attachment_66602497-e1571115384951.jpg',
