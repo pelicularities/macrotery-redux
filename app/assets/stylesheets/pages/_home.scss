@@ -1,5 +1,14 @@
 // Specific CSS for your home-page
 
+// fix white space on right issue
+html,body
+{
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden; 
+}
+
 .banner {
   // width: 100%;
   // background-position: center;
