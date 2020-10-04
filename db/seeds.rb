@@ -215,15 +215,17 @@ names = [
 end
 
 addresses.each_with_index do |address, index|
+  modulo = index % names.count
+
   eatery = Eatery.new
-  eatery.name = names[index]
+  eatery.name = names[modulo]
   eatery.address = address
   eatery.phone_number = "6#{Faker::Number.number(digits: 7)}"
   eatery.description = Faker::Restaurant.description
   eatery.save!
 
-  file = URI.open(logos[index])
-  content_type = "image/#{logos[index][-3, 3]}"
+  file = URI.open(logos[modulo])
+  content_type = "image/#{logos[modulo][-3, 3]}"
   eatery.photo.attach(io: file, filename: "logo#{index}.png", content_type: content_type)
 
   puts "seeded #{eatery.name}"
@@ -269,28 +271,28 @@ dish_images.map! { |id| "https://source.unsplash.com/#{id}" }
 
 
 
-Eatery.all.each do |eatery|
-  next if names[0, 5].include?(eatery.name)
-  10.times do
-    dish = Dish.new
-    dish.eatery = eatery
-    dish.name = Faker::Food.unique.dish
-    dish.price_cents = rand(100..4000)
-    dish.protein = Faker::Number.between(from: 10, to: 60)
-    dish.carbs = Faker::Number.between(from: 40, to: 120)
-    dish.fats = Faker::Number.between(from: 15, to: 50)
-    dish.description = Faker::Food.description
-    dish.save!
+# Eatery.all.each do |eatery|
+#   next if names[0, 5].include?(eatery.name)
+#   10.times do
+#     dish = Dish.new
+#     dish.eatery = eatery
+#     dish.name = Faker::Food.unique.dish
+#     dish.price_cents = rand(100..4000)
+#     dish.protein = Faker::Number.between(from: 10, to: 60)
+#     dish.carbs = Faker::Number.between(from: 40, to: 120)
+#     dish.fats = Faker::Number.between(from: 15, to: 50)
+#     dish.description = Faker::Food.description
+#     dish.save!
 
-    dish_image = dish_images.sample
-    file = URI.open(dish_image)
-    dish.photo.attach(io: file, filename: "dish#{dish.id}.png", content_type: 'image/png')
+#     dish_image = dish_images.sample
+#     file = URI.open(dish_image)
+#     dish.photo.attach(io: file, filename: "dish#{dish.id}.png", content_type: 'image/png')
 
-    puts "seeded dish #{dish.name}"
-  end
-  puts "seeded dishes for #{eatery.name}!"
-  Faker::Food.unique.clear
-end
+#     puts "seeded dish #{dish.name}"
+#   end
+#   puts "seeded dishes for #{eatery.name}!"
+#   Faker::Food.unique.clear
+# end
 
 lettuce_leaf_dishes = [
   {
@@ -576,8 +578,8 @@ presentation_eateries = {
   }
 }
 
-names[0, 5].each do |eatery_name|
-  eatery = Eatery.find_by name: eatery_name
+Eatery.all.each do |eatery|
+  eatery_name = eatery.name
   presentation_eateries[eatery_name][:dishes].each_with_index do |dish, index|
     new_dish = Dish.new(dish)
     new_dish.eatery = eatery
