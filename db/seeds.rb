@@ -185,21 +185,6 @@ logos = [
   'https://res.cloudinary.com/graceteng/image/upload/v1601565847/000_ox_tales_logo_rlot9r.png',
   'https://res.cloudinary.com/graceteng/image/upload/v1601565848/000_pincer_movement_logo_ovx94l.png',
   'https://res.cloudinary.com/graceteng/image/upload/v1601565848/000_go_fish_logo_qcfrum.png',
-  'https://99designs-blog.imgix.net/blog/wp-content/uploads/2019/10/attachment_90692173-e1571110647786.png',
-  'https://99designs-blog.imgix.net/blog/wp-content/uploads/2019/10/attachment_93150414-e1571110566194.png',
-  'https://99designs-blog.imgix.net/blog/wp-content/uploads/2019/10/attachment_66602497-e1571115384951.jpg',
-  'https://99designs-blog.imgix.net/blog/wp-content/uploads/2019/10/attachment_92127945-e1571116006606.jpg',
-  'https://99designs-blog.imgix.net/blog/wp-content/uploads/2019/10/f87d59b6-c3df-4ce0-a9a2-073c8b98d2a8.jpg',
-  'https://99designs-blog.imgix.net/blog/wp-content/uploads/2019/10/attachment_89345375.jpg',
-  'https://99designs-blog.imgix.net/blog/wp-content/uploads/2019/10/attachment_77512603-e1571186033116.png',
-  'https://99designs-blog.imgix.net/blog/wp-content/uploads/2019/10/mugaritz-restaurant.jpg',
-  'https://99designs-blog.imgix.net/blog/wp-content/uploads/2019/10/attachment_57615794-e1571114994767.png',
-  'https://99designs-blog.imgix.net/blog/wp-content/uploads/2019/10/attachment_94283857-e1571185890515.jpg',
-  'https://99designs-blog.imgix.net/blog/wp-content/uploads/2019/10/attachment_102682959-e1571116039684.png',
-  'https://99designs-blog.imgix.net/blog/wp-content/uploads/2019/10/attachment_72730158-e1571110735270.png',
-  'https://99designs-blog.imgix.net/blog/wp-content/uploads/2019/10/attachment_89348086-e1571112998256.png',
-  'https://99designs-blog.imgix.net/blog/wp-content/uploads/2019/10/attachment_45092251.png',
-  'https://99designs-blog.imgix.net/blog/wp-content/uploads/2019/10/1d712e10-525a-4cc2-84f2-36e66336c0d0-e1571115090968.png'
 ]
 
 names = [
@@ -209,10 +194,6 @@ names = [
   'Pincer Movement',
   'Go Fish'
 ]
-
-15.times do
-  names << Faker::Restaurant.unique.name
-end
 
 addresses.each_with_index do |address, index|
   modulo = index % names.count
@@ -577,9 +558,14 @@ presentation_eateries = {
     images: go_fish_images
   }
 }
+presentation_eateries.keys.each do |key|
+  puts key
+end
 
 Eatery.all.each do |eatery|
   eatery_name = eatery.name
+  puts eatery_name
+  puts presentation_eateries[eatery_name]
   presentation_eateries[eatery_name][:dishes].each_with_index do |dish, index|
     new_dish = Dish.new(dish)
     new_dish.eatery = eatery
