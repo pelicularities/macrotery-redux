@@ -1,55 +1,30 @@
-
-
-<div class="banner p-3" style="background-image: url(https://img.freepik.com/free-vector/fast-food-background-sketch-drawing-hamburger-cola-snacks-doodle-ice-cream-pizza-sandwich-fast-food-restaurant-vector-poster_53562-9155.jpg?size=626&ext=jpg);">
-  <div class="container">
-    <div class="col-sm-6 p-3 text-center" style="background-color: #ff4e60; color:white; border-radius: 10px; margin-top: 15px">
-
-      <h1>Welcome to <strong>Macrotery</strong>!</h1>
-      <p style="color: white"> Eating healthier and happier is just one click away! </p>
-      <div class="container">
-        <%= link_to 'Explore', dishes_path, class:'btn', style:'background-color: #99b898; color: white ; border-radius: 22px' %>
-      </div>
+<div class="row">
+  <div class="col-12">
+    <h1>Welcome to <strong>Macrotery</strong>!</h1>
+    <p> Eating healthier and happier is just one click away! </p>
+    <div>
+      <%= link_to 'Explore', dishes_path, class: 'btn btn-primary' %>
     </div>
   </div>
 </div>
 
-
-
-<div class="index-container">
-  <h2 class="text-center" id="index-h2"> As Easy As This </h2>
-  <div class='cards'>
-    <div class="row justify-content-center">
-      <!--           <div class="col-md-6"> -->
-
-        <div class="index-card col-md-6">
-          <%= image_tag "fitness.jpg" %>
-          <h4> 1. Tailored Plan </h4>
-          <p> Set up your macros to suit your daily meals.</p>
-        </div>
-      </div>
-      <div class="row justify-content-center">
-        <div class="index-card col-md-6">
-          <%= image_tag "good_food.jpg"%>
-          <h4> 2. Simple Search </h4>
-          <p>Find delicious dining that fits your macros.</p>
-        </div>
-      </div>
-
-      <div class="row justify-content-center">
-        <div class="index-card col-md-6">
-          <%= image_tag "takeaway4.jpg" %>
-          <h4> 3. Order in Advance </h4>
-          <p>No more waiting around in eateries!</p>
-        </div>
-      </div>
-
-    </div>
-
+<div class="row">
+  <h2 class="w-100"> As Easy As This </h2>
+  <div class="col">
+  <%= image_tag "https://via.placeholder.com/300x200" %>
+  <h4>Tailored Plan </h4>
+  <p> Set up your macros to suit your daily meals.</p>
   </div>
 
-
-  <div class="container intro">
-    <h3 class="text-center">The 3 Macronutrients</h3>
-    <%= image_tag "macros3.jpg" %>
-    <%= image_tag "macros.png" %>
+  <div class="col">
+  <%= image_tag "https://via.placeholder.com/300x200"%>
+  <h4>Simple Search </h4>
+  <p>Find delicious dining that fits your macros.</p>
   </div>
+
+  <div class="col">
+  <%= image_tag "https://via.placeholder.com/300x200" %>
+  <h4>Order in Advance </h4>
+  <p>No more waiting around in eateries!</p>
+  </div>
+</div>
