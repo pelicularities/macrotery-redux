@@ -257,7 +257,7 @@
 }
 
 .td-width {
-    width: 30%; // for table photo td
+    width: 70px; // for table photo td
 }
 
 .vertical-align-top td {
@@ -386,4 +386,28 @@
 
 .empty {
     width: 5px;
+}
+
+.order-col-1 {
+  width: 80px;
+}
+
+.order-col-2 {
+  width: 32px;
+}
+
+.order-col-3 {
+  width: 80px;
+}
+
+.order-col-4 {
+  width: 45px;
+}
+
+.order-col-5 {
+  width: 55px;
+}
+
+.order-col-12 {
+  width: 290px;
 }
