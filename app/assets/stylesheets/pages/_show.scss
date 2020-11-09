@@ -140,19 +140,20 @@
 
 .protein {
     background-color: rgb(175, 0, 0);
-    left: 60%;
+    position: absolute;
+    right: 110px;
 }
 
 .carb {
     background-color: rgb(0, 175, 0);
     position: absolute;
-    left: 73%;
+    right: 60px;
 }
 
 .fat {
     background-color: rgb(175, 175, 0);
     position: absolute;
-    left: 86%;
+    right: 10px;
 }
 
 .circle {
@@ -169,17 +170,38 @@
     top: 87%;
 }
 
-.total {
-    position: fixed;
-    bottom: 0px;
-    background-color: rgb(233, 190, 190);
-    padding: 15px;
-    width: 100%;
-    z-index: 2;
+.sticky-bottom {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  background-color: rgb(233, 190, 190);
+  padding: 15px;
+  width: 100%;
+  z-index: 2;
 
-    h3 {
-        font-weight: bold;
+  h3 {
+      font-weight: bold;
+  }
+  
+  .total {
+    width: 345px;
+    position: relative;
+
+    .protein {
+      position: absolute;
+      left: 215px;
     }
+
+    .carb {
+      position: absolute;
+      left: 265px;
+    }
+
+    .fat {
+      position: absolute;
+      left: 315px;
+    }
+  }
 
 }
 
@@ -194,8 +216,8 @@
 }
 
 .macro {
-    top: 5%;
     color: white;
+    top: -5%;
 }
 
 .radio-label {

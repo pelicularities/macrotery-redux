@@ -1,5 +1,5 @@
 <div data-controller="macros">
-  <div class="d-flex justify-content-around px-4 mx-4 mb-3">
+  <div class="d-flex justify-content-center px-4 mx-4 mb-3">
     <div>
       <table class="my-0 text-center" id="macro-table">
         <thead>
@@ -27,10 +27,10 @@
   </div>
 
   <div class="collapse" id="collapseExample">
-    <div class="container my-3">
-      <div class="row">
+    <div class="container-500 mx-auto my-3">
+      <div class="row justify-content-around">
         <input type="hidden" id="params" data-target="macros.params" value="">
-        <div class="col-12 col-md-6 p-3 border">
+        <div class="col-12 p-3 border">
           <form id="search-form">
             <h5>Use preset macros</h5>
             <select id="macro" name="macro" class="form-control" data-target="macros.select" data-action="change->macros#changeMeal">
@@ -68,7 +68,7 @@
   </div>
 
   <% # map %>
-  <div class="container">
+  <div class="container-500 mx-auto">
     <div class="d-flex">
       <ul class="nav nav-pills mb-3 mx-auto" id="results-select" role="tablist">
         <li class="nav-item" role="presentation">
