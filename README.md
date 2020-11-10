@@ -6,7 +6,7 @@ In this Macrotery Redux repo, I'm continuing to work on the project to finish an
 
 ## To-Do List
 - [] Layout
-  ~- [] Add footer~
+  - ~[] Add footer~
   - [x] **Make layout responsive**
   - [] Center navbar logo properly (both vertical and horizontal)
   - [] Change success / danger alert colours
@@ -16,14 +16,14 @@ In this Macrotery Redux repo, I'm continuing to work on the project to finish an
 - [] Devise views
   - [] Apply CSS styling to buttons
 ~- [] Macros page~
-  ~- [] Show pie chart for all macros, not just selected macro~
-  ~- [] Allow mobile users to swipe left/right to see macros~
+  - ~[] Show pie chart for all macros, not just selected macro~
+  - ~[] Allow mobile users to swipe left/right to see macros~
 - [] Order page
   - [] Eliminate sticky macro warning bug
   - [] Add warning that cart items will be removed if they return to Find Meals page
   - [] Prevent user from proceeding if there are no items in cart
 - [] Order payment page
-  ~- [] Persist cart items if user returns to order page~
+  - ~[] Persist cart items if user returns to order page~
 - [x] Order History page
   - [x] Align individual macro breakdown with total macro breakdown
 - [] Seeds
