@@ -1,10 +1,10 @@
 .navbar-macrotery {
   position: relative;
   background: #ff4e60;
-  justify-content: space-around;
  // #99b898;
   // #c7b198;
   margin-bottom: 20px;
+  height: 70px;
 }
 
 #nav_return {
@@ -14,12 +14,17 @@
 .navbar-macrotery .navbar-collapse {
   flex-grow: 0;
   position: absolute;
-  right: 3rem;
+  right: 2rem;
 }
 
 .navbar-macrotery .navbar-brand img {
   width: 50px;
   height: 50px;
+  position: absolute;
+  left: 50%;
+  margin-left: -25px;
+  top: 50%;
+  margin-top: -25px;
 }
 
 
@@ -42,12 +47,13 @@
 
 .back-button {
   position: absolute;
-  left: 3rem;
-  vertical-align: mid;
+  left: 2rem;
+  vertical-align: top;
 }
 
 #nav_return {
   visibility: hidden;
+  line-height: 0px;
 }
 
 a #nav_return {
