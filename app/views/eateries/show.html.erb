@@ -16,7 +16,7 @@
 
   <%= form_for Order.new, url: orders_path, method: "post", local: true, html: {
     novalidate: true
-  } do %>
+  } do |f| %>
   <%= hidden_field_tag 'eatery_id', @eatery.id %>
   <% @eatery.dishes.each do |dish| %>
   <div data-controller="order" class="container-500 mx-auto">
@@ -94,14 +94,10 @@
         <label class="mar radio-label text-size-twelve" for="take_away">Take Away</label>
 
         <div class="d-flex justify-content-center">
-          <%= submit_tag("Proceed to order", class: 'btn btn-sm btn-primary px-1') %>
+          <%= f.submit "Proceed to order", class: 'btn btn-sm btn-primary px-1', disabled: true, data: { target: 'total.orderBtn' }, id: 'orderBtn' %>
         </div>
       </div>
     </div>
   </div>
   <% end %>
-
-
-
-
 </div>

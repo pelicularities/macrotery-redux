@@ -33,4 +33,19 @@ const testFunction = () => {
     });
 };
 
+const warnUserBeforeLeaving = function (e) {
+  // warn users their cart is about to be emptied
+  e.preventDefault();
+  e.returnValue = '';
+  delete e['returnValue'];
+}
+
+window.addEventListener('beforeunload', warnUserBeforeLeaving, false);
+
+// allow user to proceed with order without triggering beforeunload warning
+const orderBtn = document.getElementById('orderBtn');
+orderBtn.addEventListener('click', () => {
+  window.removeEventListener('beforeunload', warnUserBeforeLeaving, false);
+});
+
 // export default testFunction();

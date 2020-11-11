@@ -131,8 +131,8 @@ export default class extends Controller {
         this.fatsinfoTarget.innerText = fats;
         this.caloriesinfoTarget.innerText = (protein * 4) + (carbs * 4) + (fats * 9);
 
-        const dishList = document.querySelector('#dish-list');
-        dishList.innerHTML = data.dishes;
+        // const dishList = document.querySelector('#dish-list');
+        // dishList.innerHTML = data.dishes;
         // console.log(data.dishes);
         // console.log(data.markers);
 
