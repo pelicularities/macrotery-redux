@@ -1,6 +1,7 @@
 .navbar-macrotery {
-  justify-content: space-between;
+  position: relative;
   background: #ff4e60;
+  justify-content: space-around;
  // #99b898;
   // #c7b198;
   margin-bottom: 20px;
@@ -12,6 +13,8 @@
 
 .navbar-macrotery .navbar-collapse {
   flex-grow: 0;
+  position: absolute;
+  right: 3rem;
 }
 
 .navbar-macrotery .navbar-brand img {
@@ -35,6 +38,12 @@
  // text-shadow: 0px 1px white;
  font-size: 15px;
  font-weight: strong;
+}
+
+.back-button {
+  position: absolute;
+  left: 3rem;
+  vertical-align: mid;
 }
 
 #nav_return {

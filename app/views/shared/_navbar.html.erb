@@ -1,31 +1,31 @@
 
 <div class="navbar navbar-expand navbar-light navbar-macrotery">
-<!--
- <i class="fas fa-angle-left" id="nav_return"></i> -->
- <% # hacky code for back button. but it works %>
- <% if request.original_fullpath.start_with?('/eateries') %>
-  <%= link_to dishes_path do %>
-    <i class="fas fa-angle-double-left" id="nav_return"style="visibility: visible;"></i>
-  <% end %>
- <% elsif request.original_fullpath.start_with?('/orders/') && @order.state != 'paid' %>
-  <%= link_to eatery_path(@order.eatery) do %><i class="fas fa-angle-double-left" id="nav_return"></i><% end %>
- <% elsif request.original_fullpath == '/profile/macros/new' %>
-  <%= link_to macros_path do %><i class="fas fa-angle-double-left" id="nav_return"></i><% end %>
- <% elsif /\/profile\/macros\/(\d)+\/edit/.match?(request.original_fullpath) %>
-  <%= link_to macros_path do %><i class="fas fa-angle-double-left" id="nav_return"></i><% end %>
- <% else %>
-  <i class="fas fa-angle-double-left" id="nav_return"></i>
- <% end %>
+  <% # hacky code for back button. but it works %>
+  <div class="back-button">
+    <% if request.original_fullpath.start_with?('/eateries') %>
+      <%= link_to dishes_path do %>
+        <i class="fas fa-angle-double-left" id="nav_return" style="visibility: visible;"></i>
+      <% end %>
+    <% elsif request.original_fullpath.start_with?('/orders/') && @order.state != 'paid' %>
+      <%= link_to eatery_path(@order.eatery) do %>
+        <i class="fas fa-angle-double-left" id="nav_return"></i>
+      <% end %>
+    <% elsif request.original_fullpath == '/profile/macros/new' %>
+      <%= link_to macros_path do %>
+        <i class="fas fa-angle-double-left" id="nav_return"></i>
+      <% end %>
+    <% elsif /\/profile\/macros\/(\d)+\/edit/.match?(request.original_fullpath) %>
+      <%= link_to macros_path do %>
+        <i class="fas fa-angle-double-left" id="nav_return"></i>
+      <% end %>
+    <% else %>
+      <i class="fas fa-angle-double-left" id="nav_return"></i>
+    <% end %>
+  </div>
 
   <%= link_to root_path, class: "navbar-brand" do %>
-   <%= image_tag "icons/android-icon-192x192.png", class:'rounded-circle'%>
-  <% end %>
-
-<!--   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button> -->
-
- 
+    <%= image_tag "icons/android-icon-192x192.png", class:'rounded-circle'%>
+  <% end %> 
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
