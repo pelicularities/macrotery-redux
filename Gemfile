@@ -39,8 +39,6 @@ gem 'cloudinary', '~> 1.16.0'
 gem 'geocoder'
 gem 'faker'
 gem 'font-awesome-sass'
-gem 'rack-mini-profiler'
-gem "serviceworker-rails"
 gem 'simple_form'
 
 group :development, :test do  gem 'pry-byebug'
