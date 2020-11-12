@@ -26,9 +26,9 @@ In this Macrotery Redux repo, I'm continuing to work on the project to finish an
   - ~[ ] Persist cart items if user returns to order page~
 - [x] Order History page
   - [x] Align individual macro breakdown with total macro breakdown
-- [ ] Seeds
-  - [ ] Add seeds to cover more locations in Singapore
-  - [ ] Modify seed to include a demo user
+- [x] Seeds
+  - [x] Add seeds to cover more locations in Singapore
+  - [x] Modify seed to include a demo user
 - [ ] About page
   - [ ] Add about page with info about project background and fork
 

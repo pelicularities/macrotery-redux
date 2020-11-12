@@ -4,12 +4,10 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-
-  root to: 'pages#home'
-  get '/learn', to: 'pages#learn'
+  root to: 'pages#about'
+  get '/about', to: 'pages#about'
 
   get '/profile', to: 'users#show'
-  get '/macrocalculator', to: 'users#update'
 
   get '/profile/history', to: 'orders#index'
 
