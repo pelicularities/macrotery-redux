@@ -29,8 +29,8 @@ In this Macrotery Redux repo, I'm continuing to work on the project to finish an
 - [x] Seeds
   - [x] Add seeds to cover more locations in Singapore
   - [x] Modify seed to include a demo user
-- [ ] About page
-  - [ ] Add about page with info about project background and fork
+- [x] About page
+  - [x] Add about page with info about project background and fork
 
 
 Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/rails-templates), created by the [Le Wagon coding bootcamp](https://www.lewagon.com) team.
