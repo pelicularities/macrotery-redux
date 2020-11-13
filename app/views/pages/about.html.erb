@@ -1,10 +1,12 @@
-<div class="alert alert-primary" role="alert" style="position: static;">
-  <strong>Curious about Macrotery Redux?</strong> Use these credentials to log in as a demo user:
-  <p>
-    Email: <strong>demo@demo.com</strong><br>
-    Password: <strong>demo12345</strong>
-  </p>
-</div>
+<% if current_user.nil? %>
+  <div class="alert alert-primary" role="alert" style="position: static;">
+    <strong>Curious about Macrotery Redux?</strong> Use these credentials to log in as a demo user:
+    <p>
+      Email: <strong>demo@demo.com</strong><br>
+      Password: <strong>demo12345</strong>
+    </p>
+  </div>
+<% end %>
 
 <h3>Known Issues</h3>
 <ul>
