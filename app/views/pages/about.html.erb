@@ -6,13 +6,19 @@
   </p>
 </div>
 
+<h3>Known Issues</h3>
+<ul>
+  <li><strong>Find Meals page only displays top 20 matching meals from seeded eateries within 5km of user location.</strong> This is not so much a bug as an a conscious decision not to overengineer a minimum viable product. All the fake eateries (100 total) are in Singapore, so visitors who are not physically in Singapore, or who are in a location without available eateries within 5km, will not be able to find any meals. Sorry!</li>
+  <li><strong>Stripe webhook not firing?</strong> Upon making a test payment, you'll be redirected back to the Order page, but the order status does not update from "pending" to "paid".</li>
+</ul>
+
 <h1>About Macrotery</h1>
 
 <p>Macrotery is a project that originated as a final project at <a href="https://www.lewagon.com/">Le Wagon</a> batch #454 (<a href="https://www.lewagon.com/singapore">Singapore</a>), by Allen Chung (<a href="https://github.com/allenchungtw">allenchungtw</a>), Stephen Das (<a href="https://github.com/steevesd">steevesd</a>), Grace Teng (<a href="https://github.com/pelicularities">pelicularities</a> &#8212; that's me!) and Zack Xu (<a href="https://github.com/konfs">konfs</a>). The idea is simple: what if you could search for food at eateries near you based on their protein, carbohydrate and fat content?</p>
 
 <p>Many people track the macros of the food they eat in order to meet their health and fitness goals. Those who are looking to lose weight might aim to keep their overall caloric intake low. Bodybuilders generally want high protein, low fat meals. Endurance athletes fuel their training with lots of carbohydrates. Unfortunately, this makes it difficult for individuals tracking their macros to eat out, since it can be hard to find food that fits their macro targets in eateries.</p>
 
-<p><a href="http://macrotery.herokuapp.com/">Macrotery</a> is a minimum viable product aimed at solving this problem. Users enter their macro targets, and can then search for meals at nearby eateries that match their macro targets.</p>
+<p><a href="http://macrotery.herokuapp.com/">Macrotery</a> is a minimum viable product / proof of concept aimed at solving this problem. Users enter their macro targets, and can then search for meals at nearby eateries that match their macro targets.</p>
 
 <h1>Macrotery Redux</h1>
 <p>After our Le Wagon bootcamp ended, I decided I wanted to continue working on Macrotery for a little bit more, so I <a href="https://github.com/pelicularities/macrotery-redux">forked the Github project</a> and continued working on it as Macrotery Redux. I had two main goals with the Redux version:</p>
