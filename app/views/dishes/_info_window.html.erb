@@ -8,5 +8,5 @@
       <%=eatery_dish.protein%>P <%=eatery_dish.carbs%>C <%=eatery_dish.fats%>F <%=eatery_dish.calories%> kcal</p>
     </div>
   <% end %>
-  <div class='text-center'><%= link_to "See #{eatery.name}", eatery_path(eatery.id), class: 'btn btn-primary' %></div>
+  <div class='text-center'><%= link_to "See #{eatery.name}", eatery_path(eatery.id), class: 'btn btn-primary', data: { action: 'click->macros#appendMacros' } %></div>
 </div>
